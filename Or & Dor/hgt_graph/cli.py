@@ -1,13 +1,14 @@
 import pandas as pd
 import argparse
 from pathlib import Path
+from typing import Set, Tuple
 from .constants import OUT_PATH_FMT, TAX_SAVE_PATH_FMT, HGT_TAX_DISTANCE_MIN, HGT_MIN_WEIGHT, TOP_HGT_N, ORGANISM_KEY
 from .io.proteins import create_node_attributes, extract_seqs
 from .graph.build import build_nx_graph
 from .similarity.edges import build_edges_from_alignments
 from .taxonomy.cache import get_or_build_taxonomy_cache
 from .taxonomy.annotate import annotate_graph_with_taxonomy, annotate_edges_with_tax_distance
-from .graph.scoring import compute_hgt_scores, percentile, top_hgt_candidates
+from .graph.scoring import compute_hgt_scores, percentile, top_hgt_candidates, top_hgt_edges
 from .viz.plotly3d import export_plotly_3d
 
 def main() -> None:
@@ -61,10 +62,7 @@ def main() -> None:
 
         print(f"Score threshold (P{p} of non-zero): {score_threshold:.4f}")
 
-    suspicious_edges_display = {
-        (u, v) for (u, v) in suspicious_edges
-        if u in highlight_nodes or v in highlight_nodes
-    }
+    suspicious_edges_display: Set[Tuple[str, str]] = top_hgt_edges(suspicious_edges, scores)
 
     print("\nTop HGT candidates:")
     for node, score in top:

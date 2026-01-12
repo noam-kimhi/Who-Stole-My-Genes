@@ -5,6 +5,7 @@ from ..constants import (DEFAULT_MIN_ID, DEFAULT_MIN_COVERAGE, MIN_ALIGNED_LENGT
 from .local_alignment import local_alignment_metrics
 from .aligner import make_aligner
 
+
 def build_edges_from_alignments(seqs: Dict[str, str],
                                 min_identity: float = DEFAULT_MIN_ID,
                                 min_coverage: float = DEFAULT_MIN_COVERAGE,
@@ -18,7 +19,7 @@ def build_edges_from_alignments(seqs: Dict[str, str],
     :return: A list of edges with weights.
     """
     ids = sorted(seqs.keys())
-    edges = []
+    edges: List[Tuple[str, str, Dict[str, float]]] = []
 
     aligner: PairwiseAligner = make_aligner()
 
@@ -30,7 +31,7 @@ def build_edges_from_alignments(seqs: Dict[str, str],
             identity, coverage, aligned_len = local_alignment_metrics(aligner, s1, s2)
 
             if identity >= min_identity and coverage >= min_coverage and aligned_len >= min_aligned_length:
-                similarity_score: float = identity * coverage  # TODO: Maybe just identity?
+                similarity_score: float = identity * coverage
                 edges.append((
                     u, v,
                     {

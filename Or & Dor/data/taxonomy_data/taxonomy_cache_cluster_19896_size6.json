@@ -1,0 +1,58 @@
+{
+    "Campylobacter jejuni": {
+        "cellular root": "cellular organisms",
+        "domain": "Bacteria",
+        "kingdom": "Pseudomonadati",
+        "phylum": "Campylobacterota",
+        "class": "Epsilonproteobacteria",
+        "order": "Campylobacterales",
+        "family": "Campylobacteraceae",
+        "genus": "Campylobacter",
+        "species": "Campylobacter jejuni"
+    },
+    "Escherichia coli": {
+        "cellular root": "cellular organisms",
+        "domain": "Bacteria",
+        "kingdom": "Pseudomonadati",
+        "phylum": "Pseudomonadota",
+        "class": "Gammaproteobacteria",
+        "order": "Enterobacterales",
+        "family": "Enterobacteriaceae",
+        "genus": "Escherichia",
+        "species": "Escherichia coli"
+    },
+    "Pseudomonas aeruginosa": {
+        "cellular root": "cellular organisms",
+        "domain": "Bacteria",
+        "kingdom": "Pseudomonadati",
+        "phylum": "Pseudomonadota",
+        "class": "Gammaproteobacteria",
+        "order": "Pseudomonadales",
+        "family": "Pseudomonadaceae",
+        "genus": "Pseudomonas",
+        "species group": "Pseudomonas aeruginosa group",
+        "species": "Pseudomonas aeruginosa"
+    },
+    "Salmonella enterica": {
+        "cellular root": "cellular organisms",
+        "domain": "Bacteria",
+        "kingdom": "Pseudomonadati",
+        "phylum": "Pseudomonadota",
+        "class": "Gammaproteobacteria",
+        "order": "Enterobacterales",
+        "family": "Enterobacteriaceae",
+        "genus": "Salmonella",
+        "species": "Salmonella enterica"
+    },
+    "Shigella flexneri": {
+        "cellular root": "cellular organisms",
+        "domain": "Bacteria",
+        "kingdom": "Pseudomonadati",
+        "phylum": "Pseudomonadota",
+        "class": "Gammaproteobacteria",
+        "order": "Enterobacterales",
+        "family": "Enterobacteriaceae",
+        "genus": "Shigella",
+        "species": "Shigella flexneri"
+    }
+}
