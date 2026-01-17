@@ -1,6 +1,6 @@
 from Bio import Entrez
 from typing import Optional, Dict
-from ..constants import ENTREZ_EMAIL, ENTREZ_TOOL
+from ..constants import ENTREZ_EMAIL, ENTREZ_TOOL, TAXONOMY_DB
 
 Entrez.email = ENTREZ_EMAIL
 Entrez.tool = ENTREZ_TOOL
@@ -14,7 +14,7 @@ def species_to_tax_id(species_name: str) -> Optional[str]:
     """
     try:
         handle = Entrez.esearch(
-            db='taxonomy',
+            db=TAXONOMY_DB,
             term=species_name,
             retmode='xml'
         )

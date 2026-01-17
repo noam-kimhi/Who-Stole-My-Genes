@@ -2,11 +2,9 @@ import time
 import json
 from pathlib import Path
 from typing import Dict, Union, Optional, Mapping, Any
-from ..constants import ORGANISM_KEY, NCBI_SLEEP
+from ..constants import ORGANISM_KEY, NCBI_SLEEP, PathLike
 from .normalize import normalize_species_name
 from .ncbi import species_to_tax_id, tax_id_to_lineage
-
-PathLike = Union[str, Path]
 
 
 def build_taxonomy_map(node_attrs: Dict[str, Dict[str, Union[str, int]]],

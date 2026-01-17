@@ -1,7 +1,9 @@
 import os
 from Bio.Align import substitution_matrices
-from typing import List, Tuple
+from pathlib import Path
+from typing import List, Tuple, Union
 
+PathLike = Union[str, Path]
 RESULTS_DIR: str = os.path.join('.', 'results')
 if not os.path.exists(RESULTS_DIR):
     os.makedirs(RESULTS_DIR)
@@ -28,8 +30,10 @@ IDENTITY_KEY: str = 'identity'
 COVERAGE_KEY: str = 'coverage'
 ALIGNED_LENGTH_KEY: str = 'aligned_len'
 TAX_DIST_KEY: str = 'taxonomic_distance'
+SPEC_NAME_KEY:str = 'species_name'
 ENTREZ_EMAIL: str = 'or.forshmit@mail.huji.ac.il'
 ENTREZ_TOOL: str = 'hgt_graph'
+TAXONOMY_DB: str = 'taxonomy'
 SUS_EDGE_COLOR: str = 'rgba(220,50,50,0.95)'
 REG_EDGE_COLOR: str = 'rgba(50,50,50,0.7)'
 SUS_NODE_BORDER_COLOR: str = 'rgba(255,0,0,1.0)'
@@ -50,5 +54,15 @@ COLOR_BOUNDS: Tuple[int, int] = (30, 220)
 PLOTLY_MIN_W: float = 1.0
 PLOTLY_MAX_W: float = 10.0
 NCBI_SLEEP: float = 0.34
+ORG_NAME_LBL: str = 'org_name'
 PHYLO_TITLE: str = 'HGT Candidate Phylogenetic Tree'
 PHYLO_REG_FONT_SIZE: int = 18
+NORMAL_NODES: str = 'normal'
+HIGHLIGHT_NODES: str = 'highlight'
+X_VALS_KEY: str = 'x_vals'
+Y_VALS_KEY: str = 'y_vals'
+Z_VALS_KEY: str = 'z_vals'
+HOVER_TEXT_KEY: str = 'hover'
+TEXT_SIZE_KEY: str = 'size'
+TEXT_COLOR_KEY: str = 'color'
+LABEL_KEY: str = 'label'

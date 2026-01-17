@@ -9,12 +9,12 @@ def stable_color_from_string(s: str) -> str:
     :param s: The input string.
     :return: A hex color code.
     """
-    digest = hashlib.md5(s.encode("utf-8")).digest()
-    seed = int.from_bytes(digest, byteorder="big")
-    rnd = random.Random(seed)
-    r = rnd.randint(*COLOR_BOUNDS)
-    g = rnd.randint(*COLOR_BOUNDS)
-    b = rnd.randint(*COLOR_BOUNDS)
+    digest: bytes = hashlib.md5(s.encode("utf-8")).digest()
+    seed: int = int.from_bytes(digest, byteorder="big")
+    rnd: random.Random = random.Random(seed)
+    r: int = rnd.randint(*COLOR_BOUNDS)
+    g: int = rnd.randint(*COLOR_BOUNDS)
+    b: int = rnd.randint(*COLOR_BOUNDS)
     return f"#{r:02x}{g:02x}{b:02x}"
 
 

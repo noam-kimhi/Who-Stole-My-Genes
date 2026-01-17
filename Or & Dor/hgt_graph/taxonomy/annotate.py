@@ -1,6 +1,6 @@
 import networkx as nx
 from typing import Dict, Mapping, Any, List
-from ..constants import ORGANISM_KEY, TAX_DIST_KEY, TAX_RANKS, TAX_RANKS_CLOSE_TO_BROAD
+from ..constants import ORGANISM_KEY, TAX_DIST_KEY, TAX_RANKS, TAX_RANKS_CLOSE_TO_BROAD, SPEC_NAME_KEY
 from .normalize import normalize_species_name
 
 
@@ -14,7 +14,7 @@ def annotate_graph_with_taxonomy(G: nx.Graph, taxonomy_cache: Dict[str, Mapping[
         org = str(attrs.get(ORGANISM_KEY, ''))
         sp = normalize_species_name(org)
         lineage = taxonomy_cache.get(sp, {})
-        G.nodes[node_id]['species_name'] = sp
+        G.nodes[node_id][SPEC_NAME_KEY] = sp
 
         for rank in TAX_RANKS:
             if rank in lineage:

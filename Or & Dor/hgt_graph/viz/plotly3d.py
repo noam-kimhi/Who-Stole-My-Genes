@@ -2,14 +2,13 @@ import math
 import os
 import networkx as nx
 import plotly.graph_objs as go
-from pathlib import Path
-from typing import Dict, List, Set, Tuple, Union, Mapping, Any
+from typing import Dict, List, Set, Tuple, Mapping, Any, Union
 from ..constants import (EDGE_WEIGHT_KEY, IDENTITY_KEY, COVERAGE_KEY, ALIGNED_LENGTH_KEY, TAX_DIST_KEY,
                          ORGANISM_KEY, PROTEIN_NAME_KEY, SEQ_LENGTH_KEY, PLOTLY_MIN_W, PLOTLY_MAX_W,
-                         SUS_EDGE_COLOR, REG_EDGE_COLOR, SUS_NODE_BORDER_COLOR, REG_NODE_BORDER_COLOR)
+                         SUS_EDGE_COLOR, REG_EDGE_COLOR, SUS_NODE_BORDER_COLOR, REG_NODE_BORDER_COLOR,
+                         ORG_NAME_LBL, PathLike, NORMAL_NODES, HIGHLIGHT_NODES, X_VALS_KEY, Y_VALS_KEY,
+                         Z_VALS_KEY, HOVER_TEXT_KEY, TEXT_SIZE_KEY, TEXT_COLOR_KEY, LABEL_KEY)
 from .colors import stable_color_from_string, rescale_weight
-
-PathLike = Union[str, Path]
 
 
 def build_edge_traces(G: nx.Graph, pos: Dict[str, Tuple[float, float, float]],
@@ -94,12 +93,18 @@ def make_node_traces(G: nx.Graph, pos: Dict[str, Tuple[float, float, float]], hi
     def node_display(attrs: Mapping[str, Any]) -> str:
         org: str = str(attrs.get(ORGANISM_KEY, ''))
         protein_name: str = str(attrs.get(PROTEIN_NAME_KEY, ''))
-        return org if (node_label == 'org_name' and org) else protein_name
+        return org if (node_label == ORG_NAME_LBL and org) else protein_name
 
     # containers for the two groups
-    groups = {
-        'normal': {'x': [], 'y': [], 'z': [], 'hover': [], 'size': [], 'color': [], 'label': []},
-        'highlight': {'x': [], 'y': [], 'z': [], 'hover': [], 'size': [], 'color': [], 'label': []},
+    groups: Dict[str, Dict[str, List[Union[float, str]]]] = {
+        NORMAL_NODES: {
+            X_VALS_KEY: [], Y_VALS_KEY: [], Z_VALS_KEY: [], HOVER_TEXT_KEY: [],
+            TEXT_SIZE_KEY: [], TEXT_COLOR_KEY: [], LABEL_KEY: []
+        },
+        HIGHLIGHT_NODES: {
+            X_VALS_KEY: [], Y_VALS_KEY: [], Z_VALS_KEY: [], HOVER_TEXT_KEY: [],
+            TEXT_SIZE_KEY: [], TEXT_COLOR_KEY: [], LABEL_KEY: []
+        },
     }
 
     for nid, attrs in G.nodes(data=True):
@@ -129,28 +134,28 @@ def make_node_traces(G: nx.Graph, pos: Dict[str, Tuple[float, float, float]], hi
             f'<b>HGT score:</b> {score:.4f}'
         )
 
-        grp = 'highlight' if nid in highlight_nodes else 'normal'
-        groups[grp]['x'].append(x)
-        groups[grp]['y'].append(y)
-        groups[grp]['z'].append(z)
-        groups[grp]['hover'].append(hover)
-        groups[grp]['size'].append(size)
-        groups[grp]['color'].append(stable_color_from_string(organism))
-        groups[grp]['label'].append(disp if node_label != 'none' else '')
+        grp = HIGHLIGHT_NODES if nid in highlight_nodes else NORMAL_NODES
+        groups[grp][X_VALS_KEY].append(x)
+        groups[grp][Y_VALS_KEY].append(y)
+        groups[grp][Z_VALS_KEY].append(z)
+        groups[grp][HOVER_TEXT_KEY].append(hover)
+        groups[grp][TEXT_SIZE_KEY].append(size)
+        groups[grp][TEXT_COLOR_KEY].append(stable_color_from_string(organism))
+        groups[grp][LABEL_KEY].append(disp if node_label != 'none' else '')
 
     # normal nodes
     traces = [go.Scatter3d(
-        x=groups['normal']['x'],
-        y=groups['normal']['y'],
-        z=groups['normal']['z'],
+        x=groups[NORMAL_NODES][X_VALS_KEY],
+        y=groups[NORMAL_NODES][Y_VALS_KEY],
+        z=groups[NORMAL_NODES][Z_VALS_KEY],
         mode='markers+text' if node_label != 'none' else 'markers',
-        text=groups['normal']['label'] if node_label != 'none' else None,
+        text=groups[NORMAL_NODES][LABEL_KEY] if node_label != 'none' else None,
         textposition='top center',
         hoverinfo='text',
-        hovertext=groups['normal']['hover'],
+        hovertext=groups[NORMAL_NODES][HOVER_TEXT_KEY],
         marker=dict(
-            size=groups['normal']['size'],
-            color=groups['normal']['color'],
+            size=groups[NORMAL_NODES][TEXT_SIZE_KEY],
+            color=groups[NORMAL_NODES][TEXT_COLOR_KEY],
             opacity=0.85,
             line=dict(width=1, color=REG_NODE_BORDER_COLOR),
         ),
@@ -158,20 +163,20 @@ def make_node_traces(G: nx.Graph, pos: Dict[str, Tuple[float, float, float]], hi
     )]
 
     # highlighted nodes
-    if groups['highlight']['x']:
+    if groups[HIGHLIGHT_NODES][X_VALS_KEY]:
         traces.append(
             go.Scatter3d(
-                x=groups['highlight']['x'],
-                y=groups['highlight']['y'],
-                z=groups['highlight']['z'],
+                x=groups[HIGHLIGHT_NODES][X_VALS_KEY],
+                y=groups[HIGHLIGHT_NODES][Y_VALS_KEY],
+                z=groups[HIGHLIGHT_NODES][Z_VALS_KEY],
                 mode='markers+text' if node_label != 'none' else 'markers',
-                text=groups['highlight']['label'] if node_label != 'none' else None,
+                text=groups[HIGHLIGHT_NODES][LABEL_KEY] if node_label != 'none' else None,
                 textposition='top center',
                 hoverinfo='text',
-                hovertext=groups['highlight']['hover'],
+                hovertext=groups[HIGHLIGHT_NODES][HOVER_TEXT_KEY],
                 marker=dict(
-                    size=groups['highlight']['size'],
-                    color=groups['highlight']['color'],
+                    size=groups[HIGHLIGHT_NODES][TEXT_SIZE_KEY],
+                    color=groups[HIGHLIGHT_NODES][TEXT_COLOR_KEY],
                     opacity=0.95,
                     line=dict(width=5, color=SUS_NODE_BORDER_COLOR),
                 ),
@@ -183,7 +188,7 @@ def make_node_traces(G: nx.Graph, pos: Dict[str, Tuple[float, float, float]], hi
 
 
 def export_plotly_3d(G: nx.Graph, out_html: PathLike, sus_edges: Set[Tuple[str, str]], hgt_scores: Dict[str, float],
-                     highlight_nodes: Set[str], node_label: str = 'org_name', show_edge_hover: bool = True) -> None:
+                     highlight_nodes: Set[str], node_label: str = ORG_NAME_LBL, show_edge_hover: bool = True) -> None:
     """
     Export the given NetworkX graph to a rotatable 3D Plotly HTML visualization.
     :param G: The input NetworkX graph.

@@ -1,5 +1,6 @@
 import networkx as nx
 from typing import Dict, List, Tuple, Union
+from ..constants import IDENTITY_KEY
 
 
 def build_nx_graph(node_attrs: Dict[str, Dict[str, Union[str, int]]],
@@ -26,6 +27,6 @@ def build_identity_map_from_edges(edges: List[Tuple[str, str, Dict[str, float]]]
     """
     ident_map: Dict[Tuple[str, str], float] = {}
     for u, v, attrs in edges:
-        if 'identity' in attrs:
-            ident_map[(u, v)] = float(attrs['identity'])
+        if IDENTITY_KEY in attrs:
+            ident_map[(u, v)] = float(attrs[IDENTITY_KEY])
     return ident_map
