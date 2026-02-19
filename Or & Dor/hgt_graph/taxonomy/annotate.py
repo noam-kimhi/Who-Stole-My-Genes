@@ -30,13 +30,13 @@ def taxonomic_distance(u_attrs: Mapping[str, Any], v_attrs: Mapping[str, Any]) -
     :param v_attrs: The attributes of node v.
     :return: The taxonomic distance as an integer.
     """
-    checks: List[str] = TAX_RANKS_CLOSE_TO_BROAD
-    for d, rank in enumerate(checks):
+    ranks: List[str] = TAX_RANKS_CLOSE_TO_BROAD
+    for d, rank in enumerate(ranks):
         u_val = u_attrs.get(rank)
         v_val = v_attrs.get(rank)
         if u_val is not None and v_val is not None and u_val == v_val:
             return d
-    return len(checks)
+    return len(ranks)
 
 
 def has_any_taxonomy(attrs: Mapping[str, Any]) -> bool:
