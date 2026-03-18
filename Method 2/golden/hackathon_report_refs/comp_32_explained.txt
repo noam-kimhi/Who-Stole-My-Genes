@@ -1,0 +1,167 @@
+C:\Python39\python.exe -X pycache_prefix=C:\Users\Roee\AppData\Local\JetBrains\PyCharm2025.1\cpython-cache "C:/Program Files/JetBrains/PyCharm 2023.3.4/plugins/python-ce/helpers/pydev/pydevd.py" --multiprocess --qt-support=auto --client 127.0.0.1 --port 58013 --file D:\CS\CBIO_HACK\scripts\explain_component.py --component_id 32 --edges out/edge_features.tsv --protein_features out/protein_features.tsv --component_features out/component_features.tsv --hgt_candidates out/hgt_candidates.tsv --top_nodes 20 --top_edges 25 
+Connected to pydev debugger (build 251.29188.22)
+[COMPONENT] id=32
+  size=71  edges=332  density=0.1336
+  n_species=31  H_norm=0.958  high_z_frac=0.063253  max_z=5.754461
+
+[SPECIES] top species counts:
+  Bacteroides fragilis           9
+  Rhizobium leguminosarum        4
+  Bacteroides thetaiotaomicron   4
+  Escherichia coli               3
+  Neisseria meningitidis         3
+  Salmonella enterica            3
+  Klebsiella pneumoniae          3
+  Azotobacter vinelandii         2
+  Pseudomonas aeruginosa         2
+  Pseudomonas putida             2
+  Bifidobacterium longum         2
+  Streptococcus pyogenes         2
+  Leptospira interrogans         2
+  Flavobacterium johnsoniae      2
+  Synechococcus elongatus        2
+
+[NODES] top by FINAL score (from hgt_candidates.tsv), k=20:
+  score=13.429828  deg=16  ns= 5  top5z=   3.349  bw=     1e-06  clust= 0.133  maxSpFrac=0.438  GCF_002302565.1_ASM230256v1|WP_042001317.1
+  score= 7.939213  deg=20  ns= 7  top5z=   3.550  bw=     2e-06  clust= 0.105  maxSpFrac=0.350  GCF_000220625.1_ASM22062v1|WP_013998433.1
+  score= 0.000000  deg=20  ns=11  top5z=   1.186  bw=         0  clust= 0.289  maxSpFrac=0.200  GCF_000005845.2_ASM584v2|NP_416543.1
+  score= 0.000000  deg=15  ns= 8  top5z=   3.402  bw=         0  clust= 0.333  maxSpFrac=0.200  GCF_000021045.1_ASM2104v1|WP_012700224.1
+  score= 0.000000  deg=14  ns= 7  top5z=   3.402  bw=         0  clust= 0.374  maxSpFrac=0.214  GCF_000380335.1_ASM38033v1|WP_012700224.1
+  score= 0.000000  deg=15  ns= 7  top5z=   3.053  bw=     1e-06  clust= 0.400  maxSpFrac=0.267  GCF_000006765.1_ASM676v1|NP_253850.1
+  score= 0.000000  deg=14  ns= 7  top5z=   3.126  bw=     1e-06  clust= 0.429  maxSpFrac=0.286  GCF_000014625.1_ASM1462v1|WP_003096181.1
+  score= 0.000000  deg=13  ns= 6  top5z=   0.916  bw=         0  clust= 0.346  maxSpFrac=0.308  GCF_000007565.2_ASM756v2|WP_010952820.1
+  score= 0.000000  deg=10  ns= 6  top5z=   1.386  bw=         0  clust= 0.533  maxSpFrac=0.200  GCF_000517605.1_ASM51760v1|WP_025393224.1
+  score= 0.000000  deg=12  ns= 7  top5z=          bw=         0  clust= 0.439  maxSpFrac=0.167  GCF_000196555.1_ASM19655v1|WP_013582972.1
+  score= 0.000000  deg= 7  ns= 6  top5z=  -0.159  bw=         0  clust= 0.238  maxSpFrac=0.286  GCF_900475035.1_41965_F01|WP_014407521.1
+  score= 0.000000  deg= 6  ns= 5  top5z=  -0.522  bw=         0  clust= 0.333  maxSpFrac=0.333  GCF_000006785.2_ASM678v2|WP_010922195.1
+  score= 0.000000  deg=10  ns= 6  top5z=   4.214  bw=     1e-06  clust= 0.600  maxSpFrac=0.200  GCF_000007685.1_ASM768v1|WP_000842260.1
+  score= 0.000000  deg=10  ns= 6  top5z=   4.214  bw=     1e-06  clust= 0.600  maxSpFrac=0.200  GCF_002073495.2_ASM207349v2|WP_000842260.1
+  score= 0.000000  deg=11  ns= 6  top5z=   1.462  bw=         0  clust= 0.600  maxSpFrac=0.182  GCF_000021345.1_ASM2134v1|WP_012556658.1
+  score= 0.000000  deg=12  ns= 7  top5z=          bw=         0  clust= 0.470  maxSpFrac=0.167  GCF_000007525.1_ASM752v1|WP_011068370.1
+  score= 0.000000  deg=11  ns= 5  top5z=   0.447  bw=         0  clust= 0.182  maxSpFrac=0.273  GCF_000021345.1_ASM2134v1|WP_003587433.1
+  score= 0.000000  deg=11  ns= 6  top5z=   0.363  bw=         0  clust= 0.291  maxSpFrac=0.273  GCF_000517605.1_ASM51760v1|WP_025394025.1
+  score= 0.000000  deg=13  ns= 8  top5z=   0.493  bw=         0  clust= 0.115  maxSpFrac=0.154  GCF_030388325.1_ASM3038832v1|WP_289878621.1
+  score= 0.000000  deg= 7  ns= 6  top5z=  -0.650  bw=         0  clust= 0.333  maxSpFrac=0.286  GCF_001457635.1_NCTC7465|WP_000676139.1
+
+[NODES] top by top5_mean_z, k=20:
+  top5z=   4.214  deg=10  ns= 6  bw=     1e-06  clust= 0.600  GCF_000007685.1_ASM768v1|WP_000842260.1
+  top5z=   4.214  deg=10  ns= 6  bw=     1e-06  clust= 0.600  GCF_002073495.2_ASM207349v2|WP_000842260.1
+  top5z=   3.550  deg=20  ns= 7  bw=     2e-06  clust= 0.105  GCF_000220625.1_ASM22062v1|WP_013998433.1
+  top5z=   3.402  deg=15  ns= 8  bw=         0  clust= 0.333  GCF_000021045.1_ASM2104v1|WP_012700224.1
+  top5z=   3.402  deg=14  ns= 7  bw=         0  clust= 0.374  GCF_000380335.1_ASM38033v1|WP_012700224.1
+  top5z=   3.349  deg=16  ns= 5  bw=     1e-06  clust= 0.133  GCF_002302565.1_ASM230256v1|WP_042001317.1
+  top5z=   3.126  deg=14  ns= 7  bw=     1e-06  clust= 0.429  GCF_000014625.1_ASM1462v1|WP_003096181.1
+  top5z=   3.053  deg=15  ns= 7  bw=     1e-06  clust= 0.400  GCF_000006765.1_ASM676v1|NP_253850.1
+  top5z=   2.797  deg= 2  ns= 1  bw=         0  clust= 0.000  GCF_000011065.1_ASM1106v1|WP_011107280.1
+  top5z=   2.797  deg= 2  ns= 1  bw=         0  clust= 0.000  GCF_014131755.1_ASM1413175v1|WP_011107280.1
+  top5z=   2.432  deg=11  ns= 6  bw=         0  clust= 0.600  GCF_000010065.1_ASM1006v1|WP_011244302.1
+  top5z=   2.432  deg=10  ns= 6  bw=         0  clust= 0.533  GCF_022984195.1_ASM2298419v1|WP_011244302.1
+  top5z=   1.876  deg= 6  ns= 3  bw=         0  clust= 0.533  GCF_000025985.1_ASM2598v1|WP_010993423.1
+  top5z=   1.781  deg= 6  ns= 4  bw=         0  clust= 0.000  GCF_000025985.1_ASM2598v1|WP_010992560.1
+  top5z=   1.714  deg= 7  ns= 5  bw=         0  clust= 0.333  GCF_000009925.1_ASM992v1|WP_005795876.1
+  top5z=   1.621  deg=12  ns= 6  bw=         0  clust= 0.106  GCF_000412675.1_ASM41267v1|WP_016500990.1
+  top5z=   1.576  deg= 6  ns= 4  bw=         0  clust= 0.000  GCF_000009925.1_ASM992v1|WP_011202141.1
+  top5z=   1.462  deg=11  ns= 6  bw=         0  clust= 0.600  GCF_000021345.1_ASM2134v1|WP_012556658.1
+  top5z=   1.438  deg= 7  ns= 5  bw=         0  clust= 0.333  GCF_000025985.1_ASM2598v1|WP_008658902.1
+  top5z=   1.386  deg=10  ns= 6  bw=         0  clust= 0.533  GCF_000517605.1_ASM51760v1|WP_025393224.1
+
+[NODES] top by betweenness, k=20:
+  bw=     2e-06  clust= 0.105  deg=20  ns= 7  top5z=   3.550  GCF_000220625.1_ASM22062v1|WP_013998433.1
+  bw=     1e-06  clust= 0.400  deg=15  ns= 7  top5z=   3.053  GCF_000006765.1_ASM676v1|NP_253850.1
+  bw=     1e-06  clust= 0.429  deg=14  ns= 7  top5z=   3.126  GCF_000014625.1_ASM1462v1|WP_003096181.1
+  bw=     1e-06  clust= 0.600  deg=10  ns= 6  top5z=   4.214  GCF_000007685.1_ASM768v1|WP_000842260.1
+  bw=     1e-06  clust= 0.600  deg=10  ns= 6  top5z=   4.214  GCF_002073495.2_ASM207349v2|WP_000842260.1
+  bw=     1e-06  clust= 0.133  deg=16  ns= 5  top5z=   3.349  GCF_002302565.1_ASM230256v1|WP_042001317.1
+  bw=         0  clust= 0.289  deg=20  ns=11  top5z=   1.186  GCF_000005845.2_ASM584v2|NP_416543.1
+  bw=         0  clust= 0.333  deg=15  ns= 8  top5z=   3.402  GCF_000021045.1_ASM2104v1|WP_012700224.1
+  bw=         0  clust= 0.374  deg=14  ns= 7  top5z=   3.402  GCF_000380335.1_ASM38033v1|WP_012700224.1
+  bw=         0  clust= 0.346  deg=13  ns= 6  top5z=   0.916  GCF_000007565.2_ASM756v2|WP_010952820.1
+  bw=         0  clust= 0.533  deg=10  ns= 6  top5z=   1.386  GCF_000517605.1_ASM51760v1|WP_025393224.1
+  bw=         0  clust= 0.439  deg=12  ns= 7  top5z=          GCF_000196555.1_ASM19655v1|WP_013582972.1
+  bw=         0  clust= 0.238  deg= 7  ns= 6  top5z=  -0.159  GCF_900475035.1_41965_F01|WP_014407521.1
+  bw=         0  clust= 0.333  deg= 6  ns= 5  top5z=  -0.522  GCF_000006785.2_ASM678v2|WP_010922195.1
+  bw=         0  clust= 0.600  deg=11  ns= 6  top5z=   1.462  GCF_000021345.1_ASM2134v1|WP_012556658.1
+  bw=         0  clust= 0.470  deg=12  ns= 7  top5z=          GCF_000007525.1_ASM752v1|WP_011068370.1
+  bw=         0  clust= 0.182  deg=11  ns= 5  top5z=   0.447  GCF_000021345.1_ASM2134v1|WP_003587433.1
+  bw=         0  clust= 0.291  deg=11  ns= 6  top5z=   0.363  GCF_000517605.1_ASM51760v1|WP_025394025.1
+  bw=         0  clust= 0.115  deg=13  ns= 8  top5z=   0.493  GCF_030388325.1_ASM3038832v1|WP_289878621.1
+  bw=         0  clust= 0.333  deg= 7  ns= 6  top5z=  -0.650  GCF_001457635.1_NCTC7465|WP_000676139.1
+
+[NODES] top by (1 - clustering) bridge proxy, k=20:
+  bridge= 1.000  clust= 0.000  deg= 6  ns= 4  top5z=   1.781  GCF_000025985.1_ASM2598v1|WP_010992560.1
+  bridge= 1.000  clust= 0.000  deg= 6  ns= 4  top5z=   1.576  GCF_000009925.1_ASM992v1|WP_011202141.1
+  bridge= 1.000  clust= 0.000  deg= 3  ns= 1  top5z=  -0.485  GCF_000006645.1_ASM664v1|WP_002211983.1
+  bridge= 1.000  clust= 0.000  deg= 7  ns= 3  top5z=   0.443  GCF_000007545.1_ASM754v1|WP_000676077.1
+  bridge= 1.000  clust= 0.000  deg= 4  ns= 2  top5z=  -0.192  GCF_000008585.1_ASM858v1|WP_003401670.1
+  bridge= 1.000  clust= 0.000  deg= 4  ns= 2  top5z=  -0.192  GCF_000195955.2_ASM19595v2|NP_214848.1
+  bridge= 1.000  clust= 0.000  deg= 8  ns= 2  top5z=   1.023  GCF_000240185.1_ASM24018v2|YP_005227857.1
+  bridge= 1.000  clust= 0.000  deg= 3  ns= 1  top5z=  -0.485  GCF_000222975.1_ASM22297v1|WP_002211983.1
+  bridge= 1.000  clust= 0.000  deg= 1  ns= 1  top5z=          GCF_000009765.2_ASM976v2|WP_010982385.1
+  bridge= 1.000  clust= 0.000  deg= 1  ns= 1  top5z=          GCF_000009885.1_ASM988v1|WP_002883307.1
+  bridge= 1.000  clust= 0.000  deg= 4  ns= 3  top5z=  -0.737  GCF_000009925.1_ASM992v1|WP_005790602.1
+  bridge= 1.000  clust= 0.000  deg= 2  ns= 1  top5z=   2.797  GCF_000011065.1_ASM1106v1|WP_011107280.1
+  bridge= 1.000  clust= 0.000  deg= 4  ns= 3  top5z=  -0.737  GCF_000025985.1_ASM2598v1|WP_005790602.1
+  bridge= 1.000  clust= 0.000  deg= 2  ns= 1  top5z=   2.797  GCF_014131755.1_ASM1413175v1|WP_011107280.1
+  bridge= 1.000  clust= 0.000  deg= 1  ns= 1  top5z=          GCF_000240185.1_ASM24018v2|YP_005224436.1
+  bridge= 0.909  clust= 0.091  deg=11  ns= 4  top5z=   0.081  GCF_000008865.2_ASM886v2|NP_312749.1
+  bridge= 0.905  clust= 0.095  deg= 7  ns= 5  top5z=   0.867  GCF_000009925.1_ASM992v1|WP_011202938.1
+  bridge= 0.895  clust= 0.105  deg=20  ns= 7  top5z=   3.550  GCF_000220625.1_ASM22062v1|WP_013998433.1
+  bridge= 0.894  clust= 0.106  deg=12  ns= 6  top5z=   1.621  GCF_000412675.1_ASM41267v1|WP_016500990.1
+  bridge= 0.885  clust= 0.115  deg=13  ns= 8  top5z=   0.493  GCF_030388325.1_ASM3038832v1|WP_289878621.1
+
+[EDGES] top by z_robust, k=25:
+  z=5.75446  jac=0.134653  shared=  68  Leptospira interrogans | GCF_000007685.1_ASM768v1|WP_000842260.1   --   Azotobacter vinelandii | GCF_000021045.1_ASM2104v1|WP_012700224.1
+  z=5.75446  jac=0.134653  shared=  68  Leptospira interrogans | GCF_000007685.1_ASM768v1|WP_000842260.1   --   Azotobacter vinelandii | GCF_000380335.1_ASM38033v1|WP_012700224.1
+  z=5.75446  jac=0.134653  shared=  68  Azotobacter vinelandii | GCF_000021045.1_ASM2104v1|WP_012700224.1   --   Leptospira interrogans | GCF_002073495.2_ASM207349v2|WP_000842260.1
+  z=5.75446  jac=0.134653  shared=  68  Azotobacter vinelandii | GCF_000380335.1_ASM38033v1|WP_012700224.1   --   Leptospira interrogans | GCF_002073495.2_ASM207349v2|WP_000842260.1
+  z=3.95125  jac=0.114786  shared=  59  Leptospira interrogans | GCF_000007685.1_ASM768v1|WP_000842260.1   --   Pseudomonas aeruginosa | GCF_000014625.1_ASM1462v1|WP_003096181.1
+  z=3.95125  jac=0.114786  shared=  59  Pseudomonas aeruginosa | GCF_000014625.1_ASM1462v1|WP_003096181.1   --   Leptospira interrogans | GCF_002073495.2_ASM207349v2|WP_000842260.1
+  z=3.85305  jac=0.238612  shared= 110  Bacteroides fragilis | GCF_000025985.1_ASM2598v1|WP_010993423.1   --   Capnocytophaga canimorsus | GCF_000220625.1_ASM22062v1|WP_013998433.1
+  z=3.77042  jac=0.236443  shared= 109  Bacteroides fragilis | GCF_000009925.1_ASM992v1|WP_005795876.1   --   Capnocytophaga canimorsus | GCF_000220625.1_ASM22062v1|WP_013998433.1
+  z=3.77029  jac=0.112621  shared=  58  Pseudomonas aeruginosa | GCF_000006765.1_ASM676v1|NP_253850.1   --   Leptospira interrogans | GCF_002073495.2_ASM207349v2|WP_000842260.1
+  z=3.77029  jac=0.112621  shared=  58  Pseudomonas aeruginosa | GCF_000006765.1_ASM676v1|NP_253850.1   --   Leptospira interrogans | GCF_000007685.1_ASM768v1|WP_000842260.1
+  z=3.73149  jac=0.235421  shared= 109  Bacteroides fragilis | GCF_000025985.1_ASM2598v1|WP_010992560.1   --   Capnocytophaga canimorsus | GCF_000220625.1_ASM22062v1|WP_013998433.1
+  z=3.64921  jac=0.233261  shared= 108  Bacteroides fragilis | GCF_000025985.1_ASM2598v1|WP_010993423.1   --   Capnocytophaga canimorsus | GCF_002302565.1_ASM230256v1|WP_042001317.1
+  z=3.56696  jac=0.231102  shared= 107  Bacteroides fragilis | GCF_000009925.1_ASM992v1|WP_005795876.1   --   Capnocytophaga canimorsus | GCF_002302565.1_ASM230256v1|WP_042001317.1
+  z=3.5291  jac=0.230108  shared= 107  Bacteroides fragilis | GCF_000025985.1_ASM2598v1|WP_010992560.1   --   Capnocytophaga canimorsus | GCF_002302565.1_ASM230256v1|WP_042001317.1
+  z=3.43103  jac=0.141434  shared=  71  Pseudomonas aeruginosa | GCF_000006765.1_ASM676v1|NP_253850.1   --   Synechococcus elongatus | GCF_000010065.1_ASM1006v1|WP_011244302.1
+  z=3.43103  jac=0.141434  shared=  71  Pseudomonas aeruginosa | GCF_000006765.1_ASM676v1|NP_253850.1   --   Synechococcus elongatus | GCF_022984195.1_ASM2298419v1|WP_011244302.1
+  z=3.43103  jac=0.141434  shared=  71  Synechococcus elongatus | GCF_000010065.1_ASM1006v1|WP_011244302.1   --   Pseudomonas aeruginosa | GCF_000014625.1_ASM1462v1|WP_003096181.1
+  z=3.43103  jac=0.141434  shared=  71  Pseudomonas aeruginosa | GCF_000014625.1_ASM1462v1|WP_003096181.1   --   Synechococcus elongatus | GCF_022984195.1_ASM2298419v1|WP_011244302.1
+  z=3.24682  jac=0.222698  shared= 104  Bacteroides fragilis | GCF_000009925.1_ASM992v1|WP_011202141.1   --   Capnocytophaga canimorsus | GCF_000220625.1_ASM22062v1|WP_013998433.1
+  z=3.14728  jac=0.220085  shared= 103  Bacteroides fragilis | GCF_000025985.1_ASM2598v1|WP_008658902.1   --   Capnocytophaga canimorsus | GCF_000220625.1_ASM22062v1|WP_013998433.1
+  z=3.0482  jac=0.217484  shared= 102  Bacteroides fragilis | GCF_000009925.1_ASM992v1|WP_011202141.1   --   Capnocytophaga canimorsus | GCF_002302565.1_ASM230256v1|WP_042001317.1
+  z=2.94954  jac=0.214894  shared= 101  Bacteroides fragilis | GCF_000025985.1_ASM2598v1|WP_008658902.1   --   Capnocytophaga canimorsus | GCF_002302565.1_ASM230256v1|WP_042001317.1
+  z=2.88256  jac=0.222698  shared= 104  Bacteroides thetaiotaomicron | GCF_000011065.1_ASM1106v1|WP_011107280.1   --   Capnocytophaga canimorsus | GCF_000220625.1_ASM22062v1|WP_013998433.1
+  z=2.88256  jac=0.222698  shared= 104  Capnocytophaga canimorsus | GCF_000220625.1_ASM22062v1|WP_013998433.1   --   Bacteroides thetaiotaomicron | GCF_014131755.1_ASM1413175v1|WP_011107280.1
+  z=2.71154  jac=0.217484  shared= 102  Bacteroides thetaiotaomicron | GCF_000011065.1_ASM1106v1|WP_011107280.1   --   Capnocytophaga canimorsus | GCF_002302565.1_ASM230256v1|WP_042001317.1
+
+[EDGES] top by jaccard, k=25:
+  jac=0.400000  shared= 160  z=-0.851412  Streptococcus pneumoniae | GCF_001457635.1_NCTC7465|WP_000676139.1   --   Streptococcus agalactiae | GCF_001552035.1_ASM155203v1|WP_000676114.1
+  jac=0.396509  shared= 159  z=-0.882956  Streptococcus agalactiae | GCF_000007265.1_ASM726v1|WP_000676112.1   --   Streptococcus pneumoniae | GCF_001457635.1_NCTC7465|WP_000676139.1
+  jac=0.253898  shared= 114  z=0.151941  Enterococcus faecalis | GCF_000007785.1_ASM778v1|WP_002364387.1   --   Streptococcus agalactiae | GCF_001552035.1_ASM155203v1|WP_000676114.1
+  jac=0.253898  shared= 114  z=0.151941  Enterococcus faecalis | GCF_000172575.2_ASM17257v2|WP_002364387.1   --   Streptococcus agalactiae | GCF_001552035.1_ASM155203v1|WP_000676114.1
+  jac=0.246120  shared= 111  z=0.738808  Enterococcus faecalis | GCF_000007785.1_ASM778v1|WP_002364387.1   --   Listeria monocytogenes | GCF_000196035.1_ASM19603v1|NP_464606.1
+  jac=0.246120  shared= 111  z=0.738808  Enterococcus faecalis | GCF_000172575.2_ASM17257v2|WP_002364387.1   --   Listeria monocytogenes | GCF_000196035.1_ASM19603v1|NP_464606.1
+  jac=0.238612  shared= 110  z=3.853046  Bacteroides fragilis | GCF_000025985.1_ASM2598v1|WP_010993423.1   --   Capnocytophaga canimorsus | GCF_000220625.1_ASM22062v1|WP_013998433.1
+  jac=0.237363  shared= 108  z=-0.067019  Streptococcus agalactiae | GCF_000007265.1_ASM726v1|WP_000676112.1   --   Enterococcus faecalis | GCF_000007785.1_ASM778v1|WP_002364387.1
+  jac=0.237363  shared= 108  z=-0.067019  Streptococcus agalactiae | GCF_000007265.1_ASM726v1|WP_000676112.1   --   Enterococcus faecalis | GCF_000172575.2_ASM17257v2|WP_002364387.1
+  jac=0.236443  shared= 109  z=3.770421  Bacteroides fragilis | GCF_000009925.1_ASM992v1|WP_005795876.1   --   Capnocytophaga canimorsus | GCF_000220625.1_ASM22062v1|WP_013998433.1
+  jac=0.235421  shared= 109  z=3.731489  Bacteroides fragilis | GCF_000025985.1_ASM2598v1|WP_010992560.1   --   Capnocytophaga canimorsus | GCF_000220625.1_ASM22062v1|WP_013998433.1
+  jac=0.233261  shared= 108  z=3.649206  Bacteroides fragilis | GCF_000025985.1_ASM2598v1|WP_010993423.1   --   Capnocytophaga canimorsus | GCF_002302565.1_ASM230256v1|WP_042001317.1
+  jac=0.231102  shared= 107  z=3.566961  Bacteroides fragilis | GCF_000009925.1_ASM992v1|WP_005795876.1   --   Capnocytophaga canimorsus | GCF_002302565.1_ASM230256v1|WP_042001317.1
+  jac=0.230108  shared= 107  z=3.529096  Bacteroides fragilis | GCF_000025985.1_ASM2598v1|WP_010992560.1   --   Capnocytophaga canimorsus | GCF_002302565.1_ASM230256v1|WP_042001317.1
+  jac=0.222698  shared= 104  z=3.24682  Bacteroides fragilis | GCF_000009925.1_ASM992v1|WP_011202141.1   --   Capnocytophaga canimorsus | GCF_000220625.1_ASM22062v1|WP_013998433.1
+  jac=0.222698  shared= 104  z=2.882559  Bacteroides thetaiotaomicron | GCF_000011065.1_ASM1106v1|WP_011107280.1   --   Capnocytophaga canimorsus | GCF_000220625.1_ASM22062v1|WP_013998433.1
+  jac=0.222698  shared= 104  z=2.882559  Capnocytophaga canimorsus | GCF_000220625.1_ASM22062v1|WP_013998433.1   --   Bacteroides thetaiotaomicron | GCF_014131755.1_ASM1413175v1|WP_011107280.1
+  jac=0.220085  shared= 103  z=3.147281  Bacteroides fragilis | GCF_000025985.1_ASM2598v1|WP_008658902.1   --   Capnocytophaga canimorsus | GCF_000220625.1_ASM22062v1|WP_013998433.1
+  jac=0.217484  shared= 102  z=3.048198  Bacteroides fragilis | GCF_000009925.1_ASM992v1|WP_011202141.1   --   Capnocytophaga canimorsus | GCF_002302565.1_ASM230256v1|WP_042001317.1
+  jac=0.217484  shared= 102  z=2.711542  Bacteroides thetaiotaomicron | GCF_000011065.1_ASM1106v1|WP_011107280.1   --   Capnocytophaga canimorsus | GCF_002302565.1_ASM230256v1|WP_042001317.1
+  jac=0.217484  shared= 102  z=2.711542  Capnocytophaga canimorsus | GCF_002302565.1_ASM230256v1|WP_042001317.1   --   Bacteroides thetaiotaomicron | GCF_014131755.1_ASM1413175v1|WP_011107280.1
+  jac=0.214894  shared= 101  z=2.949535  Bacteroides fragilis | GCF_000025985.1_ASM2598v1|WP_008658902.1   --   Capnocytophaga canimorsus | GCF_002302565.1_ASM230256v1|WP_042001317.1
+  jac=0.199153  shared=  94  z=0.983163  Neisseria meningitidis | GCF_000008805.1_ASM880v1|WP_002224747.1   --   Vibrio cholerae | GCF_008369605.1_ASM836960v1|WP_069212354.1
+  jac=0.196617  shared=  93  z=0.902761  Vibrio cholerae | GCF_008369605.1_ASM836960v1|WP_069212354.1   --   Neisseria meningitidis | GCF_022869645.1_ASM2286964v1|WP_002221803.1
+  jac=0.196242  shared=  94  z=2.239008  Bacteroides fragilis | GCF_000009925.1_ASM992v1|WP_005802398.1   --   Capnocytophaga canimorsus | GCF_000220625.1_ASM22062v1|WP_013998433.1
+
+
+Process finished with exit code 0

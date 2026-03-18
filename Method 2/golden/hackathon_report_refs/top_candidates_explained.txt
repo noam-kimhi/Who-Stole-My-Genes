@@ -1,0 +1,411 @@
+[REPORT] Top 20 candidates from hgt_candidates.tsv (pipeline Step-3 ranking)
+[NOTE] Neighbor z values shown only if --edges points to edge_features.tsv.
+
+=== #1 score=18.759045 ===
+Protein: GCF_000008725.1_ASM872v1|NP_220033.1
+  species=Chlamydia trachomatis  component=169  deg=10  n_species=6
+  top5_mean_z=4.652162  max_z=5.449234  max_species_fraction=0.200  entropy_norm=0.976
+  betweenness=0.0  clustering=0.266667
+  component_summary: size=97 edges=676 n_species=50 H_norm=0.998 high_z_frac=0.886095 max_z=23.361496
+  neighbor_species_top: Chlamydia pneumoniae  (2/10 = 0.200)
+  top_neighbors (k=12):
+    v=GCF_000007205.1_ASM720v1|WP_010883275.1  sp=Chlamydia pneumoniae  jac=0.471338  shared=74  z=5.449234
+    v=GCF_000008745.1_ASM874v1|WP_010883275.1  sp=Chlamydia pneumoniae  jac=0.471338  shared=74  z=5.449234
+    v=GCF_000009765.2_ASM976v2|WP_003998823.1  sp=Streptomyces avermitilis  jac=0.069444  shared=15  z=4.943022
+    v=GCF_000009005.1_ASM900v1|WP_000615921.1  sp=Staphylococcus aureus  jac=0.064516  shared=14  z=3.709659
+    v=GCF_000013425.1_ASM1342v1|YP_500969.1  sp=Staphylococcus aureus  jac=0.064516  shared=14  z=3.709659
+    v=GCF_000203835.1_ASM20383v1|WP_003974257.1  sp=Streptomyces coelicolor  jac=0.069444  shared=15  z=3.081892
+    v=GCF_008931305.1_ASM893130v1|WP_003974257.1  sp=Streptomyces coelicolor  jac=0.069444  shared=15  z=3.081892
+    v=GCF_000009085.1_ASM908v1|YP_002345063.1  sp=Campylobacter jejuni  jac=0.059633  shared=13  z=1.557385
+    v=GCF_000007525.1_ASM752v1|WP_003829893.1  sp=Bifidobacterium longum  jac=0.064516  shared=14  z=1.345023
+    v=GCF_000196555.1_ASM19655v1|WP_003829893.1  sp=Bifidobacterium longum  jac=0.064516  shared=14  z=1.345023
+
+=== #2 score=18.759045 ===
+Protein: GCF_000012125.1_ASM1212v1|WP_010725233.1
+  species=Chlamydia trachomatis  component=169  deg=10  n_species=6
+  top5_mean_z=4.652162  max_z=5.449234  max_species_fraction=0.200  entropy_norm=0.976
+  betweenness=0.0  clustering=0.266667
+  component_summary: size=97 edges=676 n_species=50 H_norm=0.998 high_z_frac=0.886095 max_z=23.361496
+  neighbor_species_top: Chlamydia pneumoniae  (2/10 = 0.200)
+  top_neighbors (k=12):
+    v=GCF_000007205.1_ASM720v1|WP_010883275.1  sp=Chlamydia pneumoniae  jac=0.471338  shared=74  z=5.449234
+    v=GCF_000008745.1_ASM874v1|WP_010883275.1  sp=Chlamydia pneumoniae  jac=0.471338  shared=74  z=5.449234
+    v=GCF_000009765.2_ASM976v2|WP_003998823.1  sp=Streptomyces avermitilis  jac=0.069444  shared=15  z=4.943022
+    v=GCF_000009005.1_ASM900v1|WP_000615921.1  sp=Staphylococcus aureus  jac=0.064516  shared=14  z=3.709659
+    v=GCF_000013425.1_ASM1342v1|YP_500969.1  sp=Staphylococcus aureus  jac=0.064516  shared=14  z=3.709659
+    v=GCF_000203835.1_ASM20383v1|WP_003974257.1  sp=Streptomyces coelicolor  jac=0.069444  shared=15  z=3.081892
+    v=GCF_008931305.1_ASM893130v1|WP_003974257.1  sp=Streptomyces coelicolor  jac=0.069444  shared=15  z=3.081892
+    v=GCF_000009085.1_ASM908v1|YP_002345063.1  sp=Campylobacter jejuni  jac=0.059633  shared=13  z=1.557385
+    v=GCF_000007525.1_ASM752v1|WP_003829893.1  sp=Bifidobacterium longum  jac=0.064516  shared=14  z=1.345023
+    v=GCF_000196555.1_ASM19655v1|WP_003829893.1  sp=Bifidobacterium longum  jac=0.064516  shared=14  z=1.345023
+
+=== #3 score=17.928724 ===
+Protein: GCF_000008805.1_ASM880v1|WP_002215452.1
+  species=Neisseria meningitidis  component=136  deg=14  n_species=7
+  top5_mean_z=4.698542  max_z=5.673628  max_species_fraction=0.143  entropy_norm=1.000
+  betweenness=0.0  clustering=0.43956
+  component_summary: size=100 edges=656 n_species=50 H_norm=0.996 high_z_frac=0.775915 max_z=20.07771
+  neighbor_species_top: Helicobacter pylori  (2/14 = 0.143)
+  top_neighbors (k=12):
+    v=GCF_000193595.2_ASM19359v3|WP_003806927.1  sp=Bordetella pertussis  jac=0.288462  shared=30  z=5.673628
+    v=GCF_004008975.1_ASM400897v1|WP_003806927.1  sp=Bordetella pertussis  jac=0.288462  shared=30  z=5.673628
+    v=GCF_000007685.1_ASM768v1|WP_001040194.1  sp=Leptospira interrogans  jac=0.098361  shared=12  z=4.416655
+    v=GCF_002073495.2_ASM207349v2|WP_001040194.1  sp=Leptospira interrogans  jac=0.098361  shared=12  z=4.416655
+    v=GCF_000008785.1_ASM878v1|WP_000090248.1  sp=Helicobacter pylori  jac=0.080645  shared=10  z=3.312144
+    v=GCF_025998455.1_ASM2599845v1|WP_000090248.1  sp=Helicobacter pylori  jac=0.080645  shared=10  z=3.312144
+    v=GCF_000009085.1_ASM908v1|YP_002344959.1  sp=Campylobacter jejuni  jac=0.046875  shared=6  z=1.348472
+    v=GCF_000011865.1_ASM1186v1|WP_002781436.1  sp=Campylobacter jejuni  jac=0.046875  shared=6  z=1.348472
+    v=GCF_000005845.2_ASM584v2|NP_415404.1  sp=Escherichia coli  jac=0.089431  shared=11  z=1.315738
+    v=GCF_000008865.2_ASM886v2|NP_308996.1  sp=Escherichia coli  jac=0.089431  shared=11  z=1.315738
+    v=GCF_000006945.2_ASM694v2|NP_459929.1  sp=Salmonella enterica  jac=0.089431  shared=11  z=1.280776
+    v=GCF_000007545.1_ASM754v1|WP_001040187.1  sp=Salmonella enterica  jac=0.089431  shared=11  z=1.280776
+
+=== #4 score=17.928724 ===
+Protein: GCF_022869645.1_ASM2286964v1|WP_002215452.1
+  species=Neisseria meningitidis  component=136  deg=12  n_species=6
+  top5_mean_z=4.698542  max_z=5.673628  max_species_fraction=0.167  entropy_norm=1.000
+  betweenness=0.0  clustering=0.454545
+  component_summary: size=100 edges=656 n_species=50 H_norm=0.996 high_z_frac=0.775915 max_z=20.07771
+  neighbor_species_top: Helicobacter pylori  (2/12 = 0.167)
+  top_neighbors (k=12):
+    v=GCF_000193595.2_ASM19359v3|WP_003806927.1  sp=Bordetella pertussis  jac=0.288462  shared=30  z=5.673628
+    v=GCF_004008975.1_ASM400897v1|WP_003806927.1  sp=Bordetella pertussis  jac=0.288462  shared=30  z=5.673628
+    v=GCF_000007685.1_ASM768v1|WP_001040194.1  sp=Leptospira interrogans  jac=0.098361  shared=12  z=4.416655
+    v=GCF_002073495.2_ASM207349v2|WP_001040194.1  sp=Leptospira interrogans  jac=0.098361  shared=12  z=4.416655
+    v=GCF_000008785.1_ASM878v1|WP_000090248.1  sp=Helicobacter pylori  jac=0.080645  shared=10  z=3.312144
+    v=GCF_025998455.1_ASM2599845v1|WP_000090248.1  sp=Helicobacter pylori  jac=0.080645  shared=10  z=3.312144
+    v=GCF_000005845.2_ASM584v2|NP_415404.1  sp=Escherichia coli  jac=0.089431  shared=11  z=1.315738
+    v=GCF_000008865.2_ASM886v2|NP_308996.1  sp=Escherichia coli  jac=0.089431  shared=11  z=1.315738
+    v=GCF_000006945.2_ASM694v2|NP_459929.1  sp=Salmonella enterica  jac=0.089431  shared=11  z=1.280776
+    v=GCF_000007545.1_ASM754v1|WP_001040187.1  sp=Salmonella enterica  jac=0.089431  shared=11  z=1.280776
+    v=GCF_000009885.1_ASM988v1|WP_001040187.1  sp=Klebsiella pneumoniae  jac=0.089431  shared=11  z=1.132561
+    v=GCF_000240185.1_ASM24018v2|YP_005226094.1  sp=Klebsiella pneumoniae  jac=0.089431  shared=11  z=1.132561
+
+=== #5 score=16.157245 ===
+Protein: GCF_000007685.1_ASM768v1|WP_001142358.1
+  species=Leptospira interrogans  component=175  deg=10  n_species=6
+  top5_mean_z=15.002594  max_z=17.202789  max_species_fraction=0.200  entropy_norm=0.976
+  betweenness=1e-06  clustering=0.377778
+  component_summary: size=97 edges=642 n_species=50 H_norm=0.998 high_z_frac=0.937695 max_z=34.941677
+  neighbor_species_top: Synechococcus elongatus  (2/10 = 0.200)
+  top_neighbors (k=12):
+    v=GCF_000009765.2_ASM976v2|WP_003948652.1  sp=Streptomyces avermitilis  jac=0.194872  shared=38  z=17.202789
+    v=GCF_000007525.1_ASM752v1|WP_003813881.1  sp=Bifidobacterium longum  jac=0.182741  shared=36  z=16.4414
+    v=GCF_000203835.1_ASM20383v1|WP_003948652.1  sp=Streptomyces coelicolor  jac=0.194872  shared=38  z=14.383974
+    v=GCF_008931305.1_ASM893130v1|WP_003948652.1  sp=Streptomyces coelicolor  jac=0.194872  shared=38  z=14.383974
+    v=GCF_000010065.1_ASM1006v1|WP_011242965.1  sp=Synechococcus elongatus  jac=0.251337  shared=47  z=12.600833
+    v=GCF_022984195.1_ASM2298419v1|WP_011242965.1  sp=Synechococcus elongatus  jac=0.251337  shared=47  z=12.600833
+    v=GCF_000015665.1_ASM1566v1|WP_011820990.1  sp=Prochlorococcus marinus  jac=0.230366  shared=44  z=11.285206
+    v=GCF_000008605.1_ASM860v1|WP_010881691.1  sp=Treponema pallidum  jac=0.218750  shared=42  z=9.917952
+    v=GCF_000410535.2_ASM41053v2|WP_010881691.1  sp=Treponema pallidum  jac=0.218750  shared=42  z=9.917952
+    v=GCF_000007925.1_ASM792v1|WP_011125816.1  sp=Prochlorococcus marinus  jac=0.200000  shared=39  z=9.62671
+
+=== #6 score=16.157245 ===
+Protein: GCF_002073495.2_ASM207349v2|WP_001142358.1
+  species=Leptospira interrogans  component=175  deg=10  n_species=6
+  top5_mean_z=15.002594  max_z=17.202789  max_species_fraction=0.200  entropy_norm=0.976
+  betweenness=1e-06  clustering=0.377778
+  component_summary: size=97 edges=642 n_species=50 H_norm=0.998 high_z_frac=0.937695 max_z=34.941677
+  neighbor_species_top: Prochlorococcus marinus  (2/10 = 0.200)
+  top_neighbors (k=12):
+    v=GCF_000009765.2_ASM976v2|WP_003948652.1  sp=Streptomyces avermitilis  jac=0.194872  shared=38  z=17.202789
+    v=GCF_000007525.1_ASM752v1|WP_003813881.1  sp=Bifidobacterium longum  jac=0.182741  shared=36  z=16.4414
+    v=GCF_000203835.1_ASM20383v1|WP_003948652.1  sp=Streptomyces coelicolor  jac=0.194872  shared=38  z=14.383974
+    v=GCF_008931305.1_ASM893130v1|WP_003948652.1  sp=Streptomyces coelicolor  jac=0.194872  shared=38  z=14.383974
+    v=GCF_000010065.1_ASM1006v1|WP_011242965.1  sp=Synechococcus elongatus  jac=0.251337  shared=47  z=12.600833
+    v=GCF_022984195.1_ASM2298419v1|WP_011242965.1  sp=Synechococcus elongatus  jac=0.251337  shared=47  z=12.600833
+    v=GCF_000015665.1_ASM1566v1|WP_011820990.1  sp=Prochlorococcus marinus  jac=0.230366  shared=44  z=11.285206
+    v=GCF_000008605.1_ASM860v1|WP_010881691.1  sp=Treponema pallidum  jac=0.218750  shared=42  z=9.917952
+    v=GCF_000410535.2_ASM41053v2|WP_010881691.1  sp=Treponema pallidum  jac=0.218750  shared=42  z=9.917952
+    v=GCF_000007925.1_ASM792v1|WP_011125816.1  sp=Prochlorococcus marinus  jac=0.200000  shared=39  z=9.62671
+
+=== #7 score=13.603860 ===
+Protein: GCF_000007205.1_ASM720v1|WP_010883275.1
+  species=Chlamydia pneumoniae  component=169  deg=10  n_species=5
+  top5_mean_z=4.742536  max_z=5.449234  max_species_fraction=0.200  entropy_norm=1.000
+  betweenness=0.0  clustering=0.044444
+  component_summary: size=97 edges=676 n_species=50 H_norm=0.998 high_z_frac=0.886095 max_z=23.361496
+  neighbor_species_top: Chlamydia trachomatis  (2/10 = 0.200)
+  top_neighbors (k=12):
+    v=GCF_000008725.1_ASM872v1|NP_220033.1  sp=Chlamydia trachomatis  jac=0.471338  shared=74  z=5.449234
+    v=GCF_000012125.1_ASM1212v1|WP_010725233.1  sp=Chlamydia trachomatis  jac=0.471338  shared=74  z=5.449234
+    v=GCF_000010225.1_ASM1022v1|WP_003854312.1  sp=Corynebacterium glutamicum  jac=0.059908  shared=13  z=4.47432
+    v=GCF_000011325.1_ASM1132v1|WP_003854312.1  sp=Corynebacterium glutamicum  jac=0.059908  shared=13  z=4.47432
+    v=GCF_000007685.1_ASM768v1|WP_000615917.1  sp=Leptospira interrogans  jac=0.067265  shared=15  z=3.865574
+    v=GCF_002073495.2_ASM207349v2|WP_000615917.1  sp=Leptospira interrogans  jac=0.067265  shared=15  z=3.865574
+    v=GCF_000009045.1_ASM904v1|NP_388007.1  sp=Bacillus subtilis  jac=0.050228  shared=11  z=3.20967
+    v=GCF_000186745.1_ASM18674v1|WP_003225805.1  sp=Bacillus subtilis  jac=0.050228  shared=11  z=3.20967
+    v=GCF_000009085.1_ASM908v1|YP_002345063.1  sp=Campylobacter jejuni  jac=0.050228  shared=11  z=0.528384
+    v=GCF_000011865.1_ASM1186v1|WP_002779438.1  sp=Campylobacter jejuni  jac=0.050228  shared=11  z=0.528384
+
+=== #8 score=13.603860 ===
+Protein: GCF_000008745.1_ASM874v1|WP_010883275.1
+  species=Chlamydia pneumoniae  component=169  deg=10  n_species=5
+  top5_mean_z=4.742536  max_z=5.449234  max_species_fraction=0.200  entropy_norm=1.000
+  betweenness=0.0  clustering=0.044444
+  component_summary: size=97 edges=676 n_species=50 H_norm=0.998 high_z_frac=0.886095 max_z=23.361496
+  neighbor_species_top: Chlamydia trachomatis  (2/10 = 0.200)
+  top_neighbors (k=12):
+    v=GCF_000008725.1_ASM872v1|NP_220033.1  sp=Chlamydia trachomatis  jac=0.471338  shared=74  z=5.449234
+    v=GCF_000012125.1_ASM1212v1|WP_010725233.1  sp=Chlamydia trachomatis  jac=0.471338  shared=74  z=5.449234
+    v=GCF_000010225.1_ASM1022v1|WP_003854312.1  sp=Corynebacterium glutamicum  jac=0.059908  shared=13  z=4.47432
+    v=GCF_000011325.1_ASM1132v1|WP_003854312.1  sp=Corynebacterium glutamicum  jac=0.059908  shared=13  z=4.47432
+    v=GCF_000007685.1_ASM768v1|WP_000615917.1  sp=Leptospira interrogans  jac=0.067265  shared=15  z=3.865574
+    v=GCF_002073495.2_ASM207349v2|WP_000615917.1  sp=Leptospira interrogans  jac=0.067265  shared=15  z=3.865574
+    v=GCF_000009045.1_ASM904v1|NP_388007.1  sp=Bacillus subtilis  jac=0.050228  shared=11  z=3.20967
+    v=GCF_000186745.1_ASM18674v1|WP_003225805.1  sp=Bacillus subtilis  jac=0.050228  shared=11  z=3.20967
+    v=GCF_000009085.1_ASM908v1|YP_002345063.1  sp=Campylobacter jejuni  jac=0.050228  shared=11  z=0.528384
+    v=GCF_000011865.1_ASM1186v1|WP_002779438.1  sp=Campylobacter jejuni  jac=0.050228  shared=11  z=0.528384
+
+=== #9 score=13.429828 ===
+Protein: GCF_002302565.1_ASM230256v1|WP_042001317.1
+  species=Capnocytophaga canimorsus  component=295  deg=18  n_species=6
+  top5_mean_z=6.495207  max_z=6.630655  max_species_fraction=0.389  entropy_norm=0.917
+  betweenness=0.0  clustering=0.313725
+  component_summary: size=80 edges=579 n_species=34 H_norm=0.961 high_z_frac=0.537133 max_z=12.194563
+  neighbor_species_top: Bacteroides fragilis  (7/18 = 0.389)
+  top_neighbors (k=12):
+    v=GCF_000008805.1_ASM880v1|WP_002224747.1  sp=Neisseria meningitidis  jac=0.132530  shared=66  z=6.630655
+    v=GCF_022869645.1_ASM2286964v1|WP_002221803.1  sp=Neisseria meningitidis  jac=0.130261  shared=65  z=6.490146
+    v=GCF_000025985.1_ASM2598v1|WP_010993423.1  sp=Bacteroides fragilis  jac=0.233261  shared=108  z=6.471349
+    v=GCF_000011065.1_ASM1106v1|WP_011107280.1  sp=Bacteroides thetaiotaomicron  jac=0.217484  shared=102  z=6.441941
+    v=GCF_014131755.1_ASM1413175v1|WP_011107280.1  sp=Bacteroides thetaiotaomicron  jac=0.217484  shared=102  z=6.441941
+    v=GCF_000009925.1_ASM992v1|WP_005795876.1  sp=Bacteroides fragilis  jac=0.231102  shared=107  z=6.401267
+    v=GCF_000025985.1_ASM2598v1|WP_010992560.1  sp=Bacteroides fragilis  jac=0.230108  shared=107  z=6.369002
+    v=GCF_022869645.1_ASM2286964v1|WP_082308665.1  sp=Neisseria meningitidis  jac=0.128000  shared=64  z=6.350133
+    v=GCF_000009925.1_ASM992v1|WP_011202141.1  sp=Bacteroides fragilis  jac=0.217484  shared=102  z=5.959224
+    v=GCF_000025985.1_ASM2598v1|WP_008658902.1  sp=Bacteroides fragilis  jac=0.214894  shared=101  z=5.875152
+    v=GCF_000009925.1_ASM992v1|WP_005802398.1  sp=Bacteroides fragilis  jac=0.191268  shared=92  z=5.108247
+    v=GCF_000010225.1_ASM1022v1|WP_011896632.1  sp=Corynebacterium glutamicum  jac=0.095703  shared=49  z=4.74108
+
+=== #10 score=12.740062 ===
+Protein: GCF_000193595.2_ASM19359v3|WP_005017264.1
+  species=Bordetella pertussis  component=175  deg=18  n_species=9
+  top5_mean_z=15.414169  max_z=21.202967  max_species_fraction=0.111  entropy_norm=1.000
+  betweenness=1e-06  clustering=0.339869
+  component_summary: size=97 edges=642 n_species=50 H_norm=0.998 high_z_frac=0.937695 max_z=34.941677
+  neighbor_species_top: Zymomonas mobilis  (2/18 = 0.111)
+  top_neighbors (k=12):
+    v=GCF_000009085.1_ASM908v1|YP_002343925.1  sp=Campylobacter jejuni  jac=0.304348  shared=56  z=21.202967
+    v=GCF_000011865.1_ASM1186v1|WP_002782934.1  sp=Campylobacter jejuni  jac=0.304348  shared=56  z=21.202967
+    v=GCF_000220625.1_ASM22062v1|WP_013996552.1  sp=Capnocytophaga canimorsus  jac=0.235000  shared=47  z=12.069109
+    v=GCF_002302565.1_ASM230256v1|WP_013996552.1  sp=Capnocytophaga canimorsus  jac=0.235000  shared=47  z=12.069109
+    v=GCF_000007105.1_ASM710v1|WP_011240418.1  sp=Zymomonas mobilis  jac=0.223958  shared=43  z=10.526691
+    v=GCF_000498655.1_ASM49865v1|WP_011240418.1  sp=Zymomonas mobilis  jac=0.223958  shared=43  z=10.526691
+    v=GCF_000008785.1_ASM878v1|WP_001142321.1  sp=Helicobacter pylori  jac=0.204878  shared=42  z=9.314254
+    v=GCF_025998455.1_ASM2599845v1|WP_001142321.1  sp=Helicobacter pylori  jac=0.204878  shared=42  z=9.314254
+    v=GCF_000007205.1_ASM720v1|WP_010883190.1  sp=Chlamydia pneumoniae  jac=0.135922  shared=28  z=9.012709
+    v=GCF_000008745.1_ASM874v1|WP_010883190.1  sp=Chlamydia pneumoniae  jac=0.135922  shared=28  z=9.012709
+    v=GCF_000007125.1_ASM712v1|WP_002964366.1  sp=Brucella melitensis  jac=0.238095  shared=45  z=9.001511
+    v=GCF_000022625.1_ASM2262v1|WP_002964366.1  sp=Brucella melitensis  jac=0.238095  shared=45  z=9.001511
+
+=== #11 score=12.740062 ===
+Protein: GCF_004008975.1_ASM400897v1|WP_005017264.1
+  species=Bordetella pertussis  component=175  deg=18  n_species=9
+  top5_mean_z=15.414169  max_z=21.202967  max_species_fraction=0.111  entropy_norm=1.000
+  betweenness=1e-06  clustering=0.339869
+  component_summary: size=97 edges=642 n_species=50 H_norm=0.998 high_z_frac=0.937695 max_z=34.941677
+  neighbor_species_top: Zymomonas mobilis  (2/18 = 0.111)
+  top_neighbors (k=12):
+    v=GCF_000009085.1_ASM908v1|YP_002343925.1  sp=Campylobacter jejuni  jac=0.304348  shared=56  z=21.202967
+    v=GCF_000011865.1_ASM1186v1|WP_002782934.1  sp=Campylobacter jejuni  jac=0.304348  shared=56  z=21.202967
+    v=GCF_000220625.1_ASM22062v1|WP_013996552.1  sp=Capnocytophaga canimorsus  jac=0.235000  shared=47  z=12.069109
+    v=GCF_002302565.1_ASM230256v1|WP_013996552.1  sp=Capnocytophaga canimorsus  jac=0.235000  shared=47  z=12.069109
+    v=GCF_000007105.1_ASM710v1|WP_011240418.1  sp=Zymomonas mobilis  jac=0.223958  shared=43  z=10.526691
+    v=GCF_000498655.1_ASM49865v1|WP_011240418.1  sp=Zymomonas mobilis  jac=0.223958  shared=43  z=10.526691
+    v=GCF_000008785.1_ASM878v1|WP_001142321.1  sp=Helicobacter pylori  jac=0.204878  shared=42  z=9.314254
+    v=GCF_025998455.1_ASM2599845v1|WP_001142321.1  sp=Helicobacter pylori  jac=0.204878  shared=42  z=9.314254
+    v=GCF_000007205.1_ASM720v1|WP_010883190.1  sp=Chlamydia pneumoniae  jac=0.135922  shared=28  z=9.012709
+    v=GCF_000008745.1_ASM874v1|WP_010883190.1  sp=Chlamydia pneumoniae  jac=0.135922  shared=28  z=9.012709
+    v=GCF_000007125.1_ASM712v1|WP_002964366.1  sp=Brucella melitensis  jac=0.238095  shared=45  z=9.001511
+    v=GCF_000022625.1_ASM2262v1|WP_002964366.1  sp=Brucella melitensis  jac=0.238095  shared=45  z=9.001511
+
+=== #12 score=12.689814 ===
+Protein: GCF_000008805.1_ASM880v1|WP_002212612.1
+  species=Neisseria meningitidis  component=433  deg=44  n_species=23
+  top5_mean_z=7.815723  max_z=8.949502  max_species_fraction=0.045  entropy_norm=0.996
+  betweenness=1e-06  clustering=0.231501
+  component_summary: size=63 edges=438 n_species=32 H_norm=0.996 high_z_frac=0.477169 max_z=10.099687
+  neighbor_species_top: Escherichia coli  (2/44 = 0.045)
+  top_neighbors (k=12):
+    v=GCF_000007125.1_ASM712v1|WP_002964508.1  sp=Brucella melitensis  jac=0.251208  shared=104  z=8.949502
+    v=GCF_000022625.1_ASM2262v1|WP_002964508.1  sp=Brucella melitensis  jac=0.251208  shared=104  z=8.949502
+    v=GCF_000517605.1_ASM51760v1|WP_025395269.1  sp=Rhizobium leguminosarum  jac=0.210280  shared=90  z=7.327171
+    v=GCF_000186745.1_ASM18674v1|WP_041520474.1  sp=Bacillus subtilis  jac=0.102128  shared=48  z=7.024479
+    v=GCF_000009045.1_ASM904v1|NP_390065.1  sp=Bacillus subtilis  jac=0.099788  shared=47  z=6.827964
+    v=GCF_000016645.1_ASM1664v1|WP_012023550.1  sp=Flavobacterium johnsoniae  jac=0.125786  shared=60  z=6.285929
+    v=GCF_000021345.1_ASM2134v1|WP_012558334.1  sp=Rhizobium leguminosarum  jac=0.182648  shared=80  z=6.211886
+    v=GCF_030388325.1_ASM3038832v1|WP_289879470.1  sp=Flavobacterium johnsoniae  jac=0.121086  shared=58  z=5.995905
+    v=GCF_000006765.1_ASM676v1|NP_249033.1  sp=Pseudomonas aeruginosa  jac=0.236277  shared=99  z=5.801238
+    v=GCF_000014625.1_ASM1462v1|WP_003110588.1  sp=Pseudomonas aeruginosa  jac=0.236277  shared=99  z=5.801238
+    v=GCF_000007525.1_ASM752v1|WP_007052359.1  sp=Bifidobacterium longum  jac=0.106383  shared=50  z=5.477348
+    v=GCF_000196555.1_ASM19655v1|WP_007052359.1  sp=Bifidobacterium longum  jac=0.106383  shared=50  z=5.477348
+
+=== #13 score=12.367910 ===
+Protein: GCF_000203835.1_ASM20383v1|WP_003948652.1
+  species=Streptomyces coelicolor  component=175  deg=20  n_species=11
+  top5_mean_z=19.366859  max_z=21.870785  max_species_fraction=0.100  entropy_norm=0.989
+  betweenness=1e-06  clustering=0.384211
+  component_summary: size=97 edges=642 n_species=50 H_norm=0.998 high_z_frac=0.937695 max_z=34.941677
+  neighbor_species_top: Bifidobacterium longum  (2/20 = 0.100)
+  top_neighbors (k=12):
+    v=GCF_000011065.1_ASM1106v1|WP_005675419.1  sp=Bacteroides thetaiotaomicron  jac=0.203980  shared=41  z=21.870785
+    v=GCF_014131755.1_ASM1413175v1|WP_005675419.1  sp=Bacteroides thetaiotaomicron  jac=0.203980  shared=41  z=21.870785
+    v=GCF_000009925.1_ASM992v1|WP_005675419.1  sp=Bacteroides fragilis  jac=0.203980  shared=41  z=18.188937
+    v=GCF_000025985.1_ASM2598v1|WP_005675419.1  sp=Bacteroides fragilis  jac=0.203980  shared=41  z=18.188937
+    v=GCF_000009805.1_ASM980v1|WP_011211612.1  sp=Nocardia farcinica  jac=0.465409  shared=74  z=16.714852
+    v=GCF_001182745.1_NCTC11134|WP_011211612.1  sp=Nocardia farcinica  jac=0.465409  shared=74  z=16.714852
+    v=GCF_000007585.1_ASM758v1|WP_004583602.1  sp=Porphyromonas gingivalis  jac=0.208955  shared=42  z=15.286294
+    v=GCF_000014565.1_ASM1456v1|WP_005252198.1  sp=Rhodococcus jostii  jac=0.412121  shared=68  z=14.838217
+    v=GCF_000007685.1_ASM768v1|WP_001142358.1  sp=Leptospira interrogans  jac=0.194872  shared=38  z=14.383974
+    v=GCF_002073495.2_ASM207349v2|WP_001142358.1  sp=Leptospira interrogans  jac=0.194872  shared=38  z=14.383974
+    v=GCF_000008585.1_ASM858v1|WP_003403453.1  sp=Mycobacterium tuberculosis  jac=0.474684  shared=75  z=14.288244
+    v=GCF_000195955.2_ASM19595v2|NP_215196.1  sp=Mycobacterium tuberculosis  jac=0.474684  shared=75  z=14.288244
+
+=== #14 score=12.118478 ===
+Protein: GCF_000008725.1_ASM872v1|NP_220023.1
+  species=Chlamydia trachomatis  component=185  deg=10  n_species=7
+  top5_mean_z=3.906026  max_z=5.562867  max_species_fraction=0.200  entropy_norm=0.970
+  betweenness=2e-06  clustering=0.333333
+  component_summary: size=96 edges=657 n_species=50 H_norm=0.997 high_z_frac=0.765601 max_z=11.809186
+  neighbor_species_top: Chlamydia pneumoniae  (2/10 = 0.200)
+  top_neighbors (k=12):
+    v=GCF_000007205.1_ASM720v1|WP_010883265.1  sp=Chlamydia pneumoniae  jac=0.479532  shared=82  z=5.562867
+    v=GCF_000008745.1_ASM874v1|WP_010883265.1  sp=Chlamydia pneumoniae  jac=0.479532  shared=82  z=5.562867
+    v=GCF_000018445.1_ASM1844v1|WP_001040166.1  sp=Acinetobacter baumannii  jac=0.046218  shared=11  z=4.097817
+    v=GCF_000014565.1_ASM1456v1|WP_009479376.1  sp=Rhodococcus jostii  jac=0.049180  shared=12  z=2.20759
+    v=GCF_000007685.1_ASM768v1|WP_000752686.1  sp=Leptospira interrogans  jac=0.053279  shared=13  z=2.098987
+    v=GCF_002073495.2_ASM207349v2|WP_000752686.1  sp=Leptospira interrogans  jac=0.053279  shared=13  z=2.098987
+    v=GCF_000006765.1_ASM676v1|NP_252930.1  sp=Pseudomonas aeruginosa  jac=0.046218  shared=11  z=1.497878
+    v=GCF_000014625.1_ASM1462v1|WP_003093689.1  sp=Pseudomonas aeruginosa  jac=0.046218  shared=11  z=1.497878
+    v=GCF_000021045.1_ASM2104v1|WP_003093689.1  sp=Azotobacter vinelandii  jac=0.046218  shared=11  z=1.215711
+    v=GCF_000007565.2_ASM756v2|WP_003255454.1  sp=Pseudomonas putida  jac=0.046218  shared=11  z=1.079264
+
+=== #15 score=12.106764 ===
+Protein: GCF_000008805.1_ASM880v1|WP_002218431.1
+  species=Neisseria meningitidis  component=175  deg=27  n_species=14
+  top5_mean_z=11.844867  max_z=12.631408  max_species_fraction=0.074  entropy_norm=0.996
+  betweenness=1e-06  clustering=0.279202
+  component_summary: size=97 edges=642 n_species=50 H_norm=0.998 high_z_frac=0.937695 max_z=34.941677
+  neighbor_species_top: Escherichia coli  (2/27 = 0.074)
+  top_neighbors (k=12):
+    v=GCF_000009085.1_ASM908v1|YP_002343925.1  sp=Campylobacter jejuni  jac=0.246073  shared=47  z=12.631408
+    v=GCF_000011865.1_ASM1186v1|WP_002782934.1  sp=Campylobacter jejuni  jac=0.246073  shared=47  z=12.631408
+    v=GCF_000007105.1_ASM710v1|WP_011240418.1  sp=Zymomonas mobilis  jac=0.294444  shared=53  z=11.811094
+    v=GCF_000498655.1_ASM49865v1|WP_011240418.1  sp=Zymomonas mobilis  jac=0.294444  shared=53  z=11.811094
+    v=GCF_000006765.1_ASM676v1|NP_252958.1  sp=Pseudomonas aeruginosa  jac=0.389222  shared=65  z=10.339333
+    v=GCF_000014625.1_ASM1462v1|WP_003093744.1  sp=Pseudomonas aeruginosa  jac=0.389222  shared=65  z=10.339333
+    v=GCF_000006745.1_ASM674v1|WP_000201237.1  sp=Vibrio cholerae  jac=0.378698  shared=64  z=9.358011
+    v=GCF_008369605.1_ASM836960v1|WP_000201237.1  sp=Vibrio cholerae  jac=0.378698  shared=64  z=9.358011
+    v=GCF_000005845.2_ASM584v2|NP_417801.1  sp=Escherichia coli  jac=0.378698  shared=64  z=9.325916
+    v=GCF_000008865.2_ASM886v2|NP_312220.1  sp=Escherichia coli  jac=0.378698  shared=64  z=9.325916
+    v=GCF_000006945.2_ASM694v2|NP_462352.1  sp=Salmonella enterica  jac=0.378698  shared=64  z=9.294409
+    v=GCF_000007545.1_ASM754v1|WP_000246815.1  sp=Salmonella enterica  jac=0.378698  shared=64  z=9.294409
+
+=== #16 score=12.106764 ===
+Protein: GCF_022869645.1_ASM2286964v1|WP_002218431.1
+  species=Neisseria meningitidis  component=175  deg=27  n_species=14
+  top5_mean_z=11.844867  max_z=12.631408  max_species_fraction=0.074  entropy_norm=0.996
+  betweenness=1e-06  clustering=0.279202
+  component_summary: size=97 edges=642 n_species=50 H_norm=0.998 high_z_frac=0.937695 max_z=34.941677
+  neighbor_species_top: Escherichia coli  (2/27 = 0.074)
+  top_neighbors (k=12):
+    v=GCF_000009085.1_ASM908v1|YP_002343925.1  sp=Campylobacter jejuni  jac=0.246073  shared=47  z=12.631408
+    v=GCF_000011865.1_ASM1186v1|WP_002782934.1  sp=Campylobacter jejuni  jac=0.246073  shared=47  z=12.631408
+    v=GCF_000007105.1_ASM710v1|WP_011240418.1  sp=Zymomonas mobilis  jac=0.294444  shared=53  z=11.811094
+    v=GCF_000498655.1_ASM49865v1|WP_011240418.1  sp=Zymomonas mobilis  jac=0.294444  shared=53  z=11.811094
+    v=GCF_000006765.1_ASM676v1|NP_252958.1  sp=Pseudomonas aeruginosa  jac=0.389222  shared=65  z=10.339333
+    v=GCF_000014625.1_ASM1462v1|WP_003093744.1  sp=Pseudomonas aeruginosa  jac=0.389222  shared=65  z=10.339333
+    v=GCF_000006745.1_ASM674v1|WP_000201237.1  sp=Vibrio cholerae  jac=0.378698  shared=64  z=9.358011
+    v=GCF_008369605.1_ASM836960v1|WP_000201237.1  sp=Vibrio cholerae  jac=0.378698  shared=64  z=9.358011
+    v=GCF_000005845.2_ASM584v2|NP_417801.1  sp=Escherichia coli  jac=0.378698  shared=64  z=9.325916
+    v=GCF_000008865.2_ASM886v2|NP_312220.1  sp=Escherichia coli  jac=0.378698  shared=64  z=9.325916
+    v=GCF_000006945.2_ASM694v2|NP_462352.1  sp=Salmonella enterica  jac=0.378698  shared=64  z=9.294409
+    v=GCF_000007545.1_ASM754v1|WP_000246815.1  sp=Salmonella enterica  jac=0.378698  shared=64  z=9.294409
+
+=== #17 score=12.049754 ===
+Protein: GCF_000012125.1_ASM1212v1|WP_009871791.1
+  species=Chlamydia trachomatis  component=173  deg=12  n_species=7
+  top5_mean_z=5.810042  max_z=6.713455  max_species_fraction=0.167  entropy_norm=0.980
+  betweenness=1e-06  clustering=0.378788
+  component_summary: size=97 edges=675 n_species=50 H_norm=0.998 high_z_frac=0.84 max_z=22.570867
+  neighbor_species_top: Chlamydia pneumoniae  (2/12 = 0.167)
+  top_neighbors (k=12):
+    v=GCF_000007205.1_ASM720v1|WP_010883187.1  sp=Chlamydia pneumoniae  jac=0.562500  shared=72  z=6.713455
+    v=GCF_000008745.1_ASM874v1|WP_010883187.1  sp=Chlamydia pneumoniae  jac=0.562500  shared=72  z=6.713455
+    v=GCF_000017025.1_ASM1702v1|WP_003357250.1  sp=Clostridium botulinum  jac=0.076503  shared=14  z=5.381717
+    v=GCF_000063585.1_ASM6358v1|WP_003357250.1  sp=Clostridium botulinum  jac=0.076503  shared=14  z=5.381717
+    v=GCF_000006645.1_ASM664v1|WP_001181005.1  sp=Yersinia pestis  jac=0.070270  shared=13  z=4.859866
+    v=GCF_000006745.1_ASM674v1|WP_001181007.1  sp=Vibrio cholerae  jac=0.087912  shared=16  z=4.835455
+    v=GCF_008369605.1_ASM836960v1|WP_001181007.1  sp=Vibrio cholerae  jac=0.087912  shared=16  z=4.835455
+    v=GCF_000007685.1_ASM768v1|WP_000918607.1  sp=Leptospira interrogans  jac=0.094444  shared=17  z=4.797409
+    v=GCF_002073495.2_ASM207349v2|WP_000918607.1  sp=Leptospira interrogans  jac=0.094444  shared=17  z=4.797409
+    v=GCF_000006945.2_ASM694v2|NP_462345.1  sp=Salmonella enterica  jac=0.070270  shared=13  z=4.554697
+    v=GCF_000008785.1_ASM878v1|WP_000411561.1  sp=Helicobacter pylori  jac=0.052910  shared=10  z=1.845599
+    v=GCF_025998455.1_ASM2599845v1|WP_000411561.1  sp=Helicobacter pylori  jac=0.052910  shared=10  z=1.845599
+
+=== #18 score=12.049754 ===
+Protein: GCF_000008725.1_ASM872v1|NP_219948.1
+  species=Chlamydia trachomatis  component=173  deg=14  n_species=8
+  top5_mean_z=5.810042  max_z=6.713455  max_species_fraction=0.143  entropy_norm=0.983
+  betweenness=1e-06  clustering=0.296703
+  component_summary: size=97 edges=675 n_species=50 H_norm=0.998 high_z_frac=0.84 max_z=22.570867
+  neighbor_species_top: Chlamydia pneumoniae  (2/14 = 0.143)
+  top_neighbors (k=12):
+    v=GCF_000007205.1_ASM720v1|WP_010883187.1  sp=Chlamydia pneumoniae  jac=0.562500  shared=72  z=6.713455
+    v=GCF_000008745.1_ASM874v1|WP_010883187.1  sp=Chlamydia pneumoniae  jac=0.562500  shared=72  z=6.713455
+    v=GCF_000017025.1_ASM1702v1|WP_003357250.1  sp=Clostridium botulinum  jac=0.076503  shared=14  z=5.381717
+    v=GCF_000063585.1_ASM6358v1|WP_003357250.1  sp=Clostridium botulinum  jac=0.076503  shared=14  z=5.381717
+    v=GCF_000006645.1_ASM664v1|WP_001181005.1  sp=Yersinia pestis  jac=0.070270  shared=13  z=4.859866
+    v=GCF_000006745.1_ASM674v1|WP_001181007.1  sp=Vibrio cholerae  jac=0.087912  shared=16  z=4.835455
+    v=GCF_008369605.1_ASM836960v1|WP_001181007.1  sp=Vibrio cholerae  jac=0.087912  shared=16  z=4.835455
+    v=GCF_000007685.1_ASM768v1|WP_000918607.1  sp=Leptospira interrogans  jac=0.094444  shared=17  z=4.797409
+    v=GCF_002073495.2_ASM207349v2|WP_000918607.1  sp=Leptospira interrogans  jac=0.094444  shared=17  z=4.797409
+    v=GCF_000006945.2_ASM694v2|NP_462345.1  sp=Salmonella enterica  jac=0.070270  shared=13  z=4.554697
+    v=GCF_000008785.1_ASM878v1|WP_000411561.1  sp=Helicobacter pylori  jac=0.052910  shared=10  z=1.845599
+    v=GCF_025998455.1_ASM2599845v1|WP_000411561.1  sp=Helicobacter pylori  jac=0.052910  shared=10  z=1.845599
+
+=== #19 score=11.952865 ===
+Protein: GCF_000222975.1_ASM22297v1|WP_002212211.1
+  species=Yersinia pestis  component=626  deg=12  n_species=6
+  top5_mean_z=12.709747  max_z=16.163119  max_species_fraction=0.167  entropy_norm=1.000
+  betweenness=0.0  clustering=0.606061
+  component_summary: size=46 edges=314 n_species=20 H_norm=0.982 high_z_frac=0.490446 max_z=19.510326
+  neighbor_species_top: Escherichia coli  (2/12 = 0.167)
+  top_neighbors (k=12):
+    v=GCF_000021345.1_ASM2134v1|WP_012559068.1  sp=Rhizobium leguminosarum  jac=0.305955  shared=149  z=16.163119
+    v=GCF_000517605.1_ASM51760v1|WP_025396145.1  sp=Rhizobium leguminosarum  jac=0.300613  shared=147  z=15.857497
+    v=GCF_000007125.1_ASM712v1|WP_004681638.1  sp=Brucella melitensis  jac=0.321649  shared=156  z=15.343325
+    v=GCF_000022625.1_ASM2262v1|WP_004681638.1  sp=Brucella melitensis  jac=0.321649  shared=156  z=15.343325
+    v=GCF_000009885.1_ASM988v1|WP_002914327.1  sp=Klebsiella pneumoniae  jac=0.262000  shared=131  z=0.841468
+    v=GCF_000240185.1_ASM24018v2|YP_005228380.1  sp=Klebsiella pneumoniae  jac=0.262000  shared=131  z=0.841468
+    v=GCF_000006945.2_ASM694v2|NP_461734.1  sp=Salmonella enterica  jac=0.267606  shared=133  z=0.791374
+    v=GCF_000007545.1_ASM754v1|WP_000777898.1  sp=Salmonella enterica  jac=0.267606  shared=133  z=0.791374
+    v=GCF_000005845.2_ASM584v2|NP_417162.1  sp=Escherichia coli  jac=0.235294  shared=120  z=0.594529
+    v=GCF_000008865.2_ASM886v2|NP_311566.1  sp=Escherichia coli  jac=0.232877  shared=119  z=0.576599
+    v=GCF_000009045.1_ASM904v1|NP_389621.1  sp=Bacillus subtilis  jac=0.025600  shared=16  z=0.0
+    v=GCF_000186745.1_ASM18674v1|WP_003231754.1  sp=Bacillus subtilis  jac=0.025600  shared=16  z=0.0
+
+=== #20 score=11.892588 ===
+Protein: GCF_002073495.2_ASM207349v2|WP_001040194.1
+  species=Leptospira interrogans  component=136  deg=22  n_species=12
+  top5_mean_z=17.511919  max_z=19.392653  max_species_fraction=0.091  entropy_norm=0.990
+  betweenness=2e-06  clustering=0.203463
+  component_summary: size=100 edges=656 n_species=50 H_norm=0.996 high_z_frac=0.775915 max_z=20.07771
+  neighbor_species_top: Listeria monocytogenes  (2/22 = 0.091)
+  top_neighbors (k=12):
+    v=GCF_000009805.1_ASM980v1|WP_003418601.1  sp=Nocardia farcinica  jac=0.194690  shared=22  z=19.392653
+    v=GCF_001182745.1_NCTC11134|WP_003418601.1  sp=Nocardia farcinica  jac=0.194690  shared=22  z=19.392653
+    v=GCF_000008585.1_ASM858v1|WP_003418601.1  sp=Mycobacterium tuberculosis  jac=0.194690  shared=22  z=16.673375
+    v=GCF_000195955.2_ASM19595v2|NP_217979.1  sp=Mycobacterium tuberculosis  jac=0.194690  shared=22  z=16.673375
+    v=GCF_000010225.1_ASM1022v1|WP_003854422.1  sp=Corynebacterium glutamicum  jac=0.185841  shared=21  z=15.42754
+    v=GCF_000014565.1_ASM1456v1|WP_003418601.1  sp=Rhodococcus jostii  jac=0.194690  shared=22  z=15.413725
+    v=GCF_000008285.1_ASM828v1|WP_003720929.1  sp=Listeria monocytogenes  jac=0.229358  shared=25  z=15.305924
+    v=GCF_000196035.1_ASM19603v1|NP_466133.1  sp=Listeria monocytogenes  jac=0.229358  shared=25  z=15.305924
+    v=GCF_000011065.1_ASM1106v1|WP_002558052.1  sp=Bacteroides thetaiotaomicron  jac=0.185841  shared=21  z=9.734008
+    v=GCF_014131755.1_ASM1413175v1|WP_002558052.1  sp=Bacteroides thetaiotaomicron  jac=0.185841  shared=21  z=9.734008
+    v=GCF_000193595.2_ASM19359v3|WP_003806927.1  sp=Bordetella pertussis  jac=0.155172  shared=18  z=8.913452
+    v=GCF_004008975.1_ASM400897v1|WP_003806927.1  sp=Bordetella pertussis  jac=0.155172  shared=18  z=8.913452
+
+
+Process finished with exit code 0
