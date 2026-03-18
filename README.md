@@ -24,20 +24,20 @@ Full paper available in [`LaTeX/`](LaTeX/Who%20Stole%20My%20Genes%20-%20Detectin
 
 ## 🔗 Table of Contents
 
-- [📍 Overview](#-overview)
-- [✨ Key Features](#-key-features)
-- [🔬 Methodology](#-methodology)
+- [📍 Overview](#overview)
+- [✨ Key Features](#key-features)
+- [🔬 Methodology](#methodology)
   - [Method 1 — Orthologous Clustering](#method-1--orthologous-clustering)
   - [Method 2 — Alignment-Free k-mer Pipeline](#method-2--alignment-free-k-mer-pipeline)
-- [📁 Project Structure](#-project-structure)
-- [🚀 Getting Started](#-getting-started)
-  - [☑️ Prerequisites](#%EF%B8%8F-prerequisites)
-  - [⚙️ Installation](#%EF%B8%8F-installation)
-  - [🤖 Usage](#-usage)
-- [📊 Results](#-results)
-- [🛠️ Technologies](#%EF%B8%8F-technologies)
-- [👥 Contributors](#-contributors)
-- [🎓 Course Context](#-course-context)
+- [📁 Project Structure](#project-structure)
+- [🚀 Getting Started](#getting-started)
+  - [☑️ Prerequisites](#prerequisites)
+  - [⚙️ Installation](#installation)
+  - [🤖 Usage](#usage)
+- [📊 Results](#results)
+- [🛠️ Technologies](#technologies)
+- [👥 Contributors](#contributors)
+- [🎓 Course Context](#course-context)
 
 ---
 
