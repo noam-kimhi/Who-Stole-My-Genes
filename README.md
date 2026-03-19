@@ -4,11 +4,9 @@
 Instead of asking _"Which species are related?"_, we ask:
 - Which proteins are suspiciously similar across phylogenetically distant species?
 - Can graph topology alone expose genes that crossed species boundaries?
-- How far can alignment-free methods take us before we need an aligner at all?
 
 This project was created by [**Or Forshmit**](https://github.com/OrF8), [**Noam Kimhi**](https://github.com/noam-kimhi), [**Roee Tekoah**](https://github.com/roeetekoah), [**Dor Stein**](https://github.com/dorstein0909), and [**Noam Korkos**](https://github.com/NoamKorkos)  
-as part of the course [**76558 – Algorithms in Computational Biology**](https://shnaton.huji.ac.il/index.php/NewSyl/76558/1/2026/)  
-at the Hebrew University of Jerusalem ([**HUJI**](https://en.huji.ac.il/)).
+as part of the course [**76558 – Algorithms in Computational Biology**](https://shnaton.huji.ac.il/index.php/NewSyl/76558/1/2026/) at the Hebrew University of Jerusalem ([**HUJI**](https://en.huji.ac.il/)).
 
 Full paper available [here](LaTeX/Who%20Stole%20My%20Genes%20-%20Detecting%20HGT%20Candidates%20Using%20Graph-Based%20Analysis.pdf).
 
@@ -272,9 +270,9 @@ Both methods were applied to diverse bacterial datasets spanning gram-positive, 
 
 **Method 2** demonstrated strong statistical signal in high-*z* edges and identified clusters with elevated species-pair boundary crossings. Component-level analysis revealed concentrated HGT-like components distinguishable from background noise:
 
-| Component 5 | Component 8 | Component 32 |
-|---|---|---|
-| ![comp5](LaTeX/figures/component_5.png) | ![comp8](LaTeX/figures/component_8.png) | ![comp32](LaTeX/figures/component_32.png) |
+| Component A                             | Component B                             | Component C                             |
+|-----------------------------------------|-----------------------------------------|-----------------------------------------|
+| ![compA](LaTeX/figures/component_A.png) | ![compB](LaTeX/figures/component_B.png) | ![compC](LaTeX/figures/component_C.png) |
 
 The simulation in `ancient_hgt_simulation.py` further characterizes Method 2's sensitivity to ancient, ameliorated HGT signals versus conserved hub proteins.
 

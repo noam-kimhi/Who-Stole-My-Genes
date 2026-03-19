@@ -26,6 +26,8 @@
 \usepackage{ulem}
 \usepackage{enumitem}
 \usepackage{setspace}
+\usepackage{booktabs}
+\usepackage{tabularx}
 \onehalfspacing
 \usepackage{fancyhdr}
 \usepackage{tikz}
@@ -40,7 +42,7 @@
 
 % Header: Like Hillel's header
 \fancyhead[L]{The Hebrew University of Jerusalem}
-\fancyhead[R]{Algorithms in Computational Biology 76558}
+\fancyhead[R]{Algorithms in Computational Biology (76558)}
 
 % Footer: page number on bottom left
 \fancyfoot[L]{\thepage}
@@ -56,7 +58,7 @@
 \fancypagestyle{plain}{%
 	\fancyhf{}
 	\fancyhead[L]{The Hebrew University of Jerusalem}
-	\fancyhead[R]{Algorithms in Computational Biology 76558}
+	\fancyhead[R]{Algorithms in Computational Biology (76558)}
 	\fancyfoot[L]{\thepage}
 	\renewcommand{\headrulewidth}{0.4pt}
 	\renewcommand{\footrulewidth}{0.4pt}
@@ -129,7 +131,7 @@
 		\vspace{20pt}
 		
 		\href{https://github.com/noam-kimhi/Who-Stole-My-Genes/}
-		{\texttt{\faGithub}} \\[11pt]
+		{\Large \faGithub} \\[5pt]
 		\date{\today}
 	\end{center}
 	
@@ -138,41 +140,43 @@
 	
 	\section{Introduction}
 	\subsection{Background}
-	Horizontal Gene Transfer (HGT) is a major evolutionary mechanism in bacteria that enables genes to move between organisms independently of vertical inheritance. This process allows bacteria to share functional genes directly with other living organisms, rather than relying solely on reproduction and inheritance to pass genetic traits to the next generation\cite{KooninMakarova}.
+	Horizontal Gene Transfer (HGT) is a major evolutionary mechanism in bacteria that enables genes to move between organisms independently of vertical inheritance. This process allows bacteria to share functional genes directly with other living organisms, rather than relying solely on reproduction and inheritance to pass genetic traits to the next generation\cite{KooninMakarova}. This can create cases where a gene in one species is unusually similar to a gene in a phylogenetically distant species.
 	\begin{figure}[htbp]
 		\centering
 		\includegraphics[width=0.5\textwidth]{figures/HGTExample.png}
 		\caption{Biological mechanisms underlying horizontal gene transfer (HGT).\\From \href{https://www.researchgate.net/figure/Schematic-of-three-process-of-Horizontal-Gene-Transfer_fig2_277076640}{\textit{Nature Microbiology, © 2006  Nature Publishing Group}}}
 		\label{fig:hgt-example}
 	\end{figure}
-	\\This can create cases where a gene in one species is unusually similar to a gene in a phylogenetically distant species. However, high similarity across distant taxa is not unique to HGT; such patterns may also result from strong functional conservation, heterogeneous evolutionary rates, gene loss in intermediate lineages, or annotation and assembly artifacts\cite{Dilucca2018}.
-	Previous studies have identified numerous cases of HGT involving protein-coding genes in bacteria, most notably antibiotic resistance genes, such as the transmission of plasmids of $\beta$-lactamases \cite{Wang2023ISME} and rplB \cite{ManoharanBasil2021}. In addition, transfer of virulence factors, toxins, and genes involved in stress response and metabolism is also prevalent \cite{Soucy2015}. All these give the recipient organism a critical advantage in stressful environments.\\ \\
-	Detecting HGT remains computationally challenging. Many established approaches either rely on phylogenetic incongruence (comparing gene trees to species trees), which is computationally heavy and sensitive to alignment quality, or use simpler heuristics (e.g., best-hit similarity, composition statistics) that are potentially over-simplified and noisy \cite{MishraLercher2025}.\\
-	Our project explores a complementary, lightweight approach: represent cross-species gene similarities as a \textcolor{red}{sparse?} graph and use global graph patterns (together with species-distance context) to prioritize candidate HGT genes.
+	However, high similarity across distant taxa is not unique to HGT; such patterns may also result from strong functional conservation, heterogeneous evolutionary rates, gene loss in intermediate lineages, or annotation and assembly artifacts\cite{Dilucca2018}.
+	Previous studies have identified numerous cases of HGT involving protein-coding genes in bacteria, most notably antibiotic resistance genes, such as the transmission of plasmids of $\beta$-lactamases \cite{Wang2023ISME} and rplB \cite{ManoharanBasil2021}. In addition, transfer of virulence factors, toxins, and genes involved in stress response and metabolism is also prevalent \cite{Soucy2015}. All these give the recipient organism a critical advantage in stressful environments.\\\\
+	Detecting HGT remains computationally challenging. Many established approaches either rely on phylogenetic incongruence (comparing gene trees to species trees), which is computationally heavy and sensitive to alignment quality, or use simpler heuristics that are potentially over-simplified and noisy \cite{MishraLercher2025}.\\
+	Our project explores a complementary, lightweight approach: represent cross-species gene similarities as a graph and use global graph patterns along with species-distance context to prioritize candidate HGT genes.
+	
+	\FloatBarrier
 	
 	\subsection{Research Question}
 	How can graph-based analysis of gene similarity reveal candidate horizontal gene transfer events across bacterial genomes?
 	
 	\subsection{Hypothesis}
-	We hypothesize that genes involved in horizontal gene transfer will exhibit disproportionately high similarity to phylogenetically distant species relative to background similarity patterns, forming graph edges that deviate from expected species-level clustering.
+	We hypothesize that genes involved in horizontal gene transfer will exhibit disproportionately high similarity to phylogenetically distant species, forming graph edges that deviate from expected species-level clustering.
 	
 	\subsection{Objectives}
 	\begin{itemize}[noitemsep, topsep=0pt]
-		\item Construct a sparse gene similarity graph across multiple bacterial species using protein sequences
-		\item Partition proteins into homologous groups using sequence-based clustering and construct within-group similarity graphs
+		\item Construct a sparse gene similarity graph using protein sequences
+		\item Partition proteins into homologous groups and construct within-group similarity graphs
 		\item Define and compute an anomaly score that highlights unusually high similarity across large phylogenetic distances
-		\item Generate interpretable visualizations (e.g., candidate ego-graphs)
-		\item Validate high-scoring candidates by cross-referencing known functional annotations and reported HGT-related genes in the literature
+		\item Generate interpretable visualizations
+		\item Validate candidates by cross-referencing known HGT-related genes in the literature
 	\end{itemize}
 	
 	\section{Data}
 	\label{sec:data}
 	As detailed below, our project was split into 2 methodologies. Both methodologies used data from NCBI RefSeq \cite{RefSeq}, and the NCBI Taxonomy database \cite{NCBITaxonomy} (using \texttt{BioPython}'s \texttt{Entrez} module \cite{BioPythonEntrez}).
-	For each genome, we have FASTA files (\texttt{.faa}), where each entry corresponds to a single gene.\\
+	For each genome, we acquired FASTA files (\texttt{.faa}) where each entry corresponds to a single gene.\\
 	Both methodologies used different data from RefSeq, due to a lack of coordination. \\
 	For \hyperref[subsec:method1]{the first methodology}, we downloaded the \texttt{bacteria.*.protein.faa.gz} files from the bacteria database \cite{RefSeqBacteria}, which consist of 15 bacterial proteomes.\\
-	For \hyperref[subsec:method2]{the second methodology}, we used a script to download protein sequences of 48 species spanning 19 families (e.g. gut microbiota, human pathogens) from the genome database \cite{RefSeqGenome}, \textcolor{red}{aimed to maximize detection of HGT events across phylogenetically diverse families}. The script \texttt{refseq\_fetch\_proteins.py} is available \href{https://github.com/noam-kimhi/Who-Stole-My-Genes/blob/main/Method\%202/src/graph_construction/refseq_fetch_proteins.py}{in the GitHub repository}. To control dataset size, we selected up to two assemblies per species using a deterministic
-	ranking. While this choice ensured manageable scale and consistent annotation quality, it introduced some redundancy due to near-identical assemblies; we discuss this limitation in \textcolor{red}{add ref to discussions}.
+	For \hyperref[subsec:method2]{the second methodology}, we acquired protein sequences of 48 species spanning 19 taxonomic families from the genome database \cite{RefSeqGenome}, using a python script (\href{https://github.com/noam-kimhi/Who-Stole-My-Genes/blob/main/Method\%202/src/graph_construction/refseq_fetch_proteins.py}{\uline{\texttt{refseq\_fetch\_proteins.py}}}). To control dataset size, we selected up to two assemblies per species using a deterministic
+	ranking. While this choice ensured manageable scale and consistent annotation quality, it introduced some redundancy due to near-identical assemblies (we discuss this limitation \hyperref[subsubsec:evaluation]{below}).
 	
 	\section{Methods}
 	Our work was split into 2 methodologies, both aimed to find HGT candidates using graph-based analysis, but from different perspectives. \hyperref[subsec:method1]{The first method} focused at the protein level, and \hyperref[subsec:method2]{the second} at the proteome level. Instead of using MSA and computationally intensive similarity calculations on entire proteomes, our methods employ the “divide and conquer” approach, each in its own way, in order to ease the computation.
@@ -215,21 +219,20 @@
 	As discussed in \hyperref[sec:data]{the data section}, we downloaded protein sequences of 15 bactrial proteomes. We then clustered all proteins into homologous groups using MMseqs2 \cite{Steinegger2017MMseqs2}. We used a minimum sequence identity threshold of 50\% and a coverage threshold of 80\% (MMseqs2 parameters: \texttt{--min-seq-id 0.5} \texttt{-c 0.8}), so that sequences grouped together are broadly similar and likely to share related function.
 	This clustering step constitutes the “divide” stage of our divide-and-conquer approach: downstream similarity computations are restricted to within-cluster comparisons, avoiding exhaustive comparisons across the full set of proteins.
 	
-	\subsubsection[Step 2]{Edge Creation Based on Similarity Score}
+	\subsubsection[step 2]{Edge Creation Based on Similarity Score}
 	\label{subsubsec:step2}
 	Within each homologous cluster, we computed pairwise sequence alignments between all unordered protein pairs. Alignments were performed using the \texttt{PairwiseAligner} class from \texttt{Biopython} (v1.85), configured for local alignment (mode \texttt{local}) with the BLOSUM62 substitution matrix \cite{BLOSUM}. Gap penalties were set to a gap opening score of $-10$ and a gap extension score of $-1$.
-	For each aligned pair $(u,v)$, we computed the following metrics:
-	\[
+	For each aligned pair $(u,v)$, we computed the following metrics:\\
+	\begin{equation*}
 	\text{Identity}(u,v) =
 	\frac{\#\text{matching aligned residues}}
 	{\min\{\text{len}(u), \text{len}(v)\}}
-	\]
-	
-	\[
+	\end{equation*}
+	\begin{equation*}
 	\text{Coverage}(u,v) =
 	\frac{\text{aligned\_length}}
 	{\min\{\text{len}(u), \text{len}(v)\}}
-	\]
+	\end{equation*}
 	An undirected edge between $u$ and $v$ was created only if:
 	\begin{center}
 		$\text{Identity} \ge 0.5$, \quad
@@ -264,7 +267,7 @@
 		\label{algo1}
 	\end{algorithm}
 	
-	\subsubsection[Step 3]{Incorporating Taxonomic Information and Computing Distance}
+	\subsubsection[step 3]{Incorporating Taxonomic Information and Computing Distance}
 	\label{subsubsec:step3}
 	To contextualize cross-species similarities, we retrieved taxonomic lineage information for each species represented in the graph using the NCBI Taxonomy database \cite{NCBITaxonomy}.
 	Each graph node was annotated with taxonomic attributes corresponding to the ordered rank list:
@@ -280,9 +283,10 @@
 			d(u,v) = \min\left\{ i \mid \text{$u$ and $v$ share the same label at rank } i \right\}
 		\end{equation*}
 	}
+	\noindent
 	If the two species do not share any common annotation across the considered ranks, we set $d(u,v) = \mathcal{R}$. Thus, smaller values of $d(u,v)$ indicate closer phylogenetic relatedness, while larger values correspond to more distant taxa.
 	
-	\subsubsection[Step 4]{Node Scoring and Identification of HGT Candidates}
+	\subsubsection[step 4]{Node Scoring and Identification of HGT Candidates}
 	\label{subsubsec:step4}
 	We flagged an edge $(u,v)$ as suspicious if it simultaneously connected distant taxa and highly similar proteins:
 	\begin{center}
@@ -319,15 +323,14 @@
 	\end{center}
 	We ranked candidates by score and reported the top-ranked node(s). In our experiments we output the top 1 candidate(\texttt{TOP\_HGT\_N}$=1$). i.e. the node with the highest HGT score, which also could (but not necessarily) be the gene donor. \\
 	Finally, we supported the top candidate using phylogenetic reconstruction.
-	Phylogenetic trees were constructed with the Neighbor-Joining (NJ) algorithm \cite{NJ} using the pairwise distance:
-	\[
-	d(u,v)=1-\mathrm{Identity}(u,v),
-	\]
-	where $\mathrm{Identity}(u,v)$ is computed as in \nameref{subsubsec:step2}. If a pairwise identity was unavailable, we set $d(u,v)=1$.
+	Phylogenetic trees were constructed with the Neighbor-Joining (NJ) algorithm \cite{NJ} using the pairwise distance $d(u,v)=1-\mathrm{Identity}(u,v)$, where $\mathrm{Identity}(u,v)$ is computed in \nameref{subsubsec:step2}. If a pairwise identity was unavailable, we set $d(u,v)=1$.
+	
+	\FloatBarrier
 	
 	\subsection{Method 2 -- Alignment-Free Detection of HGT Candidates}
 	\label{subsec:method2}
-	An overview of the pipeline is shown in \cref{fig:pipeline_overview}.
+	This method seeks to identify candidate HGT genes by constructing a similarity graph over entire proteomes using an alignment-free approach based on $k$-mer representations.
+	An overview of the method is shown in \cref{fig:method2-workflow}.
 	
 	\begin{figure}[h]
 		\centering
@@ -344,44 +347,45 @@
 			}
 			]
 			
-			\node[box] (kmers) {Step 1: \\ $k$-mer Extraction};
-			\node[box, below=of kmers] (cand) {Step 2: \\ Candidate Edge Generation};
-			\node[box, below=of cand] (prune) {Step 3: \\ Pre-pruning\\{\footnotesize Full graph / Jaccard-pruned}};
-			\node[box, below=of prune] (graph) {Step 4: \\ Graph Construction\\Connected Components};
-			\node[box, below=of graph] (score) {Step 5: \\ Normalization\\and Anomaly Scoring};
-			\node[box, below=of score] (rank) {Step 6: \\ Candidate Ranking};
+			\node[box] (kmers) {Step 1: \\ Pre-processing \& $k$-mer Encoding};
+			\node[box, below=of kmers] (cand) {Step 2: \\ Similarity Candidate Generation};
+			\node[box, below=of cand] (prune) {Step 3: \\ Graph Construction \& Pruning};
+			\node[box, below=of prune] (graph) {Step 4: \\ Statistical Normalization (Anomaly Scoring)};
+			\node[box, below=of graph] (score) {Step 5: \\ Scoring Scheme \& Candidate Ranking};
 			
 			\draw[arrow] (kmers) -- (cand);
 			\draw[arrow] (cand) -- (prune);
 			\draw[arrow] (prune) -- (graph);
 			\draw[arrow] (graph) -- (score);
-			\draw[arrow] (score) -- (rank);
 		\end{tikzpicture}
 		\caption{Workflow of \hyperref[subsec:method2]{Method 2}. Protein sequences are represented using $k$-mers to
 			generate cross-species similarity candidates. Pre-pruning controls graph density by retaining high-confidence
-			edges, after which normalization and graph-based anomaly scoring are applied to identify candidate
+			edges, after which normalization and anomaly scoring are applied to identify candidate
 			HGT-related proteins.}
-		\label{fig:pipeline_overview}
+		\label{fig:method2-workflow}
 	\end{figure}
 	
-	\subsubsection{Similarity Candidate Generation}
-	To avoid computationally infeasible all-vs-all alignments, proteins shorter than 50 amino acids were excluded. The remaining sequences were represented as sets of distinct $k$-mers ($k=6$), encoded as collision-free base-20 integers over the canonical amino acid alphabet\cite{Sims2009,Haubold2014}.\\
-	To suppress non-informative overlaps, highly frequent $k$-mers (posting list size $>100$) were excluded. Only cross-species pairs were considered, as intra-species similarity is expected and not informative for HGT detection, and candidate lists were capped to the top 10 matches per protein. Exact Jaccard similarity over the $k$-mer sets was then computed for these candidate pairs to obtain deterministic similarity scores.
+	\subsubsection{Pre-processing and Similarity Candidate Generation}
+	To avoid computationally infeasible all-vs-all alignments, proteins shorter than 50 amino acids were excluded. The remaining sequences were represented as sets of distinct $k$-mers ($k=6$), encoded as collision-free base-20 integers over the canonical amino acid alphabet\cite{Sims2009,Haubold2014}. The purpose of this encoding is to map each distinct $k$-mer to the proteins in which it appeared.\\
+	To suppress non-informative overlaps, highly frequent $k$-mers (appearing in more than 100 proteins) were excluded. Only cross-species pairs were considered, as intra-species similarity is expected and not informative for HGT detection, and candidate lists were capped to the top 10 matches per protein. Exact Jaccard similarity over the $k$-mer sets was then calculated for these candidate pairs to obtain similarity scores. 
 	
 	\subsubsection{Graph Construction and Pruning}
-	Candidate pairs were assembled into an undirected, weighted similarity graph, with edges weighted by Jaccard similarity of $k$-mer sets. Similarities were normalized per species pair by retaining the strongest edges (top 10\% per pair). All retained edges were required to meet a minimum Jaccard similarity value of 0.1, and per-node degree was capped at 20.\\	
-	Additional taxonomic distance filters retained edges with taxonomic distance in the range $[2,4]$, that was calculated as shown in \hyperref[subsec:method1]{Method 1}'s \nameref{subsubsec:step3}. These steps reduced the graph from approximately $9\times 10^5$ candidate edges to 92,790 edges, yielding the sparse graph used to detect HGT events.
+	Candidate pairs of protein sequences were assembled into an undirected weighted similarity graph, where each node represents a protein sequence. Edges between proteins are weighted by the previously computed Jaccard similarity. Retained edges were required to meet a minimum Jaccard similarity value of 0.1, and per-node degree was capped at 20. Additional taxonomic distance filters retained edges with taxonomic distance in the range $[2,4]$, that was calculated as shown in \hyperref[subsec:method1]{Method 1}'s \nameref{subsubsec:step3}. These steps reduced the graph from approximately $9\times 10^5$ candidate edges to 92,790 edges, yielding the sparse graph used to detect HGT events.
 	
 	\subsubsection{Graph-Based Anomaly Scoring}
-	Graph structure enables evaluation of anomalous similarity within mixed-species components. Similarity scores were normalized using robust $z$-scores based on the median and MAD\cite{Rousseeuw1993}, and were computed per species pair when more than 30 edges were available.\\
-	Within each connected component of the pruned graph, taxonomic mixing was quantified using species count and normalized Shannon entropy \cite{ShannonEntropy}. Anomaly concentration was measured as the fraction of edges with $z\ge3$. Each node was annotated with anomaly evidence (max and top-k mean $z$-scores) and structural connectivity metrics: cross-species degree, neighbor entropy, participation coefficient\cite{Guimera2005}, clustering coefficient, and betweenness centrality.\\
-	Proteins were ranked using a scoring framework with threshold gates requiring sufficient component size, taxonomic mixing, anomalous similarity, and cross-species connectivity (component size $\ge10$, entropy $\ge0.75$, node degree $\ge4$, mean top-5 $z\ge2$).
+	For each unordered species pair, we computed the median and median absolute deviation (MAD) of the edge Jaccard similarity distribution and used these values to define robust $z$-scores, which were assigned only for species pairs represented by at least 30 edges. Pairs with fewer observations were excluded from the downstream $z$-based node and component summaries. \\ \\
+	Within each connected component of the pruned graph, taxonomic mixing was quantified using the Shannon entropy\cite{ShannonEntropy} of species labels among its member proteins. Anomaly concentration was defined as the fraction of edges with $z\ge3$. \\ \\
+	Each node was annotated with anomaly evidence (max and top-k mean $z$-scores) and structural connectivity metrics: cross-species degree, neighbor entropy, participation coefficient\cite{Guimera2005}, clustering coefficient\cite{Watts1998}, and betweenness centrality.\\
+	Proteins were ranked using a component-aware scoring framework that combined several graph-derived indicators. For each protein, we considered: (i) the size of its connected component, (ii) taxonomic mixing within that component measured as the Shannon entropy of species labels, (iii) the node’s cross-species degree in the similarity graph, and (iv) the mean of the five largest z-scores among its incident edges. Candidates were required to satisfy minimum thresholds for these quantities (chosen parameters: component size $\geq$ 10, entropy $\geq$ 0.75, node degree $\geq$ 4, mean top-5 z $\geq$ 2). \\
+	\\
+	To rank candidate proteins, we define a final anomaly score $S(u)$ for each protein $u$, combining component-level and edge-level signals. The score is computed as:
+	\begin{equation*}
+	\log S(u) = \log \Phi(C_u) + \log A(u) + \log T(u)
+	\end{equation*}
+	\noindent
+	Where $\Phi(C_u)$ captures component-level taxonomic mixing and anomaly concentration, $A(u)$ aggregates normalized similarity scores, and $T(u)$ summarizes cross-species connectivity and bridge-like topology. To stabilize scale differences across components, aggregation was performed in log-space, meaning high scores arise only when anomaly and structural evidence co-occur. 
 	
-	\begin{equation}
-		\log S(u) = \log \Phi(C_u) + \log A(u) + \log T(u),
-	\end{equation}
-	
-	$\Phi(C_u)$ captures component-level taxonomic mixing and anomaly concentration, $A(u)$ aggregates normalized similarity scores, and $T(u)$ summarizes cross-species connectivity and bridge-like topology. To stabilize scale differences across components, aggregation was performed in log-space, meaning high scores arise only when anomaly and structural evidence co-occur.
+	\FloatBarrier
 	
 	\section{Results}
 	\subsection{Constructed Graph}
@@ -390,12 +394,18 @@
 	Component size is highly skewed (median 4; 95th percentile 20; max 107). Median components span two species, and only 18.5\% contain more than 5 species.\\
 	Anomalous similarity is globally sparse: the median fraction of high-$z$ edges per component is 0 and only 3.9\% of components show substantial anomaly concentration ($high\_z\_frac >0.3$). This sparsity is also evident in the global edge distribution (\cref{fig:zscoredist}), where most similarities cluster near the baseline while high-$z$ edges occupy a small right tail.\\	
 	Across 37,421 proteins in the pruned graph, only 5.9\% satisfy the gating criteria and receive a non-zero score, indicating strong selectivity.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\linewidth]{figures/z_score_distribution.png}
+		\caption{Distribution of MAD-based $z$-score for all protein-protein edges, plotted in logarithmic y-axis. The background distribution (grey) represents the global set of 911,306 edges, which clusters near the median, reflecting expected evolutionary divergence. The dashed black line is the statistical significance threshold (Z=3). Edges connected to the final HGT candidates (red) are localized to the right tail of the distribution.}
+		\label{fig:zscoredist}
+	\end{figure}
 	
 	\subsection{Findings}
 	The methodologies we developed are designed to show candidates to HGT genes. After finding those, we needed to biologically validate them to prove they are in fact valid candidates for HGT events. We will now present some of the candidates, along with biological background to support the findings.
 	
 	\subsubsection{Horizontal Transfer of EptC (Phosphoethanolamine Transferase)}
-	Using \hyperref[subsec:method1]{method 1}, we identified EptC as a candidate HGT event. EptC is an enzyme that catalyzes the addition of a phosphoethanolamine (PEA) group to components of the bacterial outer membrane. This modification reduces the net negative charge of the membrane surface. Antimicrobial peptides produced by the host are predominantly positively charged. By decreasing the membrane’s negative charge, the enzyme discourages the entrance of antimicrobial peptides and mitigtes their immunological effect. This provides a selective advantage to the bacterium. EptC is a known HGT-associated gene \cite{Zinkle2025}.\\
+	Using \hyperref[subsec:method1]{method 1}, we identified EptC as a candidate HGT event. EptC is an enzyme that adds a postive molecule (PEA) to the bacterial outer membrane, therefore reducing the net negative charge of the membrane surface. Antimicrobial peptides produced by the host are mostly positively charged. By decreasing the membrane’s negative charge, the enzyme discourages entrance of antimicrobial peptides and mitigtes their immunological effect. This provides a selective advantage to the bacterium. EptC is a known HGT-associated gene \cite{Zinkle2025}.\\
 	In \cref{fig:EptC_graph} below we show a similarity graph in which a red thick line is connecting \textit{Shigella} to two \textit{Escherichia Coli} species.
 	In addition to the thick lines between \textit{Shigella} and \textit{E. coli}, we observe low similarity between \textit{Pseudomonas Aeruginosa} (cyan node) and the other bacteria, suggesting our results are not due to conservation, but rather an HGT event. Also note how there is no suspicious edge between the two strains of \textit{E. coli}, thanks to integration of taxonomic information in our suspects filtering. \\
 	\begin{figure}[H]
@@ -414,7 +424,7 @@
 	\end{figure}
 	
 	\subsubsection{Horizontal Transfer of ymdF}
-	Using the \hyperref[subsec:method1]{method 1}, we identified ymdF as an additional candidate HGT event. At the time of writing this report, the exact function of the protein itself remains a mystery to the scientific community, although it is annotated as a stress-induced or stress-related protein \cite{Keseler2017EcoCyc, BioCyc_G0-10443}. Proteins involved in stress response can confer a selective advantage under adverse conditions, making such genes plausible candidates for horizontal acquisition. While there is no direct HGT evidence of ymdF itself, it has been proposed that the yciFE operon, which includes paralogs of ymdF, comprises horizontally transferred genes in both \textit{E. coli} and \textit{Salmonella} \cite{Oguri2018}, suggesting an HGT history of related genes within this operon. HGT is further supported again by our phylogenetic analysis.
+	Using \hyperref[subsec:method1]{method 1}, we identified ymdF as an additional candidate HGT event. At the time of writing this report, the exact function of the protein itself remains a mystery to the scientific community, although it is annotated as a stress-induced or stress-related protein \cite{Keseler2017EcoCyc, BioCyc_G0-10443}. Proteins involved in stress response can confer a selective advantage under adverse conditions, making such genes plausible candidates for horizontal acquisition. While there is no direct HGT evidence of ymdF itself, it has been proposed that the yciFE operon, which includes paralogs of ymdF, comprises horizontally transferred genes in both \textit{E. coli} and \textit{Salmonella} \cite{Oguri2018}, suggesting an HGT history of related genes within this operon. HGT is further supported again by our phylogenetic analysis.
 	In \cref{fig:ymdF_graph}, we present the similarity graph for the ymdF protein constructed using \hyperref[subsec:method1]{method 1}. As previously reported, the yciFE operon, which contains paralogs of ymdF, has been shown to be closely related between \textit{E. coli} and \textit{Salmonella} \cite{Oguri2018}. This relationship is clearly recovered by our graph, as indicated by the thick red edge connecting the corresponding nodes (purple and brown). Note that one node (gray) lacks species annotation in our dataset.\\
 	\begin{figure}[hbtp]
 		\centering
@@ -433,71 +443,84 @@
 	
 	\FloatBarrier
 	
-	\subsubsection{Structural regimes in the Jaccard-pruned graph}
-	
-	\begin{table}[t]
+	\subsubsection{Horizontal Transfer of Glucose-1-phosphate thymidylyltransferase}
+	Using \hyperref[subsec:method2]{method 2}, we examined the Jaccard-pruned graph, focusing on connected components enriched for high surprise edges (z-score $\geq 3$) and broad taxonomic mixing.\\
+	In connected component A (\cref{fig:compA}), both clusters demonstrate a horizontal transfer of Glucose-1-phosphate thymidylyltransferase, a key building block for bacterial surface polysaccharides, which helps bacteria like \textit{Capnocytophaga} (pathogenic oral commensal in dogs, purple node) resist the killing effect of human serum \cite{CompA1, CompA2}.
+	\begin{figure}[H]
 		\centering
-		\small
-		\begin{tabular}{lrrrrrr}
-			\toprule
-			Component & Proteins & Edges & Density & Species & $H_{\mathrm{norm}}$ & high-$z$ frac \\
-			\midrule
-			5  & 97 & 632 & 0.136 & 50 & 0.998 & 0.60 \\
-			8  & 95 & 589 & 0.130 & 49 & 0.998 & 0.47 \\
-			32 & 71 & 332 & 0.134 & 31 & 0.958 & 0.063 \\
-			\bottomrule
-		\end{tabular}
-		\caption{Summary statistics for representative components in the pruned similarity graph.}
-		\label{tab:components}
-	\end{table}
-	
-	\begin{figure}[!t]
-		\centering
-		\includegraphics[height=0.45\textheight]{figures/component_5.png}
-		\caption{Component 5: Broad multi-taxa exchange module. Nodes represent proteins and edges represent cross-species similarity. Node size reflects candidate score, and highlighted edges correspond to high-surprise similarities relative to species-pair baselines.}
-		\label{fig:component5}
+		\includegraphics[width=0.7\textwidth]{figures/component_A.png}
+		\caption{Connected component A of the Jaccard-pruned graph. Each node represents a protein sequence and is colored by species. Weighted edges connect protein with Jaccard similarity above the pruning threshold. Edge width reflects similarity strength. Bold edges denote statistically anomalous similarities ($z$-score $\geq 3$).\\Stats: \#nodes=71, \#edges=332.}
+		\label{fig:compA}
 	\end{figure}
 	
-	\begin{figure}[!t]
+	\subsubsection{Horizontal Transfer of 30S ribosomal protein S10 (rspJ)}
+	In connected component B of the graph produced by \hyperref[subsec:method2]{method 2} (\cref{fig:compB}), all clusters correspond to a horizontal transfer of 30S ribosomal protein S10 (rspJ gene). Mutations in this gene are associated with tigecycline resistance \cite{antibiotic_res}. Studies specifically show the transfer of this gene involving tuberculosis and other Mycobacterium species \cite{antibiotics12091367}. 
+	\begin{figure}[H]
 		\centering
-		\includegraphics[height=0.45\textheight]{figures/component_8.png}
-		\caption{Component 8: Chained cross-species connectivity. Compact sub-clusters are linked by a small number of high-surprise edges, producing elongated paths across distant taxa.}
-		\label{fig:component8}
+		\includegraphics[width=0.7\textwidth]{figures/component_B.png}
+		\caption{Connected component B of the Jaccard-pruned graph. Each node represents a protein sequence and is colored by species. Weighted edges connect protein with Jaccard similarity above the pruning threshold. Edge width reflects similarity strength. Bold edges denote statistically anomalous similarities ($z$-score $\geq 10$).\\Stats: \#nodes=95, \#edges=589.}
+		\label{fig:compB}
 	\end{figure}
 	
-	\begin{figure}[t]
+	\subsubsection{Analysis of Component C}
+	Connected component C of the graph produced by \hyperref[subsec:method2]{method 2} (\cref{fig:compC}) forms a densely connected subgraph comprising 100 proteins across 48 species. High scoring proteins appear throughout the network and interact across species, suggesting a shared module rather than isolated events. This pattern fits repeated horizontal gene transfer or shared mobile gene pools creating multi-species similarity \cite{compCShape}.\\
+	In cluster $C_1$ all nodes correspond to ribosomal protein S21, which is linked to late stage phage replication. Once the gene is acquired via HGT, it becomes a functional part of the phage's genetic toolkit for hijacking the host’s ribosomes to favor phage protein synthesis during late infection \cite{phage_S21_hgt}. This finding is consistent with results from other HGT detection tools \cite{other_hgt_tool}.
+	Clusters $C_2, C_3$ correspond to ribosomal protein S12 (rpsL gene), whose mutations confer streptomycin resistance \cite{Xu2025}, supporting our detection of an HGT event.
+	\begin{figure}[H]
 		\centering
-		\includegraphics[width=\linewidth]{figures/component_32.png}
-		\caption{Component 32: Localized high-confidence bridges. Two coherent regions are connected by a small number of strong cross-species edges, with anomalous signal concentrated in the bridges.}
-		\label{fig:component32}
+		\includegraphics[width=0.7\textwidth]{figures/component_C.png}
+		\caption{Connected component C of the Jaccard-pruned graph. Each node represents a protein sequence and is colored by species. Weighted edges connect protein with Jaccard similarity above the pruning threshold. Edge width reflects similarity strength. Bold edges denote statistically anomalous similarities ($z$-score $\geq 3$).\\Stats: \#nodes=97, \#edges=632.}
+		\label{fig:compC}
 	\end{figure}
-	
-	Three representative components illustrate distinct structural regimes of cross-species similarity (\cref{tab:components}).
-	Component 5 forms a dense multi-taxa exchange module spanning many species with near-maximal entropy and strong anomaly concentration (\cref{tab:components}, \cref{fig:component5}). High-scoring proteins participate in multiple cross-species interactions, suggesting a shared exchange module rather than isolated anomalies.
-	
-	Clusters within this component correspond to horizontally transferred ribosomal proteins. 
-	The left cluster involves ribosomal protein S21, which has been linked to late-stage phage replication and can become part of the phage genetic toolkit used to hijack host translational machinery after transfer \cite{phage_S21_hgt,frontiers_hgt_tools}. 
-	In contrast, the top and right clusters correspond to ribosomal protein S12 (encoded by \textit{rpsL}) within the 30S ribosomal subunit, whose mutations are associated with streptomycin resistance \cite{rpsL_streptomycin}.
-	
-	Component 8 shows a chained transfer-like topology spanning many taxa with high entropy and substantial anomaly concentration (\cref{tab:components}, \cref{fig:component8}). Compact subclusters are linked by a few high-surprise edges, producing elongated paths consistent with stepwise propagation across lineages. 
-	
-	Clusters in this component correspond to horizontal transfer of the 30S ribosomal protein S10 (encoded by \textit{rpsJ}), whose mutations are known markers of tigecycline resistance\cite{rpsJ_tigecycline}. Horizontal transfer of this gene has been reported among \textit{Mycobacterium} species, including \textit{M. tuberculosis} \cite{mycobacterium_rpsJ_transfer}.
-	
-	Component 32 instead exhibits localized high-confidence bridges across many species but with relatively low anomaly concentration (Table~\ref{tab:components}, Figure~\ref{fig:component32}). Here anomalous signal concentrates in a few bridging edges linking otherwise ordinary similarity neighborhoods. 
-	
-	Clusters in this component correspond to horizontal transfer of glucose-1-phosphate thymidylyltransferase, a key enzyme in bacterial surface polysaccharide biosynthesis. Such polysaccharides contribute to host immune evasion; for example, Capnocytophaga (pathogenic oral commensal in dogs) species use them to resist the bactericidal effects of human serum\cite{capnocytophaga_surface_polysaccharide,capnocytophaga_serum_resistance}.
-	
-	\subsubsection{Comparison with the full candidate graph}
-	
-	Applying the same normalization and structural scoring to the full candidate graph yields substantially denser connectivity, with many additional proteins and edges that obscure component boundaries. This contrast supports pre-pruning as a practical requirement for interpreting anomalous similarity patterns at scale.
-	
-	\subsubsection{Score distribution and selectivity}
-	
-	Among the top 200 ranked proteins, the median score was 5.9 (IQR: 4.47–8.17), with the 95th percentile at 12.74 and a maximum of 18.76. These values represent the extreme upper tail of the scoring distribution among the 5.9\% of proteins that passed gating.
 	
 	\FloatBarrier
+	
 	\section{Discussion}
-	\textcolor{red}{\uline{\textbf{Method 2 - Sketching approaches such as MinHash could further scale the pipeline to larger datasets\cite{Broder1997,Ondov2016}.}}}
+	\label{subsec:discussion}
+	
+	\subsection{Summary}
+	In this project, we asked whether graph-based analysis of cross-species protein similarity can help reveal candidate horizontal gene transfer (HGT) events across bacterial genomes. Our original goal was not to replace classical phylogenetic approaches, but to develop a lightweight and interpretable framework that uses sparse similarity graphs, taxonomic context and anomaly scoring to prioritize candidate genes for further study.\\
+	Overall, our results suggest that graph-based representations are indeed useful for this task. Accross both methodologies, we identified candidates whose similarity patterns deviate from the background expectation of species-level clustering --- EptC and ymdF using \hyperref[subsec:method1]{method 1}, and Glucose-1-phosphate thymidylyltransferase, 30S ribosomal protein S10, and ribosomal proteins S21/S12 using \hyperref[subsec:method2]{method 2}. Together, these findings support the idea that HGT candidates can be exposed through graph structure, especially when high similarity appears accross taxonomically distant species.
+	
+	\subsection{Analysis}
+	The main conclusion from our results is that graph analysis provides meaningful information regarding HGT events. Our research question asked how graph-based analysis can reveal candidate HGT events, and the answer emerging from this project is that unusual edges become much more informative when viewed in their broader network context.\\\\
+	In \hyperref[subsec:method1]{method 1}, the graph was constructed after clustering proteins into homologous groups, which made the problem computationally manageable and biologically focused. Within these groups, suspicious edges connected proteins that were both highly similar and taxonomically distant. The additional node-level aggregation step was important: instead of flagging a single surprising pair, we prioritized proteins that repeatedly participated in such anomalous relationships. The phylogenetic follow-up further strengthened this interpretation, since the inferred gene relationships did not fully match th expected species relationships.\\\\
+	\hyperref[subsec:method2]{Method 2} complements this by showing that even without explicit alignments, large-scale graph screening can still recover biologically interesting signals. The use of $k$-mer based Jaccard-similarity, pruning, normalization and component-aware scoring allowed us to move from a very large candidate space to a relatively small set of high-interest proteins and connected components. Importantly, the high-scoring components were not merely dense graphs --- they also displayed taxonomic mixing.\\\\
+	At the same time, our results should be interpreted carefully. They show that graph-based analysis is effective for prioritizing candidate HGT event, but not for proving an HGT event on its own. Similarity across taxa can also arise from conserved function, paralogy or annotation artifacts.
+	
+	\subsection{Evaluation}
+	A major strength of the project is that the two methodologies address complementary approaches. The fact that both methods identified plausible HGT-related candidates suggests that the graph-based perspective is robust across different computational formulations.\\
+	However, the project has several important limitations.\\
+	First, similarity is not equivalent to horizontal transfer. This was already recognized at the proposal stage as a central risk, and it remained the main conceptual limitation throughout the project. Our pipeline therefore identifies candidates, not confirmed transfers.\\
+	Second, taxonomic distance in our framework is coarse. It is useful as a prior for distinguishing expected within-lineage similarity from more surprising cross-lineage similarity, but is does not fully model evolutionary history.\\
+	Third, the dataset design introduces limitations. The two methodologies used different datasets, which reduced direct comparability between them. In \hyperref[subsec:method1]{method 1}, the number of proteomes was relatively small, allowing deeper per-cluster analysis but limiting taxonomic breadth. In \hyperref[subsec:method2]{method 2}, broader coverage improved scale, but selecting at most two assemblies per species introduced redundancy in some cases and may also have excluded informative diversity in others.\\
+	Fourth, the scoring thresholds were partly heuristics. Thresholds were chosen to make the graph informative, but different parameter choices could change the ranked candidates.\\\\
+	Regarding difficulties we have encountered, one practical challenge was balancing biological realism with computational feasibility. Classical HGT detection can become very expensive very quickly, especially when pairwise comparisons scale quadratically. This motivated the divide and conquer designs of both methods. Another challenge was distinguishing conserved proteins from truly anomalous cross-species similarities. Our response was to combine similarity with taxonomic context and graph-level aggregation rather than relying on any single local statistic.
+	
+	\subsection{Future Work}
+	The most important next step would be to create stronger validation by comparing our ranked candidates against curated HGT benchmarks or predictions from established HGT tools. This would allow quantitative evaluation of precision and recall.\\
+	A second direction is scaling. For \hyperref[subsec:method2]{method 2} in particular, sketching approaches such as MinHash \cite{Ondov2016} could further reduce the cost of large-scale similarity screening.\\
+	A third direction is unifying the two methodologies into a single hierarchical pipline. For example, one could first apply \hyperref[subsec:method2]{method 2}'s alignment-free graph construction as a broad screening layer, then pass selected components or candidate proteins into \hyperref[subsec:method1]{method 1}'s alignment-based pipeline for finer analysis and phylogenetic inspection.\\
+	Finally, future work could also move beyond bacterial datasets and ask whether similar graph-based anomaly patterns can help identify transfer across broader ecological or taxonomic boundaries.
+	
+	\section{Work Distribution Table}
+	\begin{table}[H]
+		\centering
+		\renewcommand{\arraystretch}{1.3}
+		\begin{tabularx}{\textwidth}{lX}
+			\toprule
+			\textbf{Name} & \textbf{Responsibility} \\
+			\midrule
+			Or Forshmit & Design and implementation of \hyperref[subsec:method1]{method 1}. Visualizations for \hyperref[subsec:method1]{method 1}.\\
+			Noam Kimhi & Pruning design of \hyperref[subsec:method2]{method 2}. Cleaning visualizations. Coordination between the sub-teams. Presentation making. \\
+			Roee Tekoah & \textcolor{red}{Fill} \\
+			Dor Stein & Implementation of \hyperref[subsec:method1]{method 1}. Literature and biological validation of \hyperref[subsec:method1]{method 1}'s results. \\
+			Noam Korkos & Implementation of the pruning procedure for \hyperref[subsec:method2]{method 2}. Validation of \hyperref[subsec:method2]{method 2}'s results. \\
+			\bottomrule
+		\end{tabularx}
+		\caption{Team responsibilities}
+		\label{tab:example}
+	\end{table}
 	
 	
 	\newpage
