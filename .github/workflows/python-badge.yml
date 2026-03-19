@@ -8,10 +8,12 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   update-badge:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -30,15 +32,13 @@ jobs:
 
           total = sum(data.values())
           python_bytes = data.get("Python", 0)
-
           pct = 0 if total == 0 else round((python_bytes / total) * 100, 1)
 
           badge = {
               "schemaVersion": 1,
               "label": "Python",
               "message": f"{pct}%",
-              "color": "3776AB",
-              "logoSvg": ""
+              "color": "3776AB"
           }
 
           Path("badges").mkdir(exist_ok=True)
@@ -47,10 +47,12 @@ jobs:
           )
           PY
 
-      - name: Commit badge JSON
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add badges/python-percentage.json
-          git diff --cached --quiet || git commit -m "Update Python percentage badge"
-          git push
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: "Update Python percentage badge"
+          branch: "bot/update-python-badge"
+          delete-branch: true
+          title: "Update Python percentage badge"
+          body: |
+            Automated update of badges/python-percentage.json
