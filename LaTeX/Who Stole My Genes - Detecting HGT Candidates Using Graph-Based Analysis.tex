@@ -128,7 +128,7 @@
 		
 		\vspace{20pt}
 		
-		\href{https://github.com/noam-kimhi/CBIO-Hackathon-HGT/}
+		\href{https://github.com/noam-kimhi/Who-Stole-My-Genes/}
 		{\texttt{\faGithub}} \\[11pt]
 		\date{\today}
 	\end{center}
@@ -171,7 +171,7 @@
 	For each genome, we have FASTA files (\texttt{.faa}), where each entry corresponds to a single gene.\\
 	Both methodologies used different data from RefSeq, due to a lack of coordination. \\
 	For \hyperref[subsec:method1]{the first methodology}, we downloaded the \texttt{bacteria.*.protein.faa.gz} files from the bacteria database \cite{RefSeqBacteria}, which consist of 15 bacterial proteomes.\\
-	For \hyperref[subsec:method2]{the second methodology}, we used a script to download protein sequences of 48 species spanning 19 families (e.g. gut microbiota, human pathogens) from the genome database \cite{RefSeqGenome}, \textcolor{red}{aimed to maximize detection of HGT events across phylogenetically diverse families}. The script \textcolor{red}{fill in script name} is available in the \hyperref{}{}{}{GitHub repository} \textcolor{red}{add link to script}. To control dataset size, we selected up to two assemblies per species using a deterministic
+	For \hyperref[subsec:method2]{the second methodology}, we used a script to download protein sequences of 48 species spanning 19 families (e.g. gut microbiota, human pathogens) from the genome database \cite{RefSeqGenome}, \textcolor{red}{aimed to maximize detection of HGT events across phylogenetically diverse families}. The script \texttt{refseq\_fetch\_proteins.py} is available \href{https://github.com/noam-kimhi/Who-Stole-My-Genes/blob/main/Method\%202/src/graph_construction/refseq_fetch_proteins.py}{in the GitHub repository}. To control dataset size, we selected up to two assemblies per species using a deterministic
 	ranking. While this choice ensured manageable scale and consistent annotation quality, it introduced some redundancy due to near-identical assemblies; we discuss this limitation in \textcolor{red}{add ref to discussions}.
 	
 	\section{Methods}
