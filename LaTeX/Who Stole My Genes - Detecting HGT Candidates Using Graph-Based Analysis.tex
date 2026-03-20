@@ -372,8 +372,8 @@
 	
 	\subsubsection{Graph-Based Anomaly Scoring}
 	For each unordered species pair, we computed the median and median absolute deviation (MAD) of the edge Jaccard similarity distribution to define robust $z$-scores, using only pairs with at least 30 edges.\\
-	Within each connected component, taxonomic mixing was quantified using Shannon entropy\cite{ShannonEntropy} of species labels, and anomaly concentration was defined as the fraction of edges with $z\ge3$.\\
-	Each node was annotated with anomaly evidence (max and top-k mean $z$-scores) and structural connectivity metrics: cross-species degree, neighbor entropy, participation coefficient\cite{Guimera2005}, clustering coefficient\cite{Watts1998}, and betweenness centrality.\\
+	Within each connected component, taxonomic mixing was quantified using Shannon entropy~\cite{ShannonEntropy} of species labels, and anomaly concentration was defined as the fraction of edges with $z\ge3$.\\
+	Each node was annotated with anomaly evidence (max and top-k mean $z$-scores) and structural connectivity metrics: cross-species degree, neighbor entropy, participation coefficient~\cite{Guimera2005}, clustering coefficient~\cite{Watts1998}, and betweenness centrality.\\
 	Proteins were ranked using a component-aware scoring framework that combined several graph-derived indicators. For each protein, we considered: (i) the size of its connected component, (ii) taxonomic mixing within that component measured as the Shannon entropy of species labels, (iii) the node’s cross-species degree in the similarity graph, and (iv) the mean of the five largest z-scores among its incident edges. Candidates required minimum thresholds (component size $\geq$ 10, entropy $\geq$ 0.75, node degree $\geq$ 4, mean top-5 z $\geq$ 2).\\
 	To rank candidate proteins, we define a final anomaly score $S(u)$ for each protein $u$, combining component-level and edge-level signals. The score is computed as:
 	\begin{equation*}
