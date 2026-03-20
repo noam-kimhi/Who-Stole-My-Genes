@@ -171,7 +171,7 @@
 	
 	\section{Data}
 	\label{sec:data}
-	Both methodologies used data from NCBI RefSeq \cite{RefSeq}, and the NCBI Taxonomy database \cite{NCBITaxonomy} (using \texttt{BioPython}'s \texttt{Entrez} module \cite{BioPythonEntrez}).
+	Our project was split into 2 methodologies. Both methodologies used data from NCBI RefSeq \cite{RefSeq}, and the NCBI Taxonomy database \cite{NCBITaxonomy} (using \texttt{BioPython}'s \texttt{Entrez} module \cite{BioPythonEntrez}).
 	For each genome, we acquired FASTA files (\texttt{.faa}) where each entry corresponds to a single gene.\\
 	For \hyperref[subsec:method1]{the first methodology}, we downloaded the \texttt{bacteria.*.protein.faa.gz} files from the bacteria database \cite{RefSeqBacteria}, which consist of 15 bacterial proteomes.\\
 	For \hyperref[subsec:method2]{the second methodology}, we acquired protein sequences of 48 species spanning 19 taxonomic families from the genome database \cite{RefSeqGenome}, using a python script (\href{https://github.com/noam-kimhi/Who-Stole-My-Genes/blob/main/Method\%202/src/graph_construction/refseq_fetch_proteins.py}{\uline{\texttt{refseq\_fetch\_proteins.py}}}). To control dataset size, we selected up to two assemblies per species using a deterministic
