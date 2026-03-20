@@ -4,8 +4,6 @@
 \usepackage[a4paper,margin=1in]{geometry}
 \usepackage{lmodern}
 \usepackage{graphicx}
-\usepackage{xcolor} % for colors
-\usepackage{doi}
 \usepackage{float}
 \usepackage{booktabs}
 \usepackage{caption}
@@ -26,9 +24,8 @@
 \usepackage{ulem}
 \usepackage{enumitem}
 \usepackage{setspace}
-\usepackage{booktabs}
-\usepackage{tabularx}
 \onehalfspacing
+\usepackage{tabularx}
 \usepackage{fancyhdr}
 \usepackage{tikz}
 \usepackage{placeins}
@@ -459,7 +456,7 @@
 		\label{fig:compB}
 	\end{figure}
 	
-	\subsubsection{Analysis of Component C}
+	\subsubsection{Horizontal Transfer of Ribosomal Proteins S21 \& S12 (rpsL)}
 	Connected component C of the graph produced by \hyperref[subsec:method2]{method 2} (\cref{fig:compC}) forms a densely connected subgraph comprising 100 proteins across 48 species. High scoring proteins appear throughout the network and interact across species, suggesting a shared module rather than isolated events. This pattern fits repeated horizontal gene transfer or shared mobile gene pools creating multi-species similarity \cite{compCShape}.\\
 	In cluster $C_1$ all nodes correspond to ribosomal protein S21, which is linked to late stage phage replication. Once the gene is acquired via HGT, it becomes a functional part of the phage's genetic toolkit for hijacking the host’s ribosomes to favor phage protein synthesis during late infection \cite{phage_S21_hgt}. This finding is consistent with results from other HGT detection tools \cite{other_hgt_tool}.
 	Clusters $C_2, C_3$ correspond to ribosomal protein S12 (rpsL gene), whose mutations confer streptomycin resistance \cite{Xu2025}, supporting our detection of an HGT event.
@@ -516,7 +513,7 @@
 	\end{table}
 	
 	
-	\newpage
+	\FloatBarrier
 	
 	\bibliographystyle{unsrturl}
 	\bibliography{references}
