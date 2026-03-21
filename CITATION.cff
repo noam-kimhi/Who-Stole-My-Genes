@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite it as follows."
+title: "Who Stole My Genes? Detecting HGT Candidates Using Graph-Based Analysis"
+type: software
+repository-code: https://github.com/OrF8/your-repo-name
+authors:
+  - family-names: Forshmit
+    given-names: Or
+    email: or.forshmit@mail.huji.ac.il
+  - family-names: Kimhi
+    given-names: Noam
+    email: noam.kimhi@mail.huji.ac.il
+  - family-names: Tekoah
+    given-names: Roee
+    email: roee.tekoah@mail.huji.ac.il
+  - family-names: Stein
+    given-names: Dor
+    email: dor.stein@mail.huji.ac.il
+  - family-names: Korkos
+    given-names: Noam
+    email: noam.korkos@mail.huji.ac.il
+abstract: >
+  Graph-based detection of candidate horizontal gene transfer events in bacteria
+  using sparse protein similarity graphs, taxonomic distance context, and
+  interpretable graph-based prioritization.
+keywords:
+  - horizontal gene transfer
+  - HGT
+  - bacteria
+  - bioinformatics
+  - computational biology
+  - graph analysis
+  - protein similarity
+license: "GPL-3.0-or-later"
