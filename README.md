@@ -101,7 +101,16 @@ Protein FASTAs (15 bacterial proteomes)
 
 ### Method 2 — Alignment-Free k-mer Pipeline
 
-This method scales to 48 species (19 families) without pairwise alignment, relying instead on *k*-mer composition statistics and graph-level anomaly detection.
+This method scales to 48 species (19 taxonomic families) without pairwise alignment, relying instead on *k*-mer composition statistics and graph-level anomaly detection.
+This method treats proteins as nodes in a cross-species similarity graph, then scores proteins and components for HGT-like behavior using graph structure and species-pair-normalized edge surprise — no pairwise alignment required.
+
+The pipeline has two parts:
+- **`graph_construction`**: builds candidate protein similarity edges from protein FASTAs and prunes them into a graph input.
+- **`hgt_pipeline`**: consumes a pruned edge list and produces edge/node/component features plus ranked HGT candidates.
+
+There are two practical entry paths:
+- **Shortcut path**: use the preincluded canonical pruned graph `golden/reference_inputs/edges_PRUNED_JACCARD_92790.tsv` and run `graph_hgt_pipeline.py` directly.
+- **Full E2E path**: start from `data/assembly_summary_refseq.txt` + `config/species.txt`, build manifest/downloads/candidates/pruned edges, then run the pipeline.
 
 ```
 Protein FASTAs (48 species, 19 families from RefSeq)
@@ -223,28 +232,102 @@ This produces an interactive 3D Plotly graph (`results/`) and a Neighbor-Joining
 
 #### Method 2 — Alignment-Free Pipeline
 
-**Step 1 — Build candidate edges from protein FASTAs:**
+Navigate to the `Method 2` directory first:
 ```sh
 cd "Method 2"
-python src/graph_construction/kmer_candidates_from_faa.py \
-    --manifest data/out_refseq/manifest.tsv \
-    --downloads_dir data/out_refseq/downloads \
-    --out candidates.tsv \
-    --k 5 --min_len 50 --max_postings 2000 --min_shared 3 --top_m 50
 ```
 
-**Step 2 — Prune the candidate graph:**
-```sh
-python graph_pruning.py --in candidates.tsv --out pruned_edges.tsv
-```
+##### Quickstart — From Canonical Pruned Edges
 
-**Step 3 — Run the HGT scoring pipeline:**
+A canonical pruned graph is preincluded in the repository. Run the HGT pipeline directly:
+
+With betweenness centrality:
 ```sh
 python graph_hgt_pipeline.py \
-    --in_edges pruned_edges.tsv \
+    --in_edges golden/reference_inputs/edges_PRUNED_JACCARD_92790.tsv \
+    --out_dir results/
+```
+
+Without betweenness (faster):
+```sh
+python graph_hgt_pipeline.py \
+    --in_edges golden/reference_inputs/edges_PRUNED_JACCARD_92790.tsv \
     --out_dir results/ \
-    --weight_for_z jaccard \
-    --z0 3.0
+    --no_betweenness
+```
+
+For automated reporting after the pipeline run, see `tools/REPRODUCE.md` and the convenience runner `tools/reproduce.py`.
+
+##### Full E2E Recipe (From Scratch)
+
+**Step 1 — Prepare `assembly_summary_refseq.txt`** (tracked via Git LFS — ~216 MB; the repo contains only an LFS pointer, so even if the file appears present you must fetch the actual object or download it manually):
+```sh
+# Option A: fetch the LFS object (requires git-lfs installed and LFS access)
+git lfs pull --include="Method 2/data/assembly_summary_refseq.txt"
+
+# Option B: download directly from NCBI
+curl -L -o data/assembly_summary_refseq.txt \
+    https://ftp.ncbi.nlm.nih.gov/genomes/ASSEMBLY_REPORTS/assembly_summary_refseq.txt
+```
+
+**Step 2 — Build manifest + download FASTAs** from `config/species.txt`:
+```sh
+cd src
+python graph_construction/refseq_fetch_proteins.py \
+    --assembly_summary ../data/assembly_summary_refseq.txt \
+    --species_list ../config/species.txt \
+    --out_dir ../data/out_refseq \
+    --max_assemblies_per_species 2 \
+    --require_latest \
+    --download
+cd ..
+```
+
+**Step 3 — Construct candidates and pruned edges:**
+
+The values below are the recommended defaults for the 48-species dataset. Adjust `--k`, `--min_shared`, and `--top_m` to trade off recall vs. graph size.
+```sh
+cd src
+python graph_construction/orchestrator.py construct-edges \
+    --manifest ../data/out_refseq/manifest.tsv \
+    --downloads_dir ../data/out_refseq/downloads \
+    --out_candidates ../candidates.tsv \
+    --out_edges ../edges_pruned.tsv \
+    --k 6 --min_len 50 --max_postings 100 --min_shared 6 --top_m 10 --q 0.9 --top_x 20
+cd ..
+```
+
+**Step 4 — Run the HGT pipeline:**
+```sh
+python graph_hgt_pipeline.py \
+    --in_edges edges_pruned.tsv \
+    --out_dir results/
+```
+
+**Step 5 — Generate reports:**
+```sh
+python tools/reporting/top_anomaly_edges.py \
+    --edges results/edge_features.tsv \
+    --top_n 25 \
+    --out_dir results/reports
+
+python tools/reporting/summarize_global_stats.py \
+    --component_features results/component_features.tsv \
+    --protein_features results/protein_features.tsv \
+    --edge_features results/edge_features.tsv \
+    --hgt_candidates results/hgt_candidates.tsv \
+    --out_prefix results/reports/global_stats
+```
+
+**Step 6 — Explain top components:**
+```sh
+python tools/reporting/explain_component.py \
+    --component_id 5 \
+    --edges results/edge_features.tsv \
+    --protein_features results/protein_features.tsv \
+    --component_features results/component_features.tsv \
+    --hgt_candidates results/hgt_candidates.tsv \
+    --top_nodes 20 --top_edges 25
 ```
 
 Output files in `results/`:  
