@@ -150,43 +150,51 @@ Protein FASTAs (48 species, 19 families from RefSeq)
 
 ## 📁 Project Structure
 
-```sh
-└── CBIO-Hackathon-HGT/
-    ├── Method 1/                        # Alignment-based pipeline
-    │   ├── create_graph.py              # Entry point (CLI)
-    │   ├── help_noam.py                 # Utility script
-    │   ├── hgt_graph/                   # Core library
-    │   │   ├── cli.py                   # Argument parsing & orchestration
-    │   │   ├── constants.py             # Thresholds, paths, keys
-    │   │   ├── graph/                   # Graph construction & scoring
-    │   │   ├── io/                      # Protein I/O utilities
-    │   │   ├── similarity/              # Pairwise alignment logic
-    │   │   ├── taxonomy/                # NCBI taxonomy integration
-    │   │   └── viz/                     # Plotly 3D & phylogenetic tree export
-    │   ├── MMSeqs2 Files/               # MMSeqs2 clustering outputs
-    │   ├── data/                        # Sample cluster CSV files
-    │   └── results/                     # Generated graphs & phylogenetic trees
-    │
-    ├── Method 2/                        # Alignment-free pipeline
-    │   ├── graph_hgt_pipeline.py        # Public API module
-    │   ├── graph_pruning.py             # Edge pruning utilities
-    │   ├── simulaiton.py                # Main simulation runner (note: filename has a typo)
-    │   ├── ancient_hgt_simulation.py    # Stress-test: ancient/ameliorated HGTs
-    │   ├── tax_distances.txt            # Precomputed taxonomic distances
-    │   ├── config/
-    │   │   └── species.txt              # 60 target bacterial species
-    │   ├── src/
-    │   │   ├── graph_construction/      # k-mer extraction, FASTA parsing, pruning
-    │   │   └── hgt_pipeline/            # Pipeline stages, scoring, ranking
-    │   ├── tools/                       # Standalone helper scripts
-    │   ├── data/                        # RefSeq downloads
-    │   ├── golden/                      # Ground-truth reference data
-    │   ├── artifacts/                   # Intermediate pipeline artifacts
-    │   └── tests/                       # Regression tests
-    │
-    ├── LaTeX/                           # Full academic paper (PDF + source)
-    └── requirements.txt                 # Python dependencies
+The repository is organized around two independent HGT detection pipelines, shared configuration, and the academic paper source.
+
 ```
+Who-Stole-My-Genes/
+├── Method 1/                        # Alignment-based pipeline (protein clusters)
+│   ├── create_graph.py              # Entry point (CLI)
+│   ├── help_noam.py                 # Utility: taxonomic distance helper
+│   ├── hgt_graph/                   # Core library
+│   │   ├── cli.py                   # Argument parsing & orchestration
+│   │   ├── constants.py             # Thresholds, paths, shared keys
+│   │   ├── graph/                   # Graph construction & HGT scoring
+│   │   ├── io/                      # Protein I/O utilities
+│   │   ├── similarity/              # Pairwise alignment logic (BLOSUM62)
+│   │   ├── taxonomy/                # NCBI taxonomy queries & distance cache
+│   │   └── viz/                     # Plotly 3D graph & NJ phylogenetic tree
+│   ├── MMSeqs2 Files/               # MMSeqs2 clustering scripts and outputs
+│   ├── data/                        # Sample cluster CSV files
+│   └── results/                     # Generated graphs & phylogenetic trees
+│
+├── Method 2/                        # Alignment-free k-mer pipeline (proteomes)
+│   ├── graph_hgt_pipeline.py        # Pipeline entry point
+│   ├── graph_pruning.py             # Edge-pruning utilities
+│   ├── simulaiton.py                # Simulation runner
+│   ├── ancient_hgt_simulation.py    # Sensitivity test for ancient/ameliorated HGTs
+│   ├── tax_distances.txt            # Precomputed taxonomic distances
+│   ├── src/
+│   │   ├── graph_construction/      # k-mer extraction, FASTA parsing, pruning
+│   │   └── hgt_pipeline/            # Pipeline stages: scoring, ranking, features
+│   ├── tools/                       # Standalone reporting & reproduction scripts
+│   └── data/                        # RefSeq downloads and manifest
+│
+├── LaTeX/                           # Academic paper (PDF + TeX source + figures)
+├── config/
+│   └── species.txt                  # Target bacterial species list (used by Method 2)
+└── requirements.txt                 # Python dependencies for both pipelines
+```
+
+- **`Method 1/`** – The alignment-based pipeline. Proteins from 15 bacterial proteomes are grouped by MMSeqs2, then scored for HGT likelihood using pairwise alignment, NCBI taxonomy distances, and graph topology. Produces interactive 3D Plotly graphs and Neighbor-Joining phylogenetic trees.
+- **`Method 1/hgt_graph/`** – Core Python library for Method 1, split into subpackages for I/O, similarity scoring, taxonomy, graph construction, and visualization.
+- **`Method 2/`** – The alignment-free pipeline. Uses *k*-mer Jaccard similarity across 48 species to build a large protein similarity graph, then applies per-species-pair z-score statistics and betweenness centrality to rank HGT candidates.
+- **`Method 2/src/`** – Source modules for graph construction (`graph_construction/`) and the HGT scoring pipeline (`hgt_pipeline/`).
+- **`Method 2/tools/`** – Helper scripts for reproducing results and generating reports; see `tools/REPRODUCE.md` for details.
+- **`LaTeX/`** – The full academic paper as PDF and LaTeX source, including all result figures.
+- **`config/`** – Repository-wide configuration; `species.txt` lists the target bacterial species used by Method 2.
+- **`requirements.txt`** – Python package dependencies for both pipelines.
 
 ---
 
