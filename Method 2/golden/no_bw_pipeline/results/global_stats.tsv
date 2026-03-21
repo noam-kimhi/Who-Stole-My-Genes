@@ -1,9 +1,0 @@
-section	metric	value
-components	n_components	5262.0
-components	pct_mixed_ge3_species	43.50057012542759
-components	pct_mixed_ge5_species	18.491068034967693
-components	pct_highz_gt_0p1	6.214367160775371
-components	pct_highz_gt_0p3	3.9338654503990877
-candidates	pct_scored_gt_0	100.0
-candidates	pct_scored_ge_5	47.5
-candidates	pct_scored_ge_10	10.0

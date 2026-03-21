@@ -63,6 +63,8 @@ This runs:
 
 ## Assembly Summary Source
 
+`assembly_summary_refseq.txt` is currently not tracked in git because it is very large.
+
 Download from NCBI:
 
 ```powershell

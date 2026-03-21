@@ -40,7 +40,10 @@ from pathlib import Path
 from typing import Dict, Iterator, List, Optional, Set
 import urllib.request
 
-from fasta_parsing import iter_fasta_gz, protein_id_from_header
+try:
+    from graph_construction.fasta_parsing import iter_fasta_gz, protein_id_from_header
+except ImportError:
+    from fasta_parsing import iter_fasta_gz, protein_id_from_header
 
 
 def assembly_dirname_from_ftp_path(ftp_path: str) -> str:

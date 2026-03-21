@@ -27,8 +27,16 @@ from collections import defaultdict, Counter
 from pathlib import Path
 from typing import Dict, List, Set, Tuple, Union
 
-from k_mer_encoding import kmers_encoded_set
-from fasta_parsing import iter_fasta_gz, protein_id_from_header, load_manifest_species_map
+try:
+    from graph_construction.k_mer_encoding import kmers_encoded_set
+    from graph_construction.fasta_parsing import (
+        iter_fasta_gz,
+        protein_id_from_header,
+        load_manifest_species_map,
+    )
+except ImportError:
+    from k_mer_encoding import kmers_encoded_set
+    from fasta_parsing import iter_fasta_gz, protein_id_from_header, load_manifest_species_map
 
 # ---------------- Build protein list, K, and inverted index ----------------
 def load_proteins_from_downloads(

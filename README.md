@@ -1,6 +1,6 @@
 # 🧬 Who Stole My Genes?
 
-**Who Stole My Genes?** is a computational biology project that hunts for *horizontal gene transfer* (HGT) candidates across bacterial genomes — without the computational weight of whole-genome phylogenetics.  
+**Who Stole My Genes?** is a computational biology project that hunts for *horizontal gene transfer* (HGT) candidates across bacterial genomes – without the computational weight of whole-genome phylogenetics.  
 Instead of asking _"Which species are related?"_, we ask:
 - Which proteins are suspiciously similar across phylogenetically distant species?
 - Can graph topology alone expose genes that crossed species boundaries?
@@ -25,8 +25,8 @@ Full paper available [here](LaTeX/Who%20Stole%20My%20Genes%20-%20Detecting%20HGT
 - [📍 Overview](#-overview)
 - [✨ Key Features](#-key-features)
 - [🔬 Methodology](#-methodology)
-  - [Method 1 — Orthologous Clustering](#method-1--orthologous-clustering)
-  - [Method 2 — Alignment-Free k-mer Pipeline](#method-2--alignment-free-k-mer-pipeline)
+  - [Method 1 – Orthologous Clustering](#method-1--orthologous-clustering)
+  - [Method 2 – Alignment-Free k-mer Pipeline](#method-2--alignment-free-k-mer-pipeline)
 - [📁 Project Structure](#-project-structure)
 - [🚀 Getting Started](#-getting-started)
   - [☑️ Prerequisites](#%EF%B8%8F-prerequisites)
@@ -42,11 +42,11 @@ Full paper available [here](LaTeX/Who%20Stole%20My%20Genes%20-%20Detecting%20HGT
 
 ## 📍 Overview
 
-Horizontal Gene Transfer (HGT) is one of evolution's most disruptive forces — bacteria can acquire entirely new capabilities by directly absorbing genes from unrelated organisms.  
+Horizontal Gene Transfer (HGT) is one of evolution's most disruptive forces – bacteria can acquire entirely new capabilities by directly absorbing genes from unrelated organisms.  
 Detecting these events computationally is hard: high similarity across distant species can arise from HGT, but also from convergent evolution, strong functional conservation, or assembly artifacts.
 
 This project explores a **lightweight, graph-based approach** to HGT candidate detection.  
-Rather than running computationally expensive whole-genome alignments or phylogenetic reconstructions, we model cross-species protein similarity as a **sparse graph** and leverage its global topology to flag anomalous edges — connections that are too strong given the taxonomic distance between their endpoints.
+Rather than running computationally expensive whole-genome alignments or phylogenetic reconstructions, we model cross-species protein similarity as a **sparse graph** and leverage its global topology to flag anomalous edges – connections that are too strong given the taxonomic distance between their endpoints.
 
 Two independent methodologies were developed and compared:  
 - **Method 1** operates at the *protein level*, grouping proteins into homologous clusters and analyzing each cluster's internal similarity graph.  
@@ -56,11 +56,11 @@ Two independent methodologies were developed and compared:
 
 ## ✨ Key Features
 
-- **Two complementary HGT detection pipelines** — alignment-based and alignment-free
+- **Two complementary HGT detection pipelines** – alignment-based and alignment-free
 - **MMSeqs2 clustering** for scalable homolog grouping (Method 1)
 - **k-mer inverted index** for fast candidate edge generation without alignment (Method 2)
 - **Taxonomic distance integration** via the NCBI Taxonomy database
-- **Graph-theoretic scoring** — suspicious edge detection, node HGT scores, betweenness, z-scores
+- **Graph-theoretic scoring** – suspicious edge detection, node HGT scores, betweenness, z-scores
 - **3D interactive visualizations** of protein similarity graphs (Plotly)
 - **Neighbor-Joining phylogenetic trees** for top HGT candidates (Method 1)
 - **Simulation framework** to stress-test pipeline sensitivity against ancient/ameliorated HGTs (Method 2)
@@ -69,7 +69,7 @@ Two independent methodologies were developed and compared:
 
 ## 🔬 Methodology
 
-### Method 1 — Orthologous Clustering
+### Method 1 – Orthologous Clustering
 
 This method focuses on individual proteins, clustering them into homologous groups and searching for cross-species anomalies within each group.
 
@@ -99,10 +99,10 @@ Protein FASTAs (15 bacterial proteomes)
   Output: Top HGT candidates + 3D graph + NJ phylogenetic tree
 ```
 
-### Method 2 — Alignment-Free k-mer Pipeline
+### Method 2 – Alignment-Free k-mer Pipeline
 
 This method scales to 48 species (19 taxonomic families) without pairwise alignment, relying instead on *k*-mer composition statistics and graph-level anomaly detection.
-This method treats proteins as nodes in a cross-species similarity graph, then scores proteins and components for HGT-like behavior using graph structure and species-pair-normalized edge surprise — no pairwise alignment required.
+This method treats proteins as nodes in a cross-species similarity graph, then scores proteins and components for HGT-like behavior using graph structure and species-pair-normalized edge surprise – no pairwise alignment required.
 
 The pipeline has two parts:
 - **`graph_construction`**: builds candidate protein similarity edges from protein FASTAs and prunes them into a graph input.
@@ -217,7 +217,7 @@ pip install -r requirements.txt
 
 ### 🤖 Usage
 
-#### Method 1 — Alignment-Based Pipeline
+#### Method 1 – Alignment-Based Pipeline
 
 Run the full pipeline on a cluster CSV file:
 ```sh
@@ -230,14 +230,14 @@ python create_graph.py \
 
 This produces an interactive 3D Plotly graph (`results/`) and a Neighbor-Joining phylogenetic tree for the top HGT candidate.
 
-#### Method 2 — Alignment-Free Pipeline
+#### Method 2 – Alignment-Free Pipeline
 
 Navigate to the `Method 2` directory first:
 ```sh
 cd "Method 2"
 ```
 
-##### Quickstart — From Canonical Pruned Edges
+##### Quickstart – From Canonical Pruned Edges
 
 A canonical pruned graph is preincluded in the repository. Run the HGT pipeline directly:
 
@@ -260,7 +260,7 @@ For automated reporting after the pipeline run, see `tools/REPRODUCE.md` and the
 
 ##### Full E2E Recipe (From Scratch)
 
-**Step 1 — Prepare `assembly_summary_refseq.txt`** (tracked via Git LFS — ~216 MB; the repo contains only an LFS pointer, so even if the file appears present you must fetch the actual object or download it manually):
+**Step 1 – Prepare `assembly_summary_refseq.txt`** (tracked via Git LFS – ~216 MB; the repo contains only an LFS pointer, so even if the file appears present you must fetch the actual object or download it manually):
 ```sh
 # Option A: fetch the LFS object (requires git-lfs installed and LFS access)
 git lfs pull --include="Method 2/data/assembly_summary_refseq.txt"
@@ -270,7 +270,7 @@ curl -L -o data/assembly_summary_refseq.txt \
     https://ftp.ncbi.nlm.nih.gov/genomes/ASSEMBLY_REPORTS/assembly_summary_refseq.txt
 ```
 
-**Step 2 — Build manifest + download FASTAs** from `config/species.txt`:
+**Step 2 – Build manifest + download FASTAs** from `config/species.txt`:
 ```sh
 cd src
 python graph_construction/refseq_fetch_proteins.py \
@@ -283,7 +283,7 @@ python graph_construction/refseq_fetch_proteins.py \
 cd ..
 ```
 
-**Step 3 — Construct candidates and pruned edges:**
+**Step 3 – Construct candidates and pruned edges:**
 
 The values below are the recommended defaults for the 48-species dataset. Adjust `--k`, `--min_shared`, and `--top_m` to trade off recall vs. graph size.
 ```sh
@@ -297,14 +297,14 @@ python graph_construction/orchestrator.py construct-edges \
 cd ..
 ```
 
-**Step 4 — Run the HGT pipeline:**
+**Step 4 – Run the HGT pipeline:**
 ```sh
 python graph_hgt_pipeline.py \
     --in_edges edges_pruned.tsv \
     --out_dir results/
 ```
 
-**Step 5 — Generate reports:**
+**Step 5 – Generate reports:**
 ```sh
 python tools/reporting/top_anomaly_edges.py \
     --edges results/edge_features.tsv \
@@ -319,7 +319,7 @@ python tools/reporting/summarize_global_stats.py \
     --out_prefix results/reports/global_stats
 ```
 
-**Step 6 — Explain top components:**
+**Step 6 – Explain top components:**
 ```sh
 python tools/reporting/explain_component.py \
     --component_id 5 \
@@ -347,8 +347,8 @@ Both methods were applied to diverse bacterial datasets spanning gram-positive, 
 
 **Method 1** successfully flagged known HGT-associated genes (e.g., *eptC*, *ymdF*) and produced phylogenetic trees that visually confirm their anomalous cross-species similarity:
 
-| EptC — Similarity Graph | EptC — Phylogenetic Tree |
-|---|---|
+| EptC – Similarity Graph                     | EptC – Phylogenetic Tree |
+|---------------------------------------------|---|
 | ![EptC graph](LaTeX/figures/EptC_graph.png) | ![EptC tree](LaTeX/figures/EptC_tree.png) |
 
 **Method 2** demonstrated strong statistical signal in high-*z* edges and identified clusters with elevated species-pair boundary crossings. Component-level analysis revealed concentrated HGT-like components distinguishable from background noise:

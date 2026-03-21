@@ -3,7 +3,7 @@
 - `hgt_pipeline/`: core graph-analysis pipeline and stage modules.
 - `graph_construction/`: upstream graph-construction modules.
 
-For method usage and reproducibility:
+For project usage and reproducibility:
 - See repository root `README.md`
 - See repository root `REPRODUCE.md`
 
