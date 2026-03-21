@@ -269,7 +269,7 @@ curl -L -o data/assembly_summary_refseq.txt \
 **Step 2 — Build manifest + download FASTAs** from `config/species.txt`:
 ```sh
 cd src
-python -m graph_construction.refseq_fetch_proteins \
+python graph_construction/refseq_fetch_proteins.py \
     --assembly_summary ../data/assembly_summary_refseq.txt \
     --species_list ../config/species.txt \
     --out_dir ../data/out_refseq \
@@ -284,7 +284,7 @@ cd ..
 The values below are the recommended defaults for the 48-species dataset. Adjust `--k`, `--min_shared`, and `--top_m` to trade off recall vs. graph size.
 ```sh
 cd src
-python -m graph_construction.orchestrator construct-edges \
+python graph_construction/orchestrator.py construct-edges \
     --manifest ../data/out_refseq/manifest.tsv \
     --downloads_dir ../data/out_refseq/downloads \
     --out_candidates ../candidates.tsv \
