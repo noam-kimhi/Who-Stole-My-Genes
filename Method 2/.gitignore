@@ -1,0 +1,16 @@
+# Local data artifacts (generated / machine-specific)
+data/out_refseq/downloads/
+data/out_refseq/downloads_small_set/
+data/out_refseq/bad_run/
+data/out_refseq/good_run/
+data/out_refseq/strict_run/
+data/out_refseq/candidates*.tsv
+data/out_refseq/edges*.tsv
+data/out_refseq/proteins.tsv
+
+# Local runs and temporary outputs
+tmp/
+
+# Python build/cache artifacts
+**/__pycache__/
+src/*.egg-info/
