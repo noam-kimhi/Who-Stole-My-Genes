@@ -109,8 +109,8 @@ The pipeline has two parts:
 - **`hgt_pipeline`**: consumes a pruned edge list and produces edge/node/component features plus ranked HGT candidates.
 
 There are two practical entry paths:
-- **Shortcut path**: use the preincluded canonical pruned graph `golden/reference_inputs/edges_PRUNED_JACCARD_92790.tsv` and run `graph_hgt_pipeline.py` directly.
-- **Full E2E path**: start from `data/assembly_summary_refseq.txt` + `config/species.txt`, build manifest/downloads/candidates/pruned edges, then run the pipeline.
+- **Shortcut path**: use the preincluded canonical pruned graph `golden/reference_inputs/edges_PRUNED_JACCARD_92790.tsv` and run `python -m hgt_pipeline.pipeline`.
+- **Full E2E path**: start from `data/assembly_summary_refseq.txt` + `config/species.txt`, build manifest/downloads/candidates/pruned edges, then run `python -m hgt_pipeline.pipeline`.
 
 ```
 Protein FASTAs (48 species, 19 families from RefSeq)
@@ -169,17 +169,27 @@ Who-Stole-My-Genes/
 │   └── results/                     # Generated HTML graphs & phylogenetic trees
 │
 ├── Method 2/                        # Alignment-free k-mer pipeline
-│   ├── graph_hgt_pipeline.py        # Entry point – run the HGT scoring pipeline
-│   ├── graph_pruning.py             # Standalone edge-pruning utilities
-│   ├── simulaiton.py                # Simulation runner for sensitivity analysis
-│   ├── ancient_hgt_simulation.py    # Stress-test for ancient/ameliorated HGTs
+│   ├── pyproject.toml               # Editable install for Method 2 package (`python -m pip install -e .`)
+│   ├── simulations/
+│   │   ├── simulation.py            # Signal-strength sweep simulation
+│   │   └── ancient_hgt_simulation.py# Ancient/ameliorated stress-test simulation
 │   ├── tax_distances.txt            # Precomputed taxonomic distances
 │   ├── config/
 │   │   └── species.txt              # Target bacterial species list
 │   ├── src/
-│   │   ├── graph_construction/      # k-mer extraction, FASTA parsing, candidate edges
-│   │   └── hgt_pipeline/            # Pipeline stages: scoring, ranking, feature export
+│   │   ├── graph_construction/
+│   │   │   ├── orchestrator.py          # Build/prune orchestration CLI
+│   │   │   ├── refseq_fetch_proteins.py # Manifest + RefSeq FASTA retrieval
+│   │   │   ├── kmer_candidates_from_faa.py
+│   │   │   ├── k_mer_encoding.py
+│   │   │   ├── fasta_parsing.py
+│   │   │   └── graph_pruning.py         # Integrated pruning logic
+│   │   └── hgt_pipeline/
+│   │       ├── pipeline.py              # Main Method 2 pipeline entrypoint
+│   │       └── stages/                  # edge_io, pair_stats, graph_ops, node_features, component_features, ranking
+│   ├── tests/                       # Regression checks for golden outputs
 │   ├── tools/
+│   │   ├── REPRODUCE.md             # Reproducibility instructions for Method 2 experiments
 │   │   ├── reporting/               # Post-run reporting and visualisation scripts
 │   │   └── reproduce.py             # Convenience runner for reproducing results
 │   ├── data/                        # RefSeq downloads (assembly summary tracked via Git LFS)
@@ -242,31 +252,34 @@ This produces an interactive 3D Plotly graph (`results/`) and a Neighbor-Joining
 
 #### Method 2 – Alignment-Free Pipeline
 
-Navigate to the `Method 2` directory first:
+There are two practical entry paths:
+- **Minimal-input path**: start from `data/assembly_summary_refseq.txt` + `config/species.txt`, build manifest/downloads/candidates/pruned edges, then run the pipeline.
+- **Shortcut path**: use the preincluded canonical pruned graph `golden/reference_inputs/edges_PRUNED_JACCARD_92790.tsv` and run `python -m hgt_pipeline.pipeline` directly.
+
+Work from the `Method 2` directory:
 ```sh
 cd "Method 2"
+python -m pip install -e .
 ```
 
-##### Quickstart – From Canonical Pruned Edges
-
-A canonical pruned graph is preincluded in the repository. Run the HGT pipeline directly:
+##### Quickstart – Canonical Pruned Edges
 
 With betweenness centrality:
 ```sh
-python graph_hgt_pipeline.py \
+python -m hgt_pipeline.pipeline \
     --in_edges golden/reference_inputs/edges_PRUNED_JACCARD_92790.tsv \
-    --out_dir results/
+    --out_dir tmp_run_bw
 ```
 
 Without betweenness (faster):
 ```sh
-python graph_hgt_pipeline.py \
+python -m hgt_pipeline.pipeline \
     --in_edges golden/reference_inputs/edges_PRUNED_JACCARD_92790.tsv \
-    --out_dir results/ \
+    --out_dir tmp_run_no_bw \
     --no_betweenness
 ```
 
-For automated reporting after the pipeline run, see `tools/REPRODUCE.md` and the convenience runner `tools/reproduce.py`.
+For automated reporting after the pipeline run, see `Method 2/tools/REPRODUCE.md` and `Method 2/tools/reproduce.py`.
 
 ##### Full E2E Recipe (From Scratch)
 
@@ -282,62 +295,45 @@ curl -L -o data/assembly_summary_refseq.txt \
 
 **Step 2 – Build manifest + download FASTAs** from `config/species.txt`:
 ```sh
-cd src
-python graph_construction/refseq_fetch_proteins.py \
-    --assembly_summary ../data/assembly_summary_refseq.txt \
-    --species_list ../config/species.txt \
-    --out_dir ../data/out_refseq \
+python -m graph_construction.refseq_fetch_proteins \
+    --assembly_summary data/assembly_summary_refseq.txt \
+    --species_list config/species.txt \
+    --out_dir tmp/e2e/graph_construction \
     --max_assemblies_per_species 2 \
     --require_latest \
     --download
-cd ..
 ```
 
 **Step 3 – Construct candidates and pruned edges:**
-
-The values below are the recommended defaults for the 48-species dataset. Adjust `--k`, `--min_shared`, and `--top_m` to trade off recall vs. graph size.
 ```sh
-cd src
-python graph_construction/orchestrator.py construct-edges \
-    --manifest ../data/out_refseq/manifest.tsv \
-    --downloads_dir ../data/out_refseq/downloads \
-    --out_candidates ../candidates.tsv \
-    --out_edges ../edges_pruned.tsv \
+python -m graph_construction.orchestrator construct-edges \
+    --manifest tmp/e2e/graph_construction/manifest.tsv \
+    --downloads_dir data/out_refseq/downloads \
+    --out_candidates tmp/e2e/candidates.tsv \
+    --out_edges tmp/e2e/edges_pruned.tsv \
     --k 6 --min_len 50 --max_postings 100 --min_shared 6 --top_m 10 --q 0.9 --top_x 20
-cd ..
 ```
 
 **Step 4 – Run the HGT pipeline:**
 ```sh
-python graph_hgt_pipeline.py \
-    --in_edges edges_pruned.tsv \
-    --out_dir results/
+python -m hgt_pipeline.pipeline \
+    --in_edges tmp/e2e/edges_pruned.tsv \
+    --out_dir tmp/e2e/pipeline_bw
 ```
 
 **Step 5 – Generate reports:**
 ```sh
 python tools/reporting/top_anomaly_edges.py \
-    --edges results/edge_features.tsv \
+    --edges tmp/e2e/pipeline_bw/edge_features.tsv \
     --top_n 25 \
-    --out_dir results/reports
+    --out_dir tmp/e2e/pipeline_bw/results
 
 python tools/reporting/summarize_global_stats.py \
-    --component_features results/component_features.tsv \
-    --protein_features results/protein_features.tsv \
-    --edge_features results/edge_features.tsv \
-    --hgt_candidates results/hgt_candidates.tsv \
-    --out_prefix results/reports/global_stats
-```
-
-**Step 6 – Explain top components:**
-```sh
-python tools/reporting/explain_component.py \
-    --component_id 5 \
-    --edges results/edge_features.tsv \
-    --protein_features results/protein_features.tsv \
-    --component_features results/component_features.tsv \
-    --hgt_candidates results/hgt_candidates.tsv \
-    --top_nodes 20 --top_edges 25
+    --component_features tmp/e2e/pipeline_bw/component_features.tsv \
+    --protein_features tmp/e2e/pipeline_bw/protein_features.tsv \
+    --edge_features tmp/e2e/pipeline_bw/edge_features.tsv \
+    --hgt_candidates tmp/e2e/pipeline_bw/hgt_candidates.tsv \
+    --out_prefix tmp/e2e/pipeline_bw/results/global_stats
 ```
 
 Output files in `results/`:  
@@ -348,6 +344,31 @@ Output files in `results/`:
 | `edge_features.tsv` | Per-edge z-scores and Jaccard statistics |
 | `protein_features.tsv` | Per-node betweenness, clustering, component features |
 | `component_features.tsv` | Per-component concentration and z-score statistics |
+
+<details>
+<summary>Optional: Explanations and Artifact Reproduction</summary>
+
+**Explanations (top components and top candidates):**
+```sh
+python tools/reporting/explain_component.py --component_id 5 --edges tmp/e2e/pipeline_bw/edge_features.tsv --protein_features tmp/e2e/pipeline_bw/protein_features.tsv --component_features tmp/e2e/pipeline_bw/component_features.tsv --hgt_candidates tmp/e2e/pipeline_bw/hgt_candidates.tsv --top_nodes 20 --top_edges 25
+python tools/reporting/explain_component.py --component_id 8 --edges tmp/e2e/pipeline_bw/edge_features.tsv --protein_features tmp/e2e/pipeline_bw/protein_features.tsv --component_features tmp/e2e/pipeline_bw/component_features.tsv --hgt_candidates tmp/e2e/pipeline_bw/hgt_candidates.tsv --top_nodes 20 --top_edges 25
+python tools/reporting/explain_component.py --component_id 32 --edges tmp/e2e/pipeline_bw/edge_features.tsv --protein_features tmp/e2e/pipeline_bw/protein_features.tsv --component_features tmp/e2e/pipeline_bw/component_features.tsv --hgt_candidates tmp/e2e/pipeline_bw/hgt_candidates.tsv --top_nodes 20 --top_edges 25
+python tools/reporting/explain_top_candidates.py --edges tmp/e2e/pipeline_bw/edge_features.tsv --protein_features tmp/e2e/pipeline_bw/protein_features.tsv --component_features tmp/e2e/pipeline_bw/component_features.tsv --hgt_candidates tmp/e2e/pipeline_bw/hgt_candidates.tsv --top_n 20 --top_k_neighbors 12
+```
+
+**Artifacts reproduction (component plots 5, 8, 32):**
+```sh
+python tools/reporting/plot_components.py \
+    --edges golden/bw_pipeline/rerun_pruned/edge_features.tsv \
+    --protein_features golden/bw_pipeline/rerun_pruned/protein_features.tsv \
+    --hgt_candidates golden/bw_pipeline/rerun_pruned/hgt_candidates.tsv \
+    --component_ids 5,8,32 \
+    --z_min_highlight 3 \
+    --node_size_mode score \
+    --out_dir artifacts/updated_plots/detailed
+```
+
+</details>
 
 ---
 
@@ -367,7 +388,7 @@ Both methods were applied to diverse bacterial datasets spanning gram-positive, 
 |-----------------------------------------|-----------------------------------------|-----------------------------------------|
 | ![compA](LaTeX/figures/component_A.png) | ![compB](LaTeX/figures/component_B.png) | ![compC](LaTeX/figures/component_C.png) |
 
-The simulation in `ancient_hgt_simulation.py` further characterizes Method 2's sensitivity to ancient, ameliorated HGT signals versus conserved hub proteins.
+The simulation in `Method 2/simulations/ancient_hgt_simulation.py` further characterizes Method 2's sensitivity to ancient, ameliorated HGT signals versus conserved hub proteins.
 
 ---
 

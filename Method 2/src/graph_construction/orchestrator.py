@@ -74,10 +74,17 @@ def prune_candidates(
     out_edges: Path,
     q: float,
     top_x: int,
+    max_in_edges_per_v: int | None = None,
+    top_u_edges: int | None = None,
 ) -> None:
     df = pd.read_csv(in_candidates, sep="\t")
     filtered = keep_q_percentile_edges(df, q=q)
-    pruned = keep_top_X_edges_per_node(filtered, X=top_x)
+    pruned = keep_top_X_edges_per_node(
+        filtered,
+        X=top_x,
+        max_in_edges_per_v=max_in_edges_per_v,
+        top_u_edges=top_u_edges,
+    )
     out_edges.parent.mkdir(parents=True, exist_ok=True)
     pruned.to_csv(out_edges, sep="\t", index=False)
     print(f"[OK] wrote pruned edges: {out_edges}")
@@ -103,6 +110,8 @@ def main() -> None:
     p_prune.add_argument("--out_edges", type=Path, required=True)
     p_prune.add_argument("--q", type=float, default=0.9)
     p_prune.add_argument("--top_x", type=int, default=20)
+    p_prune.add_argument("--max_in_edges_per_v", type=int, default=None)
+    p_prune.add_argument("--top_u_edges", type=int, default=None)
 
     p_construct = sub.add_parser("construct-edges", help="Run build-candidates then prune-candidates.")
     p_construct.add_argument("--manifest", type=Path, required=True)
@@ -116,6 +125,8 @@ def main() -> None:
     p_construct.add_argument("--top_m", type=int, default=10)
     p_construct.add_argument("--q", type=float, default=0.9)
     p_construct.add_argument("--top_x", type=int, default=20)
+    p_construct.add_argument("--max_in_edges_per_v", type=int, default=None)
+    p_construct.add_argument("--top_u_edges", type=int, default=None)
     p_construct.add_argument("--allow_within_species", action="store_true")
 
     args = ap.parse_args()
@@ -140,6 +151,8 @@ def main() -> None:
             out_edges=args.out_edges,
             q=args.q,
             top_x=args.top_x,
+            max_in_edges_per_v=args.max_in_edges_per_v,
+            top_u_edges=args.top_u_edges,
         )
         return
 
@@ -160,6 +173,8 @@ def main() -> None:
             out_edges=args.out_edges,
             q=args.q,
             top_x=args.top_x,
+            max_in_edges_per_v=args.max_in_edges_per_v,
+            top_u_edges=args.top_u_edges,
         )
         return
 

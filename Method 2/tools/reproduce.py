@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Iterable, List
 
 
-REPO_ROOT = Path(__file__).resolve().parent
+REPO_ROOT = Path(__file__).resolve().parent.parent
 SRC_DIR = REPO_ROOT / "src"
 TOOLS_REPORTING_DIR = REPO_ROOT / "tools" / "reporting"
 
@@ -263,7 +263,7 @@ def main() -> None:
         downloads = gc_out / "downloads"
         cmd = [
             sys.executable,
-            str((REPO_ROOT / "reproduce.py").resolve()),
+            str(Path(__file__).resolve()),
             "from-manifest",
             "--manifest",
             str(manifest.resolve()),

@@ -1,73 +1,114 @@
-# Reproduce End-to-End
+# Reproduce End-to-End (Module CLIs)
 
-This repository provides a single root runner for exact, scriptable E2E recipes:
+This document uses only the two module entrypoints used in the codebase:
+- `graph_construction.*` (including the graph-construction orchestrator)
+- `hgt_pipeline.pipeline`
+
+No `reproduce.py` wrapper is required.
+
+## Environment
+
+From repository root (PowerShell):
 
 ```powershell
-python reproduce.py --help
+python -m pip install -e .
 ```
 
-## 1) Deterministic Reproduction From Golden Edges
+## A) Start From `config/species.txt` + `data/assembly_summary_refseq.txt`
 
-Recreate pipeline outputs + reports from the canonical pruned graph input:
+Canonical manifest is tracked in the repo at:
+- `data/out_refseq/manifest.tsv`
 
-```powershell
-python reproduce.py from-edges `
-  --in_edges golden/reference_inputs/edges_PRUNED_JACCARD_92790.tsv `
-  --out_dir rerun_from_golden `
-  --with_reports `
-  --with_explanations
-```
-
-Optional full run with betweenness:
+1. Build manifest from assembly summary and species config:
 
 ```powershell
-python reproduce.py from-edges `
-  --in_edges golden/reference_inputs/edges_PRUNED_JACCARD_92790.tsv `
-  --out_dir rerun_from_golden_bw `
-  --with_betweenness `
-  --with_reports `
-  --with_explanations
-```
-
-## 2) Reproduce From Manifest + Downloaded FASTAs
-
-Construct candidate graph and pruned edges, then run the analysis pipeline:
-
-```powershell
-python reproduce.py from-manifest `
-  --manifest data/out_refseq/manifest.tsv `
-  --downloads_dir data/out_refseq/downloads `
-  --work_dir rerun_from_manifest `
-  --with_reports `
-  --with_explanations
-```
-
-## 3) Full Reproduction From `assembly_summary_refseq.txt`
-
-Starting from assembly summary + species list, including downloads:
-
-```powershell
-python reproduce.py from-assembly-summary `
+python -m graph_construction.refseq_fetch_proteins `
   --assembly_summary data/assembly_summary_refseq.txt `
   --species_list config/species.txt `
-  --work_dir rerun_full `
-  --with_reports `
-  --with_explanations
+  --out_dir tmp/e2e_review/graph_construction `
+  --max_assemblies_per_species 2 `
+  --require_latest
 ```
 
-This runs:
-1. `graph_construction.refseq_fetch_proteins` (manifest + FASTA downloads)
-2. `graph_construction.orchestrator construct-edges` (candidates + pruned edges)
-3. `hgt_pipeline.pipeline` (feature extraction + scoring)
-4. `tools/reporting/*` (report tables and explanations)
+2. Construct graph inputs with the graph-construction orchestrator:
 
-## Assembly Summary Source
+```powershell
+python -m graph_construction.orchestrator construct-edges `
+  --manifest tmp/e2e_review/graph_construction/manifest.tsv `
+  --downloads_dir data/out_refseq/downloads `
+  --out_candidates tmp/e2e_review/run/candidates.tsv `
+  --out_edges tmp/e2e_review/run/edges_pruned.tsv `
+  --k 6 --min_len 50 --max_postings 100 --min_shared 6 --top_m 10 --q 0.9 --top_x 20
+```
 
-`assembly_summary_refseq.txt` is currently not tracked in git because it is very large.
+3. Run the analysis pipeline (no betweenness, then betweenness):
 
-Download from NCBI:
+```powershell
+python -m hgt_pipeline.pipeline `
+  --in_edges tmp/e2e_review/run/edges_pruned.tsv `
+  --out_dir tmp/e2e_review/run/pipeline_no_bw `
+  --no_betweenness
+
+python -m hgt_pipeline.pipeline `
+  --in_edges tmp/e2e_review/run/edges_pruned.tsv `
+  --out_dir tmp/e2e_review/run/pipeline_bw
+```
+
+## B) Reporting / Explanations
+
+No-betweenness reports:
+
+```powershell
+python tools/reporting/top_anomaly_edges.py `
+  --edges tmp/e2e_review/run/pipeline_no_bw/edge_features.tsv `
+  --top_n 25 `
+  --out_dir tmp/e2e_review/run/pipeline_no_bw/results
+
+python tools/reporting/summarize_global_stats.py `
+  --component_features tmp/e2e_review/run/pipeline_no_bw/component_features.tsv `
+  --protein_features tmp/e2e_review/run/pipeline_no_bw/protein_features.tsv `
+  --edge_features tmp/e2e_review/run/pipeline_no_bw/edge_features.tsv `
+  --hgt_candidates tmp/e2e_review/run/pipeline_no_bw/hgt_candidates.tsv `
+  --out_prefix tmp/e2e_review/run/pipeline_no_bw/results/global_stats
+```
+
+Betweenness-on reports + explanations:
+
+```powershell
+python tools/reporting/top_anomaly_edges.py `
+  --edges tmp/e2e_review/run/pipeline_bw/edge_features.tsv `
+  --top_n 25 `
+  --out_dir tmp/e2e_review/run/pipeline_bw/results
+
+python tools/reporting/summarize_global_stats.py `
+  --component_features tmp/e2e_review/run/pipeline_bw/component_features.tsv `
+  --protein_features tmp/e2e_review/run/pipeline_bw/protein_features.tsv `
+  --edge_features tmp/e2e_review/run/pipeline_bw/edge_features.tsv `
+  --hgt_candidates tmp/e2e_review/run/pipeline_bw/hgt_candidates.tsv `
+  --out_prefix tmp/e2e_review/run/pipeline_bw/results/global_stats
+```
+
+```powershell
+python tools/reporting/explain_component.py --component_id 5 --edges tmp/e2e_review/run/pipeline_bw/edge_features.tsv --protein_features tmp/e2e_review/run/pipeline_bw/protein_features.tsv --component_features tmp/e2e_review/run/pipeline_bw/component_features.tsv --hgt_candidates tmp/e2e_review/run/pipeline_bw/hgt_candidates.tsv --top_nodes 20 --top_edges 25
+python tools/reporting/explain_component.py --component_id 8 --edges tmp/e2e_review/run/pipeline_bw/edge_features.tsv --protein_features tmp/e2e_review/run/pipeline_bw/protein_features.tsv --component_features tmp/e2e_review/run/pipeline_bw/component_features.tsv --hgt_candidates tmp/e2e_review/run/pipeline_bw/hgt_candidates.tsv --top_nodes 20 --top_edges 25
+python tools/reporting/explain_component.py --component_id 32 --edges tmp/e2e_review/run/pipeline_bw/edge_features.tsv --protein_features tmp/e2e_review/run/pipeline_bw/protein_features.tsv --component_features tmp/e2e_review/run/pipeline_bw/component_features.tsv --hgt_candidates tmp/e2e_review/run/pipeline_bw/hgt_candidates.tsv --top_nodes 20 --top_edges 25
+python tools/reporting/explain_top_candidates.py --edges tmp/e2e_review/run/pipeline_bw/edge_features.tsv --protein_features tmp/e2e_review/run/pipeline_bw/protein_features.tsv --component_features tmp/e2e_review/run/pipeline_bw/component_features.tsv --hgt_candidates tmp/e2e_review/run/pipeline_bw/hgt_candidates.tsv --top_n 20 --top_k_neighbors 12
+```
+
+## C) Exact-Match Targets
+
+Expected exact targets:
+- `golden/reference_inputs/edges_PRUNED_JACCARD_92790.tsv`
+- `golden/no_bw_pipeline/rerun_pruned/*.tsv`
+- `golden/no_bw_pipeline/results/*.tsv`
+- `golden/bw_pipeline/rerun_pruned/*.tsv`
+- `golden/bw_pipeline/results/*.tsv`
+- `golden/bw_pipeline/explanations/*.txt`
+
+Note:
+- `data/assembly_summary_refseq.txt` is large and not tracked by git.
+- Download from NCBI when needed:
 
 ```powershell
 curl.exe -L -o data/assembly_summary_refseq.txt https://ftp.ncbi.nlm.nih.gov/genomes/ASSEMBLY_REPORTS/assembly_summary_refseq.txt
 ```
-

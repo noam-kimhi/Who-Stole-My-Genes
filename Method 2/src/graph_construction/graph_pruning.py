@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import argparse
+from typing import Optional
 
 
 def keep_q_percentile_edges(df, q=0.9):
@@ -21,9 +22,31 @@ def keep_q_percentile_edges(df, q=0.9):
     return filtered_df.drop(columns=["species_pair"])
 
 
-def keep_top_X_edges_per_node(df, X=20):
-    """For each node u, keep top k edges (u,v) based on jaccard"""
-    top_edges = df.groupby('u').apply(lambda x: x.nlargest(X, 'jaccard')).reset_index(drop=True)
+def keep_top_X_edges_per_node(
+    df,
+    X: int = 20,
+    max_in_edges_per_v: Optional[int] = None,
+    top_u_edges: Optional[int] = None,
+):
+    """
+    Prune candidate edges with configurable degree controls.
+
+    Parameters:
+      X:
+        Backward-compatible primary knob.
+      max_in_edges_per_v:
+        Optional cap for edges per target protein `v` (legacy behavior).
+      top_u_edges:
+        Optional cap for top edges kept per source protein `u`.
+        If omitted, falls back to `X`.
+    """
+    top_k_u = X if top_u_edges is None else top_u_edges
+    top_edges = df
+
+    if max_in_edges_per_v is not None:
+        top_edges = top_edges.groupby("v").filter(lambda x: len(x) <= max_in_edges_per_v)
+
+    top_edges = top_edges.groupby("u").apply(lambda x: x.nlargest(top_k_u, "jaccard")).reset_index(drop=True)
     return top_edges
 
 
