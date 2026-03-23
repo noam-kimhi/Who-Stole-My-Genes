@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "alignment-free-hgt-detection"
+version = "0.1.0"
+description = "Alignment-free detection of horizontal gene transfer candidates via protein similarity graphs and anomaly scoring."
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+  "pandas>=1.5",
+  "networkx>=2.8",
+  "matplotlib>=3.6",
+]
+
+[project.scripts]
+hgt-pipeline = "hgt_pipeline.pipeline:main"
+graph-construction = "graph_construction.orchestrator:main"
+refseq-fetch-proteins = "graph_construction.refseq_fetch_proteins:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
