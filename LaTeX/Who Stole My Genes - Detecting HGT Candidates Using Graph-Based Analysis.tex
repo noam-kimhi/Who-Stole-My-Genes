@@ -266,7 +266,7 @@
 	\end{center}
 	where $d_{\text{tax}}(u,v)$ is the taxonomic distance from \nameref{subsubsec:step3}, and $\mathrm{SimilarityScore}$ is defined in \nameref{subsubsec:step2}.
 	Intuitively, such edges represent unexpected cross-species similarity (large taxonomic distance, yet high sequence similarity).\\
-	Let $S_i$ denote the set of nodes connected to some node $i$ by a suspicious edge.
+	Let $S_i$ denote the set of nodes $j$ such that the edge $(i,j)$ is suspicious (with $j \neq i$).
 	We then compute two quantities for every node $i$:
 	\begin{enumerate}[noitemsep]
 		\item \textbf{HGT score} (sum of similarity scores over suspicious edges):
