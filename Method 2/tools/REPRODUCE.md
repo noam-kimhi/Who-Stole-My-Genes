@@ -106,8 +106,8 @@ Expected exact targets:
 - `golden/bw_pipeline/explanations/*.txt`
 
 Note:
-- `data/assembly_summary_refseq.txt` is large and not tracked by git.
-- Download from NCBI when needed:
+- `data/assembly_summary_refseq.txt` can be found in the `Method 2/data/` directory.
+- It can also be download from NCBI when needed:
 
 ```powershell
 curl.exe -L -o data/assembly_summary_refseq.txt https://ftp.ncbi.nlm.nih.gov/genomes/ASSEMBLY_REPORTS/assembly_summary_refseq.txt
