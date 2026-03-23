@@ -31,14 +31,9 @@ def keep_top_X_edges_per_node(
     """
     Prune candidate edges with configurable degree controls.
 
-    Parameters:
-      X:
-        Backward-compatible primary knob.
-      max_in_edges_per_v:
-        Optional cap for edges per target protein `v` (legacy behavior).
-      top_u_edges:
-        Optional cap for top edges kept per source protein `u`.
-        If omitted, falls back to `X`.
+    :param X: Backward-compatible primary knob.
+    :param max_in_edges_per_v: Optional cap for edges per target protein `v` (legacy behavior).
+    :param top_u_edges: Optional cap for top edges kept per source protein `u`. If omitted, falls back to `X`.
     """
     top_k_u = X if top_u_edges is None else top_u_edges
     top_edges = df
