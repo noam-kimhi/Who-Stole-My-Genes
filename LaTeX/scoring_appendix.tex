@@ -1,24 +1,121 @@
-\documentclass{article}
+\documentclass[11pt]{article}
 
-% Language setting
-% Replace `english' with e.g. `spanish' to change the document language
-\usepackage[english]{babel}
-
-% Set page size and margins
-% Replace `letterpaper' with `a4paper' for UK/EU standard size
-\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
-
-% Useful packages
-\usepackage{amsmath}
+% ---------- Packages ----------
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{lmodern}
 \usepackage{graphicx}
-\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{caption}
+\captionsetup{font=footnotesize}
+\IfFileExists{microtype.sty}{\usepackage{microtype}}{}
+\usepackage{amsmath}
+\IfFileExists{fontawesome5.sty}{\usepackage{fontawesome5}}{\newcommand{\faGithub}{\texttt{GitHub}}}
+\IfFileExists{algorithm.sty}{\usepackage{algorithm}}{}
+\usepackage{hyperref}
+\IfFileExists{cleveref.sty}{\usepackage[nameinlink]{cleveref}}{}
+\IfFileExists{cite.sty}{\usepackage[superscript]{cite}}{}
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}\bookmarksetup{numbered}}{}
+\makeatletter
+\providecommand*\theHalgorithm{\thealgorithm}
+\makeatother
+\IfFileExists{algpseudocode.sty}{\usepackage{algpseudocode}}{}
+\IfFileExists{ulem.sty}{\usepackage{ulem}}{}
+\usepackage{enumitem}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{tabularx}
+\usepackage{fancyhdr}
+\IfFileExists{tikz.sty}{\usepackage{tikz}\usetikzlibrary{arrows.meta, positioning}}{}
+\IfFileExists{placeins.sty}{\usepackage{placeins}}{}
+\setcounter{tocdepth}{2}
+\renewcommand{\contentsname}{Contents}
 
-\title{Supplementary Material: Detailed Scoring Derivation}
-\author{Or Forshmit \and Noam Kimhi \and Roee Tekoah \and Dor Stein \and Noam Korkos}
+% ---------- Header and Footer ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{The Hebrew University of Jerusalem}
+\fancyhead[R]{Algorithms in Computational Biology (76558)}
+\fancyfoot[L]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\setlength{\headheight}{14pt}
+
+\fancypagestyle{plain}{%
+	\fancyhf{}
+	\fancyhead[L]{The Hebrew University of Jerusalem}
+	\fancyhead[R]{Algorithms in Computational Biology (76558)}
+	\fancyfoot[L]{\thepage}
+	\renewcommand{\headrulewidth}{0.4pt}
+	\renewcommand{\footrulewidth}{0.4pt}
+}
+
+% ---------- Metadata ----------
+\hypersetup{
+	pdftitle={Who Stole My Genes? Detecting HGT Candidates Using Graph-Based Analysis},
+	pdfauthor={Or Forshmit, Noam Kimhi, Roee Tekoah, Dor Stein, Noam Korkos},
+	pdfsubject={Horizontal Gene Transfer detection using graph-based analysis},
+	pdfkeywords={HGT, Horizontal Gene Transfer}
+}
+
+\title{\textbf{Who Stole My Genes?}\\Detecting HGT Candidates Using Graph-Based Analysis}
+\author{}
 \date{}
 
 \begin{document}
 \maketitle
+\vspace{-50pt}
+
+\begin{center}
+	\renewcommand{\arraystretch}{1.15}
+	\setlength{\tabcolsep}{10pt}
+
+	\begin{tabular}{ccc}
+		\begin{minipage}[t]{0.30\textwidth}\centering
+			\textbf{Or Forshmit}\\[-1pt]
+			\footnotesize\texttt{or\_forshmit8}\\[-1pt]
+			\footnotesize\href{mailto:or.forshmit@mail.huji.ac.il}{\texttt{or.forshmit@mail.huji.ac.il}}
+		\end{minipage}
+		&
+		\begin{minipage}[t]{0.30\textwidth}\centering
+			\textbf{Noam Kimhi}\\[-1pt]
+			\footnotesize\texttt{noam.kimhi}\\[-1pt]
+			\footnotesize\href{mailto:noam.kimhi@mail.huji.ac.il}{\texttt{noam.kimhi@mail.huji.ac.il}}
+		\end{minipage}
+		&
+		\begin{minipage}[t]{0.30\textwidth}\centering
+			\textbf{Roee Tekoah}\\[-1pt]
+			\footnotesize\texttt{roeet}\\[-1pt]
+			\footnotesize\href{mailto:roee.tekoah@mail.huji.ac.il}{\texttt{roee.tekoah@mail.huji.ac.il}}
+		\end{minipage}
+	\end{tabular}
+
+	\vspace{10pt}
+
+	\begin{tabular}{cc}
+		\begin{minipage}[t]{0.30\textwidth}\centering
+			\textbf{Dor Stein}\\[-1pt]
+			\footnotesize\texttt{dorstein}\\[-1pt]
+			\footnotesize\href{mailto:dor.stein@mail.huji.ac.il}{\texttt{dor.stein@mail.huji.ac.il}}
+		\end{minipage}
+		&
+		\begin{minipage}[t]{0.30\textwidth}\centering
+			\textbf{Noam Korkos}\\[-1pt]
+			\footnotesize\texttt{noam.korkos}\\[-1pt]
+			\footnotesize\href{mailto:noam.korkos@mail.huji.ac.il}{\texttt{noam.korkos@mail.huji.ac.il}}
+		\end{minipage}
+	\end{tabular}
+
+	\vspace{20pt}
+
+	\href{https://github.com/noam-kimhi/Who-Stole-My-Genes/}
+	{\Large \faGithub} \\[5pt]
+	\date{\today}
+\end{center}
+
+\tableofcontents
+\newpage
+
 \noindent This document provides the full formal definition and derivation of the scoring scheme used in the main text.
 
 \paragraph{Scoring rationale.}
