@@ -1,0 +1,254 @@
+\documentclass[11pt]{article}
+
+% ---------- Packages ----------
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{caption}
+\captionsetup{font=footnotesize}
+\IfFileExists{microtype.sty}{\usepackage{microtype}}{}
+\usepackage{amsmath}
+\IfFileExists{fontawesome5.sty}{\usepackage{fontawesome5}}{\newcommand{\faGithub}{\texttt{GitHub}}}
+\IfFileExists{algorithm.sty}{\usepackage{algorithm}}{}
+\usepackage{hyperref}
+\IfFileExists{cleveref.sty}{\usepackage[nameinlink]{cleveref}}{}
+\IfFileExists{cite.sty}{\usepackage[superscript]{cite}}{}
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}\bookmarksetup{numbered}}{}
+\makeatletter
+\providecommand*\theHalgorithm{\thealgorithm}
+\makeatother
+\IfFileExists{algpseudocode.sty}{\usepackage{algpseudocode}}{}
+\IfFileExists{ulem.sty}{\usepackage{ulem}}{}
+\usepackage{enumitem}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{tabularx}
+\usepackage{fancyhdr}
+\IfFileExists{tikz.sty}{\usepackage{tikz}\usetikzlibrary{arrows.meta, positioning}}{}
+\IfFileExists{placeins.sty}{\usepackage{placeins}}{}
+\setcounter{tocdepth}{2}
+\renewcommand{\contentsname}{Contents}
+
+% ---------- Header and Footer ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{The Hebrew University of Jerusalem}
+\fancyhead[R]{Algorithms in Computational Biology (76558)}
+\fancyfoot[L]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\setlength{\headheight}{14pt}
+
+\fancypagestyle{plain}{%
+	\fancyhf{}
+	\fancyhead[L]{The Hebrew University of Jerusalem}
+	\fancyhead[R]{Algorithms in Computational Biology (76558)}
+	\fancyfoot[L]{\thepage}
+	\renewcommand{\headrulewidth}{0.4pt}
+	\renewcommand{\footrulewidth}{0.4pt}
+}
+
+% ---------- Metadata ----------
+\hypersetup{
+	pdftitle={Who Stole My Genes? Detecting HGT Candidates Using Graph-Based Analysis},
+	pdfauthor={Or Forshmit, Noam Kimhi, Roee Tekoah, Dor Stein, Noam Korkos},
+	pdfsubject={Horizontal Gene Transfer detection using graph-based analysis},
+	pdfkeywords={HGT, Horizontal Gene Transfer}
+}
+
+\title{\textbf{Who Stole My Genes?}\\Detecting HGT Candidates Using Graph-Based Analysis}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\vspace{-50pt}
+
+\begin{center}
+	\renewcommand{\arraystretch}{1.15}
+	\setlength{\tabcolsep}{10pt}
+
+	\begin{tabular}{ccc}
+		\begin{minipage}[t]{0.30\textwidth}\centering
+			\textbf{Or Forshmit}\\[-1pt]
+			\footnotesize\texttt{or\_forshmit8}\\[-1pt]
+			\footnotesize\href{mailto:or.forshmit@mail.huji.ac.il}{\texttt{or.forshmit@mail.huji.ac.il}}
+		\end{minipage}
+		&
+		\begin{minipage}[t]{0.30\textwidth}\centering
+			\textbf{Noam Kimhi}\\[-1pt]
+			\footnotesize\texttt{noam.kimhi}\\[-1pt]
+			\footnotesize\href{mailto:noam.kimhi@mail.huji.ac.il}{\texttt{noam.kimhi@mail.huji.ac.il}}
+		\end{minipage}
+		&
+		\begin{minipage}[t]{0.30\textwidth}\centering
+			\textbf{Roee Tekoah}\\[-1pt]
+			\footnotesize\texttt{roeet}\\[-1pt]
+			\footnotesize\href{mailto:roee.tekoah@mail.huji.ac.il}{\texttt{roee.tekoah@mail.huji.ac.il}}
+		\end{minipage}
+	\end{tabular}
+
+	\vspace{10pt}
+
+	\begin{tabular}{cc}
+		\begin{minipage}[t]{0.30\textwidth}\centering
+			\textbf{Dor Stein}\\[-1pt]
+			\footnotesize\texttt{dorstein}\\[-1pt]
+			\footnotesize\href{mailto:dor.stein@mail.huji.ac.il}{\texttt{dor.stein@mail.huji.ac.il}}
+		\end{minipage}
+		&
+		\begin{minipage}[t]{0.30\textwidth}\centering
+			\textbf{Noam Korkos}\\[-1pt]
+			\footnotesize\texttt{noam.korkos}\\[-1pt]
+			\footnotesize\href{mailto:noam.korkos@mail.huji.ac.il}{\texttt{noam.korkos@mail.huji.ac.il}}
+		\end{minipage}
+	\end{tabular}
+
+	\vspace{20pt}
+
+	\href{https://github.com/noam-kimhi/Who-Stole-My-Genes/}
+	{\Large \faGithub} \\[5pt]
+	\date{\today}
+\end{center}
+
+\tableofcontents
+\newpage
+
+\noindent This document provides the full formal definition and derivation of the scoring scheme used in the main text.
+
+\paragraph{Scoring rationale.}
+The scoring framework is designed to detect edges and nodes that are anomalously similar relative to their species-pair background. 
+Instead of relying on global similarity thresholds, we normalize similarities within each unordered species pair, thereby accounting for heterogeneity in evolutionary distance and sequence conservation across taxa. 
+Robust statistics (median and MAD) are used to ensure stability under heavy-tailed similarity distributions and to suppress the influence of conserved proteins and outliers. This design avoids reliance on explicit phylogenetic reconstruction while still capturing deviations from expected cross-species similarity patterns.
+
+\vspace{0.5em}
+We use the exact implemented scoring equations. Let $e=(u,v)$ and let $p(e)$ be the unordered species pair of the proteins connected by edge $e$, i.e., the pair of species labels associated with the endpoints of $e$, ignoring order. All normalization is performed independently within each such species pair.
+For each pair $p$ over edge set $E_p$ (default weight $w_e=$ Jaccard):
+\begin{equation}
+m_p=\mathrm{median}\{w_e:e\in E_p\},\quad
+d_p=\mathrm{median}\{|w_e-m_p|:e\in E_p\},\quad
+s_p=1.4826\,d_p+10^{-9}.
+\end{equation}
+Here $\mathrm{median}(\cdot)$ denotes the sample median. The quantity $d_p$ corresponds to the median absolute deviation (MAD), defined as $\mathrm{MAD}(X)=\mathrm{median}(|x - \mathrm{median}(X)|)$.
+The scaling factor $1.4826$ ensures consistency with the standard deviation under a normal distribution, making $s_p$ comparable to a standard deviation estimate while retaining robustness to outliers. 
+The small constant $10^{-9}$ prevents numerical instability when $d_p$ is very close to zero.
+
+\vspace{0.5em}
+Edge robust score:
+\begin{equation}
+z_e=
+\begin{cases}
+\dfrac{w_e-m_{p(e)}}{s_{p(e)}}, & |E_{p(e)}|\ge 30\\
+\text{undefined}, & |E_{p(e)}|<30.
+\end{cases}
+\end{equation}
+We use a global anomaly threshold $z_0=3.0$ to define high-anomaly edges. The requirement $|E_{p(e)}|\ge 30$ ensures sufficient sample size for stable estimation of the median and MAD; smaller samples yield unreliable baselines and are therefore excluded from anomaly scoring.
+Thus, $z_e$ measures how many robust standard deviations the edge weight $w_e$ lies above the typical similarity for its species pair. 
+Large positive values indicate unexpectedly high similarity relative to the background distribution, consistent with potential horizontal transfer signals.
+
+Practically, if $z_e$ is undefined, the edge is not removed from the graph, but it is excluded from all $z$-based anomaly terms (node/component anomaly summaries and high-$z$ betweenness), so it does not contribute to anomaly-based statistics.
+\vspace{0.5em}
+
+Let $q_i$ denote the empirical fraction of nodes in component $C$ belonging to species $i$, and let $k_C$ be the number of distinct species in $C$. 
+The normalized entropy $H_C^{\mathrm{norm}}$ is defined as the Shannon entropy of this discrete distribution divided by $\log k_C$, ensuring values in $[0,1]$.
+The normalized neighbor-species entropy $H_u^{\mathrm{norm}}$ is defined analogously using the species distribution of neighbors of node $u$, normalized to lie in $[0,1]$.
+
+For each component $C$:
+\begin{equation}
+H_C^{\mathrm{norm}}=
+\begin{cases}
+\dfrac{-\sum_i q_i\log q_i}{\log k_C}, & k_C\ge 2\\
+0, & k_C<2,
+\end{cases}
+\qquad
+\mathrm{high\_z\_frac}(C)=\frac{|\{e\in E_C:z_e\ge z_0\}|}{|E_C|}.
+\end{equation}
+\vspace{0.5em}
+
+For each node $u$: degree $d(u)$; neighbor-species count $n_{\mathrm{sp}}(u)$; top-5 mean incident robust score $z_5(u)$, defined as the mean of the five largest defined $z_e$ (if fewer than five defined $z_e$ values exist, the mean is taken over available values) among edges incident to $u$; max neighbor-species fraction $f(u)$; normalized neighbor-species entropy $H_u^{\mathrm{norm}}$, clustering $cc(u)$, and betweenness $b(u)$ on the high-$z$ subgraph.
+
+Hard gates are:
+\begin{equation}
+\begin{aligned}
+&|V_{C_u}|\ge 10,\quad H_{C_u}^{\mathrm{norm}}\ge 0.75,\quad d(u)\ge 4,\quad n_{\mathrm{sp}}(u)\ge 2,\\
+&z_5(u)\ \text{defined and}\ z_5(u)\ge 2.0,\\
+&\big(n_{\mathrm{sp}}(u)\ge 3\ \text{or}\ b(u)>10^{-12}\big).
+\end{aligned}
+\end{equation}
+Failure on any gate gives score $0$.
+Threshold rationale (hard gates): $|V_{C_u}|\ge 10$ avoids unstable component statistics in very small components; $H_{C_u}^{\mathrm{norm}}\ge 0.75$ enforces strong taxonomic mixing; $d(u)\ge 4$ and $n_{\mathrm{sp}}(u)\ge 2$ suppress sparse single-link artifacts; $z_5(u)\ge 2.0$ requires clear robust anomaly signal; and $n_{\mathrm{sp}}(u)\ge 3$ or $b(u)>10^{-12}$ keeps either broadly connected multi-species nodes or bridge-like nodes.
+\vspace{0.5em}
+
+Within each component, robust baselines for $x\in\{z_5,f,d,b\}$ are
+\begin{equation}
+m_{x,C}=\mathrm{median}\{x(v):v\in V_C\},\quad
+s_{x,C}=\max\!\left(1.4826\cdot \mathrm{MAD}\{x(v):v\in V_C\},\;10^{-3}(|m_{x,C}|+1)\right),
+\end{equation}
+
+The quantity $m_{x,C}$ is the median value of feature $x$ over nodes in component $C$, representing a typical baseline level within that component. 
+The scale $s_{x,C}$ is a robust estimate of variability, defined using the MAD and lower-bounded by $10^{-3}(|m_{x,C}|+1)$ to avoid numerical instability in low-variance or degenerate cases.
+
+Each feature is then standardized relative to its component-specific baseline, yielding a robust $z$-score:
+If $Z_z(u)=Z_f(u)=Z_b(u)=0$, score is set to $0$.
+\vspace{0.5em}
+
+
+We define the following component-level and node-level factors. 
+Here, $\rho(C)$ is component edge density; $P_{\mathrm{dens}}$ down-weights very dense components; $G_{\mathrm{ctx}}$ is the fraction of edges in $C$ with high anomaly score ($z\ge z_0$); $G_{\mathrm{size}}$ and $G_{\mathrm{deg}}$ are log-scaled boosts for larger component size and higher node degree; $P_{\mathrm{bridge}}$ rewards low local clustering (bridge-like topology); $P_{\mathrm{ent}}$ down-weights nodes with very low neighbor-species entropy; and $\mathrm{clip}_{[0,1]}(x)=\min(1,\max(0,x))$ truncates values to the interval $[0,1]$.
+\begin{equation}
+\rho(C)=\frac{2|E_C|}{|V_C|(|V_C|-1)},\;
+P_{\mathrm{dens}}=\max(10^{-6},(1-\mathrm{clip}_{[0,1]}(\rho))^{2}),\;
+G_{\mathrm{ctx}}=\max(\mathrm{high\_z\_frac},10^{-6}),
+\end{equation}
+\begin{equation}
+G_{\mathrm{size}}=\log(1+|V_C|),\;
+G_{\mathrm{deg}}=\log(1+d(u)),\;
+P_{\mathrm{bridge}}=\max(10^{-6},(1-\mathrm{clip}_{[0,1]}(cc(u)))),
+\end{equation}
+\begin{equation}
+P_{\mathrm{ent}}=
+\begin{cases}
+0.1+0.9\cdot \dfrac{H_u^{\mathrm{norm}}}{0.15}, & H_u^{\mathrm{norm}}<0.15\\
+1, & H_u^{\mathrm{norm}}\ge 0.15.
+\end{cases}
+\end{equation}
+
+\vspace{0.5em}
+\textbf{Final score.} Let $Z_z,Z_f,Z_d,Z_b$ denote the positive-capped robust standardized node features corresponding to $(z_5,f,d,b)$, respectively. The score is constructed in log-space to combine multiplicative factors additively, improving numerical stability and interpretability. Each term contributes independently, enabling explicit control over the influence of node-level anomaly, structural context, and component-level properties.
+The density penalty $P_{\mathrm{dens}}$ down-weights highly dense (near-clique) components, which are more likely to arise from conserved protein families rather than localized transfer events.
+The context term $G_{\mathrm{ctx}}$ reflects the fraction of high-anomaly edges in the component, favoring components enriched with unusually strong cross-species similarities.
+\begin{equation}
+\begin{aligned}
+\log S(u)={}&\log G_{\mathrm{size}}+\log G_{\mathrm{ctx}}+\log G_{\mathrm{deg}}
++\log P_{\mathrm{dens}}+\log P_{\mathrm{bridge}}+\log P_{\mathrm{ent}}\\
+&+1.0\log(1+Z_z)+2.0\log(1+Z_f)+0.5\log(1+0.25Z_d)+1.0\log(1+Z_b),
+\end{aligned}
+\end{equation}
+with $S(u)=\exp(\log S(u))$. The coefficients on $\log(1+Z_x)$ terms control the relative importance of each feature: anomaly strength ($Z_z$), cross-species connectivity ($Z_f$), degree ($Z_d$), and structural centrality ($Z_b$). 
+These weights are fixed hyperparameters reflecting empirical prioritization of signals indicative of horizontal transfer.
+\vspace{0.5em}
+
+\paragraph{Additional analyzed features beyond direct score terms.}
+Beyond the direct multiplicative terms in $S(u)$, the pipeline also computes and reports additional descriptive features for interpretation and diagnostics. Edge-level outputs include raw Jaccard, shared-$k$-mer count, species-pair baseline fields (pair median, pair MAD, pair sample size), and robust $z$. Node-level outputs include top-1/top-5 Jaccard summaries, top-1/top-5 shared-$k$-mer summaries, max incident $z$, effective species count $n_{\mathrm{eff}}=\exp(H)$, and participation coefficient. Component-level outputs include max component $z$ and top-10 mean component $z$. These are written to result tables and used in reporting/visualization even when not direct multiplicative factors in $S(u)$.
+
+All thresholds above are fixed hyperparameters in code (not learned and not estimated per component). We keep a global $z_0=3.0$ for comparability across components, require at least 30 edges per species pair to stabilize MAD-based normalization, and use conservative node/component gates selected during exploratory calibration to maintain high selectivity with a non-zero candidate set.
+\subsubsection*{Hyperparameters}
+
+\textbf{Candidate generation:}
+$k=6$, min length $=50$, max posting list $=100$, min shared $k$-mers $=6$, top matches $=10$, cross-species only.
+
+\textbf{Pre-pruning:}
+species-pair quantile $q=0.9$, degree cap $=20$, min Jaccard $=0.1$, taxonomy filter $[2,4]$.
+
+\textbf{Normalization:}
+min edges per species pair $=30$, scale $1.4826\cdot \mathrm{MAD} + 10^{-9}$, anomaly threshold $z_0=3$.
+
+\textbf{Gating:}
+$|V_C|\ge10$, $H_C^{\mathrm{norm}}\ge0.75$, $d(u)\ge4$, $n_{\mathrm{sp}}(u)\ge2$, $z_5(u)\ge2$, plus $(n_{\mathrm{sp}}\ge3$ or $b>10^{-12})$.
+
+\textbf{Scoring weights:}
+$w_z=1$, $w_f=2$, $w_d=0.5$, $w_b=1$, $z_{\max}=10$.
+
+\end{document}
