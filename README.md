@@ -193,11 +193,12 @@ Who-Stole-My-Genes/
 │   │   ├── reporting/               # Post-run reporting and visualisation scripts
 │   │   └── reproduce.py             # Convenience runner for reproducing results
 │   ├── data/                        # RefSeq downloads (assembly summary tracked via Git LFS)
-│   └── golden/                      # Canonical reference outputs and small test inputs
-│       ├── bw_pipeline/             # Canonical pipeline outputs (with betweenness)
-│       ├── no_bw_pipeline/          # Alternate pipeline outputs (without betweenness)
-│       ├── reference_inputs/        # Prebuilt edge/manifest files for quickstart runs
-│       └── hackathon_report_refs/   # Figures and tables used in the project report
+│   ├── golden/                      # Canonical reference outputs and small test inputs
+│   │   ├── bw_pipeline/             # Canonical pipeline outputs (with betweenness)
+│   │   ├── no_bw_pipeline/          # Alternate pipeline outputs (without betweenness)
+│   │   ├── reference_inputs/        # Prebuilt edge/manifest files for quickstart runs
+│   │   └── hackathon_report_refs/   # Figures and tables used in the project report
+│   └── LaTeX/                       # Scoring appendix (PDF + LaTeX source)
 │
 ├── LaTeX/                           # Academic paper (PDF + LaTeX source + figures)
 └── requirements.txt                 # Python dependencies
