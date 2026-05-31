@@ -8,6 +8,8 @@ Instead of asking _"Which species are related?"_, we ask:
 This project was created by [**Or Forshmit**](https://github.com/OrF8), [**Noam Kimhi**](https://github.com/noam-kimhi), [**Roee Tekoah**](https://github.com/roeetekoah), [**Dor Stein**](https://github.com/dorstein0909), and [**Noam Korkos**](https://github.com/NoamKorkos)  
 as part of the course [**76558 – Algorithms in Computational Biology**](https://shnaton.huji.ac.il/index.php/NewSyl/76558/1/2026/) at the Hebrew University of Jerusalem ([**HUJI**](https://en.huji.ac.il/)).
 
+> 🎓 Final Grade: **100**
+
 Full paper available [here](LaTeX/Who%20Stole%20My%20Genes%20-%20Detecting%20HGT%20Candidates%20Using%20Graph-Based%20Analysis.pdf).
 
 <p align="center">
